@@ -1,0 +1,67 @@
+/* AdvancedToastStyles.css */
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.Toastify__toast-container {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.Toastify__toast {
+    animation: slideInLeft 0.3s ease-out, fadeOut 0.3s ease-in 2.7s forwards;
+    background: linear-gradient(to right, #009fff, #ec2f4b);
+    color: white;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    /* padding: 16px 24px; */
+}
+
+.Toastify__toast-body {
+    font-size: 16px;
+    /* line-height: 1.5; */
+}
+
+.Toastify__close-button {
+    color: #fff;
+    opacity: 1;
+}
+
+.Toastify__progress-bar {
+    background: rgba(255, 255, 255, 0.7);
+    height: 4px;
+}
+
+/* Specific types of toasts */
+.Toastify__toast--success {
+    background: linear-gradient(to right, #00b09b, #96c93d);
+}
+
+.Toastify__toast--error {
+    background: linear-gradient(to right, #f85032, #e73827);
+}
+
+.Toastify__toast--info {
+    background: linear-gradient(to right, #3498db, #8e44ad);
+}
+
+.Toastify__toast--warning {
+    background: linear-gradient(to right, #f39c12, #f1c40f);
+}

@@ -1,0 +1,33 @@
+
+  
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+  }
+  
+  .tag {
+    padding: 5px 10px;
+    background-color: #eee;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+  }
+  
+  .tag .remove-tag {
+    background-color: #c00;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 1;
+    padding: 0 5px;
+    border-radius: 50%;
+  }
+  

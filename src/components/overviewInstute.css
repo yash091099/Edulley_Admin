@@ -1,0 +1,56 @@
+/* Existing styles remain unchanged */
+
+.overview-container {
+  border: 1px solid #ccc;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.main-container {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.heading {
+  margin-bottom: 20px;
+  font-weight: bolder;
+}
+
+.formField {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;  /* Changed to column to stack label, input, and error message */
+  align-items: flex-start; /* Align items to start to handle full width of error message */
+}
+
+.formField label {
+  text-align: left;
+  margin-bottom: 5px; /* Add margin below label */
+}
+
+.input,
+textarea {
+  flex: 4;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%; /* Ensures full width within flex container */
+}
+
+.input.error, /* New class for input fields with errors */
+textarea.error {
+  border-color: red; /* Change border color to red when there's an error */
+}
+
+.error{ /* Styling for error messages */
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 2px;
+  width: 100%; /* Ensures the message spans the full width of the form field */
+}
+
+/* Other existing styles remain unchanged */
