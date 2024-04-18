@@ -1,7 +1,7 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-export default function ReportCard({ label, value, data, filterOptions, selectedYear, setSelectedYear }) {
+export default function ReportCard({ label, value, data,name, filterOptions, selectedYear, setSelectedYear }) {
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 5 }, (_, index) => currentYear + index);
 
