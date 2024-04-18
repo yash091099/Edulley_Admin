@@ -52,7 +52,7 @@ const AddInstituteForm = ({
 
   const saveAllData = async (event) => {
     event.preventDefault();
-    const payload = {
+    let  payload = {
       universityName: formData?.overviewData?.universityName,
       universityLogo: formData?.overviewData?.logo,
       country: formData?.overviewData?.country,
@@ -65,6 +65,11 @@ const AddInstituteForm = ({
       uniqueUniversityInfo: formData?.uniqueUniversityInfoData,
       ranking: formData?.rankingData,
     };
+
+    payload.universityStats.studentsPerStaff = Number(payload.universityStats.studentsPerStaff);
+    payload.universityStats.fullTimeStudents = Number(payload.universityStats.fullTimeStudents);
+    payload.universityStats.internationalStudentsPercentage = payload.universityStats.internationalStudentsPercentage?.toString();
+    payload.universityStats.studentSatisfactionRate = payload.universityStats.studentSatisfactionRate?.toString();
 
     if (initialFormData) {
       payload._id = initialFormData?._id;

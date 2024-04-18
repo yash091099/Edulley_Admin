@@ -17,13 +17,14 @@ export const getAllStudents = (queryParams) => {
   return instance.get(url);
 };
 
+
 export const addClient = (payload) => {
   const url = `${baseUrl}v1/clients/superadmin/add/basic/details`;
   return instance.post(url, payload);
 };
 export const submitClientHost = (payload) => {
   const url = `${baseUrl}v1/clientAccount/superadmin/update/clientHost`;
-  return instance.patch(url, payload);
+  return instance.post(url, payload);
 };
 
 export const getAllClients = (queryParams) => {
@@ -35,7 +36,7 @@ export const getAllClients = (queryParams) => {
 
 export const changePassword = (payload) => {
   const url = `${baseUrl}v1/auth/admin/change/password`;
-  return instance.patch(url, payload);
+  return instance.post(url, payload);
 }
 
 // API call to add a new blog
@@ -47,7 +48,7 @@ export const addBlog = (payload) => {
 // API call to edit an existing blog
 export const editBlog = (payload) => {
   const url = `${baseUrl}/v1/blog/edit`;
-  return instance.patch(url, payload);
+  return instance.post(url, payload);
 };
 
 // API call to get all blogs
@@ -74,7 +75,7 @@ export const addInstitute = (payload) => {
 
 export const editInstitute = (payload) => {
   const url = `${baseUrl}/v1/institute/edit`;
-  return instance.patch(url, payload);
+  return instance.post(url, payload);
 };
 
 export const getAllInstitutes = (queryParams) => {
@@ -85,7 +86,7 @@ export const getAllInstitutes = (queryParams) => {
 
 export const editCourse = (payload) => {
   const url = `${baseUrl}/v1/course/edit`;
-  return instance.patch(url, payload);
+  return instance.post(url, payload);
 };
 
 export const addCourse = (payload) => {
@@ -106,7 +107,7 @@ export const addScholarship = (payload) => {
 
 export const editScholarship = (payload) => {
   const url = `${baseUrl}/v1/scholarship/edit`;
-  return instance.patch(url, payload);
+  return instance.post(url, payload);
 };
 
 export const getAllScholarships = (queryParams) => {
@@ -122,7 +123,7 @@ export const addCareerDetails = (payload) => {
 
 export const editCareerDetails = (payload) => {
   const url = `${baseUrl}/v1/careerPath/edit`;
-  return instance.patch(url, payload);
+  return instance.post(url, payload);
 };
 
 export const getCareers = (queryParams) => {

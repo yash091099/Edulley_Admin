@@ -1,0 +1,28 @@
+.loader-container {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgb(0 0 0 / 85%);
+    pointer-events: none;
+}
+  
+  
+  .loader {
+    z-index: 10000;
+  }
+  
+  /* Customize AtomSpinner colors */
+  .loader > div {
+    --spinner-color: #ff8c00; /* Change main spinner color */
+    --spinner-size: 50px; /* Adjust spinner size */
+  }
+  

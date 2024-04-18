@@ -5,7 +5,7 @@ export default function NameFieldInstiture(props) {
     <div className="flex gap-[0.62rem] items-center">
       <div>
         {/* get image from props */}
-        <img src={props?.universityLogo} alt="img" />
+        <img style={{ width: "50px", height: "50px" , borderRadius:"50%" }} src={props?.universityLogo} alt="img" />
       </div>
       <div className="flex flex-col items-start">
         <p className="text-[#4B465C] text-[0.9375rem] font-[600] leading-[1.375rem]">

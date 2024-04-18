@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import AddCareer from "./AddCareer";
 import addIcon from "../assets/svg/Rectangle.svg";
 import { getCareers } from "../context/services/client";
+import CustomLoader from "./loader";
 
 export default function CareerManagement() {
   const navigate = useNavigate();
@@ -13,12 +14,14 @@ export default function CareerManagement() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [isAdd, setIsAdd] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchCareers(currentPage);
   }, [currentPage]);
 
   const fetchCareers = async (page) => {
+    setLoading(true);
     const response = await getCareers({ page, limit: 10 });
     if (response.status === 200) {
       setCareers(response?.data?.data?.list);
@@ -29,6 +32,7 @@ export default function CareerManagement() {
       console.error('Failed to fetch careers:', response.message);
       setCareers([]);
     }
+    setLoading(false);
   };
 
   const openAddForm = () => {
@@ -45,7 +49,9 @@ export default function CareerManagement() {
   };
 
   return (
-    <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
+    <>
+      {loading && <CustomLoader />}
+      <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
       <div className="flex justify-between">
         <h1 className="text-text text-[1.5rem] font-[600]">
            {isAdd ? "Add New Career Path" : "Career Management"}
@@ -86,5 +92,7 @@ export default function CareerManagement() {
         />
       )}
     </div>
+    </>
+   
   );
 }

@@ -39,10 +39,12 @@ export default function AddScholarship({ initialData, handleBack }) {
       amount: Number(data?.amount), // Ensure amount is a number
     };
 
+    payload._id = initialData?._id;
+
     try {
       // Use the correct API function for adding or editing the scholarship
       const response = initialData
-        ? await editScholarship(payload, initialData._id)
+        ? await editScholarship(payload)
         : await addScholarship(payload); // Replace with actual API call for adding
 
       if (response.status === 200) {

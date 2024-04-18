@@ -5,6 +5,7 @@ import AddInstituteForm from "./AddInstitute";
 import InstitutionTable from "./institution-table";
 import { getAllInstitutes } from "../context/services/client";
 import TableButton from "./TableButton";
+import CustomLoader from "./loader";
 
 export default function InstituteManagement() {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ export default function InstituteManagement() {
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(10);
+  const [loading, setLoading] = useState(false);
+
 
   const columns = [
     { name: "NAME", enableSorting: true, searchingEnabled: true },
@@ -26,7 +29,9 @@ export default function InstituteManagement() {
   const mapping = ["universityName", "city", "country", "brochure"];
 
   useEffect(() => {
+
     const fetchData = async () => {
+      setLoading(true);
       try {
         const queryParams = { page: currentPage, limit: pageSize };
         const response = await getAllInstitutes(queryParams);
@@ -40,6 +45,7 @@ export default function InstituteManagement() {
       } catch (error) {
         console.error("Error fetching data:", error);
       }
+      setLoading(false);
     };
     fetchData();
   }, [currentPage, pageSize]);
@@ -57,6 +63,9 @@ export default function InstituteManagement() {
   };
 
   return (
+    <>
+    {loading && <CustomLoader />}
+
     <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
       <div className="flex justify-between">
         <h1 className="text-text text-[1.5rem] font-[600]">
@@ -130,5 +139,6 @@ export default function InstituteManagement() {
         </>
       )}
     </div>
+    </>
   );
 }

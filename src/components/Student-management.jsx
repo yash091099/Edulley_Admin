@@ -5,6 +5,7 @@ import Table from "./Table";
 import { useNavigate } from "react-router-dom";
 import { getAllStudents } from "../context/services/client";
 import ViewVUser from "./ViewUser";
+import CustomLoader from "./loader";
 
 export default function StudentManagement() {
   const navigate = useNavigate();
@@ -49,9 +50,13 @@ export default function StudentManagement() {
 
   const mapping = ["Name", "Email", "Address", "Phone", "Date Joined"];
 
-  const handleRowClick = (student) => {
-    setExistingStudent(student);
+  const openAddForm = () => {
     setAdd(!add);
+  };
+
+  const handleEdit = (row) => {
+    setExistingStudent(row);
+    openAddForm();
   };
 
   const handleFilterChange = (e) => {
@@ -77,77 +82,83 @@ export default function StudentManagement() {
   };
 
   return (
-    <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
-      <div className="flex justify-between">
-        <h1 className="text-text text-[1.5rem] font-[600]">
-          Student Management {add ? "> Add" : ""}
-        </h1>
-        <div className="flex justify-between gap-[0.2rem]">
-          <button
-            className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]"
-            onClick={toggleFilterModal}
-          >
-            <img src={filterIcon} alt="filter" />
-            <p className="text-text text-[0.75rem] font-[600]">Filter</p>
-          </button>
-          <button
-            onClick={handleRowClick}
-            className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]"
-          >
-            <img src={addIcon} alt="add" />
-            <p className="text-text text-[0.75rem] font-[600]">
-              {add ? "Back" : "Add"}
-            </p>
-          </button>
-        </div>
-      </div>
-      {showFilterModal && (
-        <div className="modal-background">
-          <div className="modal-content">
-            <h2>Filter Students</h2>
-            <input
-              type="text"
-              placeholder="Search by name or email"
-              value={filter}
-              onChange={handleFilterChange}
-              className="filter-input"
-            />
-            <div className="modal-footer">
-              <button onClick={toggleFilterModal} className="modal-close-btn">
-                Close
-              </button>
-            </div>
+    <>
+      {loading && <CustomLoader />}
+      <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
+        <div className="flex justify-between">
+          <h1 className="text-text text-[1.5rem] font-[600]">
+            Student Management {add ? "> Add" : ""}
+          </h1>
+          <div className="flex justify-between gap-[0.2rem]">
+            <button
+              className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]"
+              onClick={toggleFilterModal}
+            >
+              <img src={filterIcon} alt="filter" />
+              <p className="text-text text-[0.75rem] font-[600]">Filter</p>
+            </button>
+            <button
+              onClick={openAddForm}
+              className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]"
+            >
+              <img src={addIcon} alt="add" />
+              <p className="text-text text-[0.75rem] font-[600]">
+                {add ? "Back" : "Add"}
+              </p>
+            </button>
           </div>
         </div>
-      )}
+        {showFilterModal && (
+          <div className="modal-background">
+            <div className="modal-content">
+              <h2>Filter Students</h2>
+              <input
+                type="text"
+                placeholder="Search by name or email"
+                value={filter}
+                onChange={handleFilterChange}
+                className="filter-input"
+              />
+              <div className="modal-footer">
+                <button onClick={toggleFilterModal} className="modal-close-btn">
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
-      {add ? (
-        <ViewVUser handleBack={handleRowClick} initialData={existingStudent} />
-      ) : (
-        <Table
-          component="Student"
-          columns={columns}
-          data={filteredStudents.map((student) => ({
-            Name: student.fullName,
-            Email: student.email,
-            Address: student.mailingAddress.addressLine1,
-            Phone: student.contactNumber,
-            DateJoined:
-              student.createdAt &&
-              new Date(student.createdAt).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              }),
-            ...student,
-          }))}
-          mapping={mapping}
-          fun={handleRowClick}
-          currentPage={currentPage}
-          totalPages={totalPages}
-          setCurrentPage={setCurrentPage}
-        />
-      )}
-    </div>
+        {add ? (
+          <ViewVUser
+            handleBack={handleEdit}
+            initialData={existingStudent}
+          />
+        ) : (
+          <Table
+            component="Student"
+            columns={columns}
+            data={filteredStudents.map((student) => ({
+              Name: student.fullName,
+              Email: student.email,
+              Address: student.mailingAddress.addressLine1,
+              Phone: student.contactNumber,
+              DateJoined:
+                student.createdAt &&
+                new Date(student.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                }),
+              ...student,
+            }))}
+            mapping={mapping}
+            fun={handleEdit}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            setCurrentPage={setCurrentPage}
+          />
+        )}
+      </div>
+    </>
   );
 }

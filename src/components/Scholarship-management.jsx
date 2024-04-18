@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import AddScholarship from "./AddScholorship";
 import CourseTable from "./CourseTable"; // Consider renaming this to ScholarshipTable for clarity
 import { getAllScholarships } from "../context/services/client";
+import CustomLoader from "./loader";
 
 export default function ScholarshipManagement() {
   const navigate = useNavigate();
@@ -14,12 +15,14 @@ export default function ScholarshipManagement() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchScholarships();
   }, [currentPage , isAdd]);
 
   const fetchScholarships = async () => {
+    setLoading(true);
     const queryParams = { page: currentPage, limit: 10 }; // Adjust according to your needs
     const response = await getAllScholarships(queryParams);
     if (response.status === 200) {
@@ -35,6 +38,7 @@ export default function ScholarshipManagement() {
       console.error("Failed to fetch scholarships:", response.message);
       setData([]); // Clear data on failure
     }
+    setLoading(false);
   };
 
   const openAddForm = () => {
@@ -57,7 +61,9 @@ export default function ScholarshipManagement() {
   };
 
   return (
-    <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
+    <>
+       {loading && <CustomLoader />}
+       <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
       <div className="flex justify-between">
         <h1 className="text-text text-[1.5rem] font-[600]">
           Scholarship Management {isAdd ? "> Add" : ""}
@@ -99,7 +105,7 @@ export default function ScholarshipManagement() {
           ]}
           data={data}
           mapping={[
-            "Name",
+            "name",
             "amount",
             "deadline",
             "universityName",
@@ -113,5 +119,7 @@ export default function ScholarshipManagement() {
         />
       )}
     </div>
+    </>
+   
   );
 }

@@ -12,17 +12,27 @@ import { FormDataProvider } from "./FormDataContext.jsx";
 export default function ViewVUser({handleBack , initialData}) {
   const [state, setState] = useState(1);
 
-
-  const [formData, setFormData] = useState({
+  const localStorageData = localStorage.getItem("studentFormData")
+  const initialFormData = localStorageData ? JSON.parse(localStorageData) : {
     personalDetails: {},
     academicProfile: {},
     workExperience: {},
     testScores: {},
     userDocuments: {}
-  });
+  }
+  const [formData, setFormData] = useState(initialFormData);
+
 
   useEffect(() => {
-    setFormData(initialData)
+    formData && localStorage.setItem("studentFormData", JSON.stringify(formData))
+
+    return ()=>{
+      localStorage.removeItem("studentFormData")
+    }
+  }, [formData])
+
+  useEffect(() => {
+    initialData && setFormData(initialData)
   }, [initialData])
 
 
@@ -33,23 +43,86 @@ export default function ViewVUser({handleBack , initialData}) {
   }, [state]);
 
   const saveData = async () => {
+    console.log(formData);
 
-    let data = {
-
-      fullName: formData?.personalDetails?.fullName,
-      email: formData?.personalDetails?.email,
-      phoneNumber: formData?.personalDetails?.phoneNumber,
-      dateOfBirth: formData?.personalDetails?.dateOfBirth,
-      gender: formData?.personalDetails?.gender,
-      address: formData?.personalDetails?.address,
-      city: formData?.personalDetails?.city,
-      state: formData?.personalDetails?.state,
-      country: formData?.personalDetails?.country,
-      postalCode: formData?.personalDetails?.postalCode,
-      highestQualification: formData?.academicProfile?.highestQualification,
-      
-    }
-
+    let dataToSend = {
+      "fullName": formData.personalDetails.name,
+      "gender": formData.personalDetails.gender,
+      "contactNumber": formData.personalDetails.contactNumber,
+      "email": formData.personalDetails.emailID,
+      "dob": formData.personalDetails.dob,
+      "maritalStatus": formData.personalDetails.maritalStatus,
+      "mailingAddress": {
+          "addressLine1": formData.personalDetails.mailingAddressLine1,
+          "addressLine2": formData.personalDetails.mailingAddressLine2,
+          "country": formData.personalDetails.mailingCountry,
+          "state": formData.personalDetails.mailingState,
+          "pinCode": formData.personalDetails.mailingPincode
+      },
+      "permanentAddress": {
+          "addressLine1": formData.personalDetails.permanentAddressLine1,
+          "addressLine2": formData.personalDetails.permanentAddressLine2,
+          "country": formData.personalDetails.permanentCountry,
+          "state": formData.personalDetails.permanentState,
+          "pinCode": formData.personalDetails.permanentPincode
+      },
+      "passportInformation": {
+          "passportNumber": formData.personalDetails.passportNumber,
+          "issueCountry": formData.personalDetails.passportIssueCountry,
+          "issueDate": formData.PersonalDetails.passportExpiryDate,
+          "expiryDate": formData.personalDetails.passportIssueDate,
+          "birthState": formData.personalDetails.passportStateOfBirth,
+          "birthCountry": formData.personalDetails.passportCountryOfBirth
+      },
+      "academicProfile": {
+          "secondary": {
+              "instituteName": formData.academicProfile.tenthInstitutionName,
+              "board": formData.academicProfile.tenthBoard,
+              "score": formData.academicProfile.tenthScore,
+              "completionYear": formData.academicProfile.tenthYearOfCompletion,
+              "specialization": formData.academicProfile.tenthSpecialization
+          },
+          "seniorSecondary": {
+              "instituteName": formData.academicProfile.twelfthInstitutionName,
+              "board": formData.academicProfile.twelfthBoard,
+              "score": formData.academicProfile.twelfthScore,
+              "completionYear": formData.academicProfile.twelfthYearOfCompletion,
+              "specialization": formData.academicProfile.twelfthSpecialization
+          },
+          "UG": {
+              "instituteName": formData.academicProfile.ugInstitutionName,
+              "board": formData.academicProfile.ugBoard,
+              "score": formData.academicProfile.ugScore,
+              "completionYear": formData.academicProfile.ugYearOfCompletion,
+              "specialization": formData.academicProfile.ugSpecialization
+          },
+          "PG": {
+              "instituteName": formData.academicProfile.pgInstitutionName,
+              "board": formData.academicProfile.pgBoard,
+              "score": formData.academicProfile.pgScore,
+              "completionYear": formData.academicProfile.pgYearOfCompletion,
+              "specialization": formData.academicProfile.pgSpecialization
+          }
+      },
+      "workExperience": [
+          {
+              "jobTitle": formData.workExperience.jobTitle,
+              "company": formData.workExperience.company,
+              "location": formData.workExperience.location,
+              "jobSummary": formData.workExperience.jobSummary,
+              "joiningDate": formData.workExperience.joiningDate,
+              "workedTill": formData.workExperience.workedTill
+          }
+      ],
+      "testScores": formData.testScores,
+      "documents": {
+          "document1": formData.userDocuments.document1,
+          "document2": formData.userDocuments.document2,
+          "document3": formData.userDocuments.document3,
+          "document4": formData.userDocuments.document4
+      }
+  }
+   
   }
 
 

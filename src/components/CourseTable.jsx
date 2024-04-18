@@ -73,10 +73,14 @@ function renderField(row, key, keyIndex) {
       return <StatusField label={row[key]} />;
     case "Course Name":
       return <NameFieldCourse name={row[key]} />;
+    case "name":
+      return <p className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]}</p>;
     case "duration":
       return <p className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]} years</p>;
     case "Name":
       return <NameFieldCourse name={row[key]} />;
+    case "deadline":
+      return <p className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key].split("T")[0]}</p>;
     default:
       return <p className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]}</p>;
   }

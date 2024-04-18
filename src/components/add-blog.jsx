@@ -40,6 +40,7 @@ const AddBlog = ({ existingBlog , openAddForm }) => {
       content: data.content,
       quote: data.quote,
     };
+    payload.blogId = existingBlog?._id;
 
     const action = existingBlog ? editBlog : addBlog;
     action(payload)

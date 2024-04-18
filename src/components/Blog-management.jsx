@@ -5,6 +5,7 @@ import addIcon from "../assets/svg/Rectangle.svg";
 import AddBlog from "./add-blog";
 import { getAllBlogs } from "../context/services/client";
 import { useNavigate } from "react-router-dom";
+import CustomLoader from "./loader";
 
 export default function BlogManagement() {
   const navigate = useNavigate();
@@ -13,12 +14,14 @@ export default function BlogManagement() {
   const [isAdd, setIsAdd] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchBlogs();
   }, [currentPage , isAdd]);
 
   const fetchBlogs = async () => {
+    setLoading(true);
     const response = await getAllBlogs({ page: currentPage, limit: 10 });
     if (response.status === 200) {
       setBlogs(response?.data?.data?.list);
@@ -28,6 +31,7 @@ export default function BlogManagement() {
       console.error("Failed to fetch blogs:", response.message);
       setBlogs([]);
     }
+    setLoading(false);
   };
 
   const openAddForm = () => {
@@ -46,6 +50,8 @@ export default function BlogManagement() {
   };
 
   return (
+    <>
+    {loading && <CustomLoader />}
     <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
       <div className="flex justify-between">
         <h1 className="text-text text-[1.5rem] font-[600]">
@@ -91,5 +97,6 @@ export default function BlogManagement() {
         />
       )}
     </div>
+    </>
   );
 }
