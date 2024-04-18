@@ -11,7 +11,7 @@ export default function CourseTable({ columns, data, mapping, fun, viewDetails, 
           <thead>
             <tr className="border-b border-[#DBDADE]">
               <th className="cursor-pointer pl-[1.25rem] pr-[0.62rem] py-[0.94rem]">
-                <input type="checkbox" />
+                {/* <input type="checkbox" /> */}
               </th>
               {columns.map((column, index) => (
                 <th key={index}>
@@ -28,7 +28,7 @@ export default function CourseTable({ columns, data, mapping, fun, viewDetails, 
             {data.map((row, rowIndex) => (
               <tr key={rowIndex} className="cursor-pointer h-[5rem] border-y border-[#DBDADE]">
                 <td className="pl-[1.25rem] pr-[0.62rem] py-[0.94rem]">
-                  <input type="checkbox" />
+                  {/* <input type="checkbox" /> */}
                 </td>
                 {mapping.map((key, keyIndex) => (
                   <td key={keyIndex} onClick={() => fun(row , keyIndex)}>
@@ -63,6 +63,8 @@ function renderField(row, key, keyIndex) {
       return <StatusField label={row[key]} />;
     case "Course Name":
       return <NameFieldCourse name={row[key]} />;
+    case "duration":
+      return <p className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]} years</p>;
     case "Name":
       return <NameFieldCourse name={row[key]} />;
     default:
