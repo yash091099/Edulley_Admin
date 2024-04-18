@@ -49,8 +49,6 @@ export default function ViewVUser({ handleBack, initialData }) {
   }, [state]);
 
   const saveData = async () => {
-    console.log(formData);
-
     let dataToSend = {
       fullName: formData.personalDetails.name,
       gender: formData.personalDetails.gender,

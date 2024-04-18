@@ -19,36 +19,41 @@ export default function CourseManagement() {
 
   useEffect(() => {
     fetchCourses();
-  }, [currentPage]);
+  }, [currentPage , isAdd]);
 
   const fetchCourses = async () => {
     setLoading(true);
-    const queryParams = { page: currentPage, limit: 10 }; // Modify as needed
-    const response = await getCourses(queryParams);
-    if (response.status === 200) {
-      setData(response?.data?.data?.list);
-      setTotalCount(response?.data?.data?.totalCount);
-      setTotalPages(
-        Math.ceil(response?.data?.data?.totalCount / queryParams.limit)
-      );
-      // setTotalCount(response.data.totalCount);
-      // setTotalPages(Math.ceil(response.data.totalCount / queryParams.limit));
-    } else {
-      console.error("Failed to fetch courses:", response.message);
-      setData([]); // Clear data on failure
+    const queryParams = { page: currentPage, limit: 10 };
+    try {
+      const response = await getCourses(queryParams);
+      if (response.status === 200) {
+        setData(response?.data?.data?.list);
+        setTotalCount(response?.data?.data?.totalCount);
+        setTotalPages(
+          Math.ceil(response?.data?.data?.totalCount / queryParams.limit)
+        );
+      } else {
+        console.error("Failed to fetch courses:", response.message);
+        setData([]);
+      }
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+      setData([]);
     }
     setLoading(false);
   };
 
   const openAddForm = () => {
-    setExistingCourse(null); // Clear any previously selected course
+    setExistingCourse(null);
     setIsAdd(!isAdd);
   };
 
   const editCourse = (course, index) => {
-    data[index] = course;
+    const updatedData = [...data];
+    updatedData[index] = course;
+    setData(updatedData);
     setExistingCourse(course);
-    setIsAdd(!isAdd);
+    setIsAdd(true);
   };
 
   const handleBack = () => {
@@ -58,17 +63,13 @@ export default function CourseManagement() {
 
   return (
     <>
-    {loading && <CustomLoader />}
+      {loading && <CustomLoader />}
       <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
         <div className="flex justify-between">
           <h1 className="text-text text-[1.5rem] font-[600]">
             Course Management
           </h1>
           <div className="flex justify-between gap-[0.2rem]">
-            {/* <button className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]">
-            <img src={filterIcon} alt="filter" />
-            <p className="text-text text-[0.75rem] font-[600]">Filter</p>
-          </button> */}
             <button
               onClick={openAddForm}
               className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]"
