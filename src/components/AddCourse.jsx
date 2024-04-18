@@ -65,7 +65,7 @@ const AddCourse = ({ initialData, handleBack }) => {
     // Determine whether to add a new course or edit an existing one
     try {
       if (initialData) {
-        await editCourse({ ...payload, _id: initialData._id });
+        await editCourse({ ...payload, courseId: initialData._id });
       } else {
         await addCourse(payload); // Replace with actual API call
       }

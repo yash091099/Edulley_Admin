@@ -72,7 +72,7 @@ const AddInstituteForm = ({
     payload.universityStats.studentSatisfactionRate = payload.universityStats.studentSatisfactionRate?.toString();
 
     if (initialFormData) {
-      payload._id = initialFormData?._id;
+      payload.instituteId = initialFormData?._id;
     }
 
     const action = initialFormData ? editInstitute : addInstitute;

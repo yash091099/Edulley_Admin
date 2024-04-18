@@ -137,3 +137,8 @@ export const addStudent = (payload) => {
   return instance.post(url, payload);
 };
 
+export const editStudent = (payload) => {
+  const url = `${baseUrl}/v1/student/edit`;
+  return instance.post(url, payload);
+};
+

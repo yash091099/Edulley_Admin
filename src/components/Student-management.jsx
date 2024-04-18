@@ -130,7 +130,7 @@ export default function StudentManagement() {
 
         {add ? (
           <ViewVUser
-            handleBack={handleEdit}
+            handleBack={openAddForm}
             initialData={existingStudent}
           />
         ) : (

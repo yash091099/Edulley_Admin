@@ -39,7 +39,7 @@ export default function AddScholarship({ initialData, handleBack }) {
       amount: Number(data?.amount), // Ensure amount is a number
     };
 
-    payload._id = initialData?._id;
+    payload.scholarshipId = initialData?._id;
 
     try {
       // Use the correct API function for adding or editing the scholarship

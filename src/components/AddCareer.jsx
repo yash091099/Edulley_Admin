@@ -57,7 +57,7 @@ const AddCareer = ({ initialData, fetchCareers, handleBack }) => {
 
 
     if (initialData) {
-      payload._id = initialData?._id;
+      payload.careerPathId = initialData?._id;
     }
 
     try {
