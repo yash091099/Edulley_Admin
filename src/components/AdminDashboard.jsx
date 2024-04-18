@@ -19,19 +19,33 @@ export default function AdminDashboard() {
     recentStudents: [],
   });
 
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+
+  const chartData = [
+    { name: 'Jan', students: 400 },
+    { name: 'Feb', students: 300 },
+    { name: 'Mar', students: 300 },
+    { name: 'Apr', students: 200 },
+    { name: 'May', students: 278 },
+    { name: 'Jun', students: 189 },
+    { name: 'Jul', students: 239 },
+    { name: 'Aug', students: 349 },
+    { name: 'Sep', students: 400 },
+    { name: 'Oct', students: 300 },
+    { name: 'Nov', students: 300 },
+    { name: 'Dec', students: 200 },
+  ];
+
   useEffect(() => {
     const loadData = async () => {
       const response = await fetchDashboardData();
       if (response.status === 200) {
         setData({
-          students: response.data.students,
-          applications: response.data.applications,
-          courses: response.data.courses,
-          universities: response.data.universities,
-          recentStudents: response.data.recentStudents.map((student) => ({
-            ...student,
-            Tags: student.academicProfile.secondary.specialization, // Adjust according to actual data structure
-          })),
+          students: response?.data?.data?.students,
+          applications: response?.data?.data?.applications,
+          courses: response?.data?.data?.courses,
+          universities: response?.data?.data?.universities,
+          recentStudents: response?.data?.data?.recentStudents,
         });
       } else {
         console.error("Failed to fetch data:", response.message);
@@ -39,7 +53,6 @@ export default function AdminDashboard() {
     };
     loadData();
   }, []);
-
 
   const columns = [
     { name: "NAME", enableSorting: true, searchingEnabled: true },
@@ -78,17 +91,18 @@ export default function AdminDashboard() {
       </div>
       <ReportCard
         label="Total number of students"
-        value="₹ 25000"
-        filterOptions={["October"]}
-      >
-        <img className="w-full" src={graph} alt="img" />
-      </ReportCard>
+        value={data?.students}
+        filterOptions={["2020", "2021", "2022", "2023", "2024"]}
+        data={chartData}
+        selectedYear={selectedYear}
+        setSelectedYear={setSelectedYear}
+      />
 
       <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-md">
         <h1 className="text-text text-[1.5rem] font-[600]">Recent Students</h1>
         <Table
           columns={columns}
-          data={data.recentStudents}
+          data={data?.recentStudents}
           mapping={["Name", "Email", "Location", "Phone", "Date Joined"]}
         />
       </div>

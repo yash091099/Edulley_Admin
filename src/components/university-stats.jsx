@@ -21,6 +21,7 @@ const validationSchema = Yup.object({
 });
 
 const UniversityStats = ({ onDataChange, initialData }) => {
+  console.log(initialData);
   return (
     <Formik
       initialValues={{

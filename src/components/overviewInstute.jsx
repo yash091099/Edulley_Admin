@@ -13,6 +13,8 @@ const validationSchema = Yup.object({
 });
 
 const Overview = ({ onDataChange, initialData , resetVersion }) => {
+
+  console.log(initialData);
   // Function to handle file uploads and update Formik state
   const handleFileChange = async (event, setFieldValue, fieldName) => {
     const file = event.target.files[0];
@@ -53,8 +55,9 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
         requirements: initialData?.requirements || "",
         brochure: initialData?.brochure || "",
         logo: initialData?.logo || "",
-        banner: initialData?.bannerImage || ""
+        banner: initialData?.bannerImage || "",
       }}
+
       validationSchema={validationSchema}
       onSubmit={(values) => {
         console.log("Form data submitted:", values);
@@ -113,7 +116,7 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
 
             <div className="col-md-6 formField">
               <label>Brochure</label>
-              <input className="input" type="text" name="brochure" placeholder="Add Brochure"
+              <Field className="input" type="text" name="brochure" placeholder="Add Brochure"
                 onChange={e => {
                   setFieldValue("brochure", e.target.value);
                   onDataChange({...values, brochure: e.target.value});

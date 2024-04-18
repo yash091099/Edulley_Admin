@@ -8,24 +8,47 @@ import { addInstitute, editInstitute } from "../context/services/client";
 import toaster from "../Shared/toaster";
 // import "./addInstitute.css";
 
-const AddInstituteForm = ({ initialFormData = null , openAddForm }) => {
+const AddInstituteForm = ({
+  initialFormData,
+  openAddForm,
+}) => {
   const [resetVersion, setResetVersion] = useState(0);
-  const [formData, setFormData] = useState( {
-    overviewData: {},
-    universityStatsData: {},
-    uniqueUniversityInfoData: {},
-    rankingData: {},
+  const [formData, setFormData] = useState({
+    overviewData: {
+      universityName: initialFormData?.universityName || "",
+      logo: initialFormData?.universityLogo || "",
+      country: initialFormData?.country || "",
+      city: initialFormData?.city || "",
+      banner: initialFormData?.bannerImage || "",
+      brochure: initialFormData?.brochure || "",
+      overview: initialFormData?.overview || "",
+      requirements: initialFormData?.admissionReq || "",
+    },
+    universityStatsData: {
+      studentsPerStaff: initialFormData?.universityStats?.studentsPerStaff || 0,
+      fullTimeStudents: initialFormData?.universityStats?.fullTimeStudents || 0,
+      internationalStudentsPercentage: initialFormData?.universityStats?.internationalStudentsPercentage || 0,
+      studentSatisfactionRate: initialFormData?.universityStats?.studentSatisfactionRate || 0,
+    },
+    uniqueUniversityInfoData: {
+      image1: initialFormData?.uniqueUniversityInfo?.image1 || "",
+      image2: initialFormData?.uniqueUniversityInfo?.image2 || "",
+      image3: initialFormData?.uniqueUniversityInfo?.image3 || "",
+      image4: initialFormData?.uniqueUniversityInfo?.image4 || "",      
+    },
+    rankingData: {
+      logo: initialFormData?.ranking?.logo || "",
+      name: initialFormData?.ranking?.name || "",
+      rank: initialFormData?.ranking?.rank || "",
+    },
   });
 
-
-  
   const handleDataChange = (type, newData) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [type]: newData
+      [type]: newData,
     }));
   };
-  
 
   const saveAllData = async (event) => {
     event.preventDefault();
@@ -43,6 +66,10 @@ const AddInstituteForm = ({ initialFormData = null , openAddForm }) => {
       ranking: formData?.rankingData,
     };
 
+    if (initialFormData) {
+      payload._id = initialFormData?._id;
+    }
+
     const action = initialFormData ? editInstitute : addInstitute;
     action(payload)
       .then(() => {
@@ -53,6 +80,7 @@ const AddInstituteForm = ({ initialFormData = null , openAddForm }) => {
         );
         resetFormData();
         openAddForm();
+
       })
       .catch((error) => {
         toaster.error(`Error: ${error.message}`);
@@ -66,17 +94,45 @@ const AddInstituteForm = ({ initialFormData = null , openAddForm }) => {
       uniqueUniversityInfoData: {},
       rankingData: {},
     });
-    setResetVersion(v => v + 1);
+    setResetVersion((v) => v + 1);
   };
 
   return (
     <>
-      <Overview onDataChange={data => handleDataChange('overviewData', data)} initialData={initialFormData} resetVersion={resetVersion} /> 
-      <UniversityStats onDataChange={data => handleDataChange('universityStatsData', data)} initialData={initialFormData?.universityStats} resetVersion={resetVersion} />
-      <UniqueUniversityInfo onDataChange={data => handleDataChange('uniqueUniversityInfoData', data)} initialData={initialFormData?.uniqueUniversityInfo} resetVersion={resetVersion} />
-      <Ranking onDataChange={data => handleDataChange('rankingData', data)} initialData={initialFormData?.ranking} resetVersion={resetVersion} />
+      <Overview
+        onDataChange={(data) => handleDataChange("overviewData", data)}
+        initialData={formData?.overviewData}
+        resetVersion={resetVersion}
+      />
+      <UniversityStats
+        onDataChange={(data) => handleDataChange("universityStatsData", data)}
+        initialData={formData?.universityStatsData}
+        resetVersion={resetVersion}
+      />
+      <UniqueUniversityInfo
+        onDataChange={(data) =>
+          handleDataChange("uniqueUniversityInfoData", data)
+        }
+        initialData={formData?.uniqueUniversityInfoData}
+        resetVersion={resetVersion}
+      />
+      <Ranking
+        onDataChange={(data) => handleDataChange("rankingData", data)}
+        initialData={formData?.rankingData}
+        resetVersion={resetVersion}
+      />
       <div className="button-container">
-        <button  style={{backgroundColor:"#FF6477" ,padding:"10px",borderRadius:"4px",color:"#fff",minWidth:"100px"}}  className="saveButton" onClick={saveAllData}>
+        <button
+          style={{
+            backgroundColor: "#FF6477",
+            padding: "10px",
+            borderRadius: "4px",
+            color: "#fff",
+            minWidth: "100px",
+          }}
+          className="saveButton"
+          onClick={saveAllData}
+        >
           Save
         </button>
       </div>

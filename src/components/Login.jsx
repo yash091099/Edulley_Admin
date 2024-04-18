@@ -3,53 +3,51 @@ import UserInput from "./UserInput";
 import PrimaryButton from "./PrimaryButton";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/images/Edulley-logo.png";
-import axios from "axios"; // Ensure you have axios installed
 import { loginUser } from "../context/services/login";
 import toaster from "../Shared/toaster";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [adminId, setAdminId] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const handleLogin = async () => {
-    toaster.info("Logging in...");
+    if (!adminId || !password) {
+      setError("All fields are required");
+      return;
+    }
     setLoading(true);
-    console.log(email, password);
     try {
-      const { data, status } = await loginUser({ adminId: email, password: password });
-  
+      const { data, status } = await loginUser({ adminId, password });
       if (status === 200) {
-        console.log(data.data, "data");
-        localStorage.setItem("userData", JSON.stringify(data?.data));
+        localStorage.setItem("userData", JSON.stringify(data.data));
+        toaster.success("User logged in");
         navigate("/dashboard");
       } else {
-        // Handle non-200 status codes gracefully
-        setError(data?.message || "An error occurred"); // More specific error if available
+        toaster.error(data?.message || "An error occurred");
       }
     } catch (err) {
-      setError(err.response?.data.message || "An error occurred"); // More specific error if available
+      toaster.error(err.response?.data.message || "An error occurred");
     } finally {
       setLoading(false);
     }
   };
-  
 
   return (
     <div className="flex flex-col gap-[2rem] max-w-[37.5625rem] w-full p-4">
-      <img className="w-[4.6875rem] mb-[1rem] mx-auto" src={logo} alt="step" />
+      <img className="w-[10rem] mb-[1rem] mx-auto" src={logo} alt="logo" />
       <h1 className="text-text text-[2rem] font-[600]">Login</h1>
-      {error && <div className="text-red-500 text-sm">{error}</div>}
       <div className="flex flex-col gap-[1rem]">
         <UserInput
-          label="Email"
+          label="Admin ID"
           type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={setEmail}
+          placeholder="Enter your admin ID"
+          value={adminId}
+          onChange={setAdminId}
         />
+        {error && !adminId && <p className="text-sm text-red-500">Admin ID is required</p>}
         <UserInput
           label="Password"
           type="password"
@@ -57,11 +55,12 @@ export default function Login() {
           value={password}
           onChange={setPassword}
         />
+        {error && !password && <p className="text-sm text-red-500">Password is required</p>}
       </div>
       <PrimaryButton
         label={loading ? "Logging in..." : "Login"}
         action={handleLogin}
-        disabled={loading}
+        disabled={loading || !adminId || !password}
       />
     </div>
   );

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import filterIcon from "../assets/svg/filter-icon.svg";
 import addIcon from "../assets/svg/Rectangle.svg";
 import AddInstituteForm from "./AddInstitute";
 import InstitutionTable from "./institution-table";
@@ -15,7 +14,7 @@ export default function InstituteManagement() {
   const [totalCount, setTotalCount] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize] = useState(10); // Adjust pageSize according to your requirement
+  const [pageSize] = useState(10);
 
   const columns = [
     { name: "NAME", enableSorting: true, searchingEnabled: true },
@@ -32,7 +31,6 @@ export default function InstituteManagement() {
         const queryParams = { page: currentPage, limit: pageSize };
         const response = await getAllInstitutes(queryParams);
         if (response.status === 200) {
-          console.log(response?.data?.data?.list);
           setData(response?.data?.data?.list);
           setTotalCount(response?.data?.data?.totalCount);
           setTotalPages(Math.ceil(response?.data?.data?.totalCount / pageSize));
@@ -45,13 +43,17 @@ export default function InstituteManagement() {
     };
     fetchData();
   }, [currentPage, pageSize]);
+  
+  
 
-  const openAddForm = (row) => {
-    console.log(row);
+  const openAddForm = () => {
     setIsAdd(!isAdd);
-    if (row) {
-      setExistingInstitute(row);
-    }
+
+  };
+
+  const handleEdit = (row) => {
+    setExistingInstitute(row);
+    openAddForm();
   };
 
   return (
@@ -61,10 +63,10 @@ export default function InstituteManagement() {
           Institute Management {isAdd ? "> Add" : ""}
         </h1>
         <div className="flex justify-between gap-[0.2rem]">
-          <button className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]">
+          {/* <button className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]">
             <img src={filterIcon} alt="filter" />
             <p className="text-text text-[0.75rem] font-[600]">Filter</p>
-          </button>
+          </button> */}
           <button
             onClick={openAddForm}
             className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]"
@@ -87,40 +89,44 @@ export default function InstituteManagement() {
             columns={columns}
             data={data}
             mapping={mapping}
-            fun={openAddForm}
+            fun={handleEdit}
           />
-          <div className="w-full flex justify-between items-center">
-            <p className="text-[#4B465C]/50 text-[1rem] font-[400] leading-[1.4675rem]">
-              Showing {(currentPage - 1) * pageSize + 1} to{" "}
-              {Math.min(currentPage * pageSize, totalCount)} of {totalCount}
-            </p>
-            <div className="flex gap-[0.31rem]">
-              <TableButton
-                label="Previous"
-                action={() =>
-                  setCurrentPage(
-                    currentPage > 1 ? currentPage - 1 : currentPage
-                  )
-                }
-              />
-              {[...Array(totalPages)].map((_, index) => (
+          {data.length > 0 ? (
+            <div className="w-full flex justify-between items-center">
+              <p className="text-[#4B465C]/50 text-[1rem] font-[400] leading-[1.4675rem]">
+                Showing {(currentPage - 1) * pageSize + 1} to{" "}
+                {Math.min(currentPage * pageSize, totalCount)} of {totalCount}
+              </p>
+              <div className="flex gap-[0.31rem]">
                 <TableButton
-                  key={index}
-                  label={index + 1}
-                  activeButton={currentPage}
-                  action={() => setCurrentPage(index + 1)}
+                  label="Previous"
+                  action={() =>
+                    setCurrentPage(
+                      currentPage > 1 ? currentPage - 1 : currentPage
+                    )
+                  }
                 />
-              ))}
-              <TableButton
-                label="Next"
-                action={() =>
-                  setCurrentPage(
-                    currentPage < totalPages ? currentPage + 1 : currentPage
-                  )
-                }
-              />
+                {[...Array(totalPages)].map((_, index) => (
+                  <TableButton
+                    key={index}
+                    label={index + 1}
+                    activeButton={currentPage === index + 1}
+                    action={() => setCurrentPage(index + 1)}
+                  />
+                ))}
+                <TableButton
+                  label="Next"
+                  action={() =>
+                    setCurrentPage(
+                      currentPage < totalPages ? currentPage + 1 : currentPage
+                    )
+                  }
+                />
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="text-center py-[2rem]">No Institute found</div>
+          )}
         </>
       )}
     </div>

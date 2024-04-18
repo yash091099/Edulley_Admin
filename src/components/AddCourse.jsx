@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
 import { addCourse, editCourse } from "../context/services/client";
+import toaster from "../Shared/toaster";
 
-const AddCourse = ({ initialData , handleBack }) => {
+const AddCourse = ({ initialData, handleBack }) => {
   const [data, setData] = useState({
     courseName: initialData?.courseName || "",
     universityName: initialData?.universityName || "",
@@ -15,8 +16,8 @@ const AddCourse = ({ initialData , handleBack }) => {
     duration: initialData?.duration || "",
     applicationDeadline: initialData?.applicationDeadline || "",
     applicationFee: initialData?.applicationFee || "",
-    upcomingIntake: initialData?.upcomingIntake || "",
-    studyMode: initialData?.studyMode || "",
+    upcomingIntakes: initialData?.upcomingIntakes || "",
+    modeOfStudy: initialData?.modeOfStudy || "",
   });
 
   const fileInputRefs = {
@@ -30,6 +31,15 @@ const AddCourse = ({ initialData , handleBack }) => {
   };
 
   const saveData = async () => {
+    // Check if any required fields are empty
+    const requiredFields = ["courseName", "universityName", "level", "overview", "modules", "requirements", "fee", "duration", "applicationDeadline", "applicationFee", "upcomingIntakes", "modeOfStudy"];
+    const emptyFields = requiredFields.filter(field => !data[field]);
+    if (emptyFields.length > 0) {
+      // Show toaster with message to fill all required fields
+      toaster.error("Please fill all required fields");
+      return;
+    }
+
     // Construct the payload
     const payload = {
       courseName: data.courseName,
@@ -41,24 +51,24 @@ const AddCourse = ({ initialData , handleBack }) => {
       modules: data.modules,
       requirements: data.requirements,
       uniqueCourseInfo: {
-        fee: data.fee,
-        duration: data.duration,
+        fee: parseInt(data.fee),
+        duration: parseInt(data.duration),
         applicationDeadline: data.applicationDeadline,
-        applicationFee: data.applicationFee,
-        upcomingIntake: data.upcomingIntake,
-        studyMode: data.studyMode,
+        applicationFee: parseInt(data.applicationFee),
+        upcomingIntakes: data.upcomingIntakes,
+        studyMode: data.modeOfStudy,
       },
     };
 
     // Determine whether to add a new course or edit an existing one
     try {
       if (initialData) {
-        await editCourse(payload); // Replace with actual API call
+        await editCourse({ ...payload, _id: initialData._id });
       } else {
         await addCourse(payload); // Replace with actual API call
       }
       // Show success message
-      console.log(`Course ${initialData ? "updated" : "added"} successfully!`);
+      toaster.success(`Course ${initialData ? "updated" : "added"} successfully!`);
       handleBack();
       // Reset the form or handle post-save actions
       setData({
@@ -74,12 +84,12 @@ const AddCourse = ({ initialData , handleBack }) => {
         duration: "",
         applicationDeadline: "",
         applicationFee: "",
-        upcomingIntake: "",
-        studyMode: "",
+        upcomingIntakes: "",
+        modeOfStudy: "",
       });
     } catch (error) {
       // Handle error scenarios
-      console.error(`Error saving course: ${error.message}`);
+      toaster.error(`Error saving course: ${error.message}`);
     }
   };
 
@@ -112,9 +122,11 @@ const AddCourse = ({ initialData , handleBack }) => {
         <h3 className="heading">Overview</h3>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>Course Name</label>
+            <label>
+              Course Name<span style={{ color: "red" }}>*</span>
+            </label>
             <input
-            className="input"
+              className="input"
               type="text"
               name="courseName"
               placeholder="Add Course Name"
@@ -123,7 +135,9 @@ const AddCourse = ({ initialData , handleBack }) => {
             />
           </div>
           <div className="col-md-6 formField">
-            <label>University Name</label>
+            <label>
+              University Name<span style={{ color: "red" }}>*</span>
+            </label>
             <input
               type="text"
               className="input"
@@ -144,24 +158,23 @@ const AddCourse = ({ initialData , handleBack }) => {
               ref={fileInputRefs.bannerImage}
               onChange={handleFileChange}
             />
-            
           </div>
           <div className="formField col-md-6 formField">
             <label htmlFor="courseLogo">Course Logo</label>
-            <input 
+            <input
               type="file"
               name="courseLogo"
               accept="image/*"
               ref={fileInputRefs.courseLogo}
               onChange={handleFileChange}
             />
-
-            
           </div>
         </div>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>Level</label>
+            <label>
+              Level<span style={{ color: "red" }}>*</span>
+            </label>
             <input
               type="text"
               className="input"
@@ -174,7 +187,9 @@ const AddCourse = ({ initialData , handleBack }) => {
         </div>
         <div className="row">
           <div className="col-md-12 formField">
-            <label>Overview</label>
+            <label>
+              Overview<span style={{ color: "red" }}>*</span>
+            </label>
             <textarea
               name="overview"
               className="p-2"
@@ -187,7 +202,9 @@ const AddCourse = ({ initialData , handleBack }) => {
 
         <div className="row">
           <div className="col-md-12 formField">
-            <label>Modules</label>
+            <label>
+              Modules<span style={{ color: "red" }}>*</span>
+            </label>
             <textarea
               name="modules"
               className="p-2"
@@ -199,7 +216,9 @@ const AddCourse = ({ initialData , handleBack }) => {
         </div>
         <div className="row">
           <div className="col-md-12 formField">
-            <label>Requirements</label>
+            <label>
+              Requirements<span style={{ color: "red" }}>*</span>
+            </label>
             <textarea
               name="requirements"
               className="p-2"
@@ -214,9 +233,11 @@ const AddCourse = ({ initialData , handleBack }) => {
         <h3 className="heading">Unique University Info</h3>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>Fee</label>
+            <label>
+              Fee<span style={{ color: "red" }}>*</span>
+            </label>
             <input
-              type="text"
+              type="number"
               className="input"
               name="fee"
               placeholder="Add Fee"
@@ -225,9 +246,11 @@ const AddCourse = ({ initialData , handleBack }) => {
             />
           </div>
           <div className="col-md-6 formField">
-            <label>Duration</label>
+            <label>
+              Duration (Years)<span style={{ color: "red" }}>*</span>
+            </label>
             <input
-              type="text"
+              type="number"
               className="input"
               name="duration"
               placeholder="Add Duration"
@@ -238,10 +261,12 @@ const AddCourse = ({ initialData , handleBack }) => {
         </div>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>Application Deadline</label>
+            <label>
+              Application Deadline<span style={{ color: "red" }}>*</span>
+            </label>
             <input
               className="input"
-              type="text"
+              type="date"
               name="applicationDeadline"
               placeholder="Add Application Deadline"
               value={data.applicationDeadline}
@@ -249,10 +274,12 @@ const AddCourse = ({ initialData , handleBack }) => {
             />
           </div>
           <div className="col-md-6 formField">
-            <label>Application Fee</label>
+            <label>
+              Application Fee<span style={{ color: "red" }}>*</span>
+            </label>
             <input
               className="input"
-              type="text"
+              type="number"
               name="applicationFee"
               placeholder="Add Application Fee"
               value={data.applicationFee}
@@ -262,7 +289,9 @@ const AddCourse = ({ initialData , handleBack }) => {
         </div>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>Upcoming Intakes</label>
+            <label>
+              Upcoming Intakes<span style={{ color: "red" }}>*</span>
+            </label>
             <input
               className="input"
               type="text"
@@ -273,7 +302,9 @@ const AddCourse = ({ initialData , handleBack }) => {
             />
           </div>
           <div className="col-md-6 formField">
-            <label>Mode of study</label>
+            <label>
+              Mode of Study<span style={{ color: "red" }}>*</span>
+            </label>
             <input
               className="input"
               type="text"
