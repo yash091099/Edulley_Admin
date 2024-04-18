@@ -3,6 +3,8 @@ import { addCourse, editCourse } from "../context/services/client";
 import toaster from "../Shared/toaster";
 
 const AddCourse = ({ initialData, handleBack }) => {
+
+  console.log(initialData)
   const [data, setData] = useState({
     courseName: initialData?.courseName || "",
     universityName: initialData?.universityName || "",
@@ -53,7 +55,7 @@ const AddCourse = ({ initialData, handleBack }) => {
       uniqueCourseInfo: {
         fee: parseInt(data.fee),
         duration: parseInt(data.duration),
-        applicationDeadline: data.applicationDeadline,
+        applicationDeadline: data.applicationDeadline?.split("T")[0], // Convert to Date object
         applicationFee: parseInt(data.applicationFee),
         upcomingIntakes: data.upcomingIntakes,
         studyMode: data.modeOfStudy,
@@ -82,7 +84,7 @@ const AddCourse = ({ initialData, handleBack }) => {
         requirements: "",
         fee: "",
         duration: "",
-        applicationDeadline: "",
+        applicationDeadline: new Date(),
         applicationFee: "",
         upcomingIntakes: "",
         modeOfStudy: "",

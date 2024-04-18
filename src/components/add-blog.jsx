@@ -3,7 +3,7 @@ import "./overviewInstute.css";
 import { addBlog, editBlog, uploadFile } from "../context/services/client";
 import toaster from "../Shared/toaster";
 
-const AddBlog = ({ existingBlog }) => {
+const AddBlog = ({ existingBlog , openAddForm }) => {
   const [data, setData] = useState({
     blogHeading: "",
     date: "",
@@ -12,6 +12,7 @@ const AddBlog = ({ existingBlog }) => {
     quote: "",
     content: "",
   });
+
   useEffect(() => {
     if (existingBlog) {
       setData({
@@ -26,6 +27,11 @@ const AddBlog = ({ existingBlog }) => {
   }, [existingBlog]);
 
   const saveBlog = () => {
+    if (!data?.blogHeading || !data?.date || !data?.content) {
+      toaster.error("Please fill in all required fields.");
+      return;
+    }
+
     const payload = {
       heading: data.blogHeading,
       date: data.date,
@@ -38,6 +44,7 @@ const AddBlog = ({ existingBlog }) => {
     const action = existingBlog ? editBlog : addBlog;
     action(payload)
       .then(() => {
+        openAddForm();
         toaster.success(
           existingBlog
             ? "Blog updated successfully!"
@@ -74,7 +81,7 @@ const AddBlog = ({ existingBlog }) => {
         }
       );
       if (!response.ok) {
-        throw new Error(`⁠Failed to upload file: ${response.statusText}`);
+        throw new Error(`Failed to upload file: ${response.statusText}`);
       }
       const responseData = await response.json();
       const uploadedUrl = responseData.publicUrl;
@@ -113,7 +120,7 @@ const AddBlog = ({ existingBlog }) => {
         <h3 className="heading">Add Blog</h3>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>Blog Heading</label>
+            <label>Blog Heading*</label>
             <input
               className="input"
               type="text"
@@ -124,7 +131,7 @@ const AddBlog = ({ existingBlog }) => {
             />
           </div>
           <div className="col-md-6 formField">
-            <label>Date</label>
+            <label>Date*</label>
             <input
               className="input"
               type="date"
@@ -144,18 +151,15 @@ const AddBlog = ({ existingBlog }) => {
               style={{ display: "none" }}
             />
 
-<label onClick={() =>
-                document.querySelector('input[type="file"]').click()
-              } htmlFor="banner-upload" className="btn btn-secondary">Upload Banner</label>
-
-            {/* <button
-              className="button"
+            <label
               onClick={() =>
                 document.querySelector('input[type="file"]').click()
               }
+              htmlFor="banner-upload"
+              className="btn btn-secondary"
             >
               Upload Banner
-            </button> */}
+            </label>
           </div>
           <div className="col-md-6 formField">
             <label>Tags</label>
@@ -165,12 +169,26 @@ const AddBlog = ({ existingBlog }) => {
               placeholder="Add Tags"
               onKeyPress={handleTagInput}
             />
-            {data?.tags?.length > 0 && <p>Tags: {data?.tags?.join(", ")}</p>}
+            {data?.tags?.length > 0 && (
+              <div className="tags-container">
+                {data?.tags?.map((tag, index) => (
+                  <div key={index} className="tag">
+                    {tag}
+                    <button
+                      className="remove-tag"
+                      onClick={() => removeTag(index)}
+                    >
+                      &times;
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
         <div className="row">
           <div className="col-md-12 formField">
-            <label>Content</label>
+            <label>Content*</label>
             <textarea
               name="content"
               value={data?.content}
@@ -190,7 +208,7 @@ const AddBlog = ({ existingBlog }) => {
             />
           </div>
         </div>
-        <div onClick={saveBlog} className="button-container">
+        <div className="button-container">
           <button
             className="saveButton"
             style={{
@@ -200,9 +218,9 @@ const AddBlog = ({ existingBlog }) => {
               color: "#fff",
               minWidth: "100px",
             }}
-            disabled={!data?.blogHeading || !data?.date || !data?.content}
+            onClick={saveBlog}
+            // disabled={!data?.blogHeading || !data?.date || !data?.content}
           >
-
             Save
           </button>
         </div>

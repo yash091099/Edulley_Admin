@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { addScholarship, editScholarship } from "../context/services/client";
 import toaster from "../Shared/toaster";
 
-export default function AddScholarship({ initialData ,handleBack }) {
+export default function AddScholarship({ initialData, handleBack }) {
   const [data, setData] = useState({
     name: initialData?.name || "",
     universityName: initialData?.universityName || "",
@@ -17,7 +17,19 @@ export default function AddScholarship({ initialData ,handleBack }) {
     setData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const validateFields = () => {
+    for (const key in data) {
+      if (!data[key]) {
+        toaster.error(`Please fill in all fields.`);
+        return false;
+      }
+    }
+    return true;
+  };
+
   const saveScholarship = async () => {
+    if (!validateFields()) return;
+
     const payload = {
       name: data?.name,
       universityName: data?.universityName,
@@ -30,17 +42,15 @@ export default function AddScholarship({ initialData ,handleBack }) {
     try {
       // Use the correct API function for adding or editing the scholarship
       const response = initialData
-        ? await editScholarship(payload) // Replace with actual API call for editing
+        ? await editScholarship(payload, initialData._id)
         : await addScholarship(payload); // Replace with actual API call for adding
 
-        if(response.status === 200) {
-          handleBack();
-          toaster.success(`Scholarship ${initialData ? 'updated' : 'added'} successfully!`);
-        } else {
-          toaster.error(`Error: ${response.message}`);
-        }
-
-      // Handle post-save actions like navigating away or showing a success message
+      if (response.status === 200) {
+        handleBack();
+        toaster.success(`Scholarship ${initialData ? "updated" : "added"} successfully!`);
+      } else {
+        toaster.error(`Error: ${response.message}`);
+      }
     } catch (error) {
       toaster.error(`Error saving scholarship: ${error.message}`);
       console.error(`Error saving scholarship: ${error.message}`);
@@ -54,7 +64,9 @@ export default function AddScholarship({ initialData ,handleBack }) {
         <h3 className="heading">Overview</h3>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>Scholarship Name</label>
+            <label>
+              Scholarship Name<span style={{ color: "red" }}>*</span>
+            </label>
             <input
               className="input"
               type="text"
@@ -65,7 +77,9 @@ export default function AddScholarship({ initialData ,handleBack }) {
             />
           </div>
           <div className="col-md-6 formField">
-            <label>University Name</label>
+            <label>
+              University Name<span style={{ color: "red" }}>*</span>
+            </label>
             <input
               className="input"
               type="text"
@@ -78,7 +92,9 @@ export default function AddScholarship({ initialData ,handleBack }) {
         </div>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>Course Name</label>
+            <label>
+              Course Name<span style={{ color: "red" }}>*</span>
+            </label>
             <input
               className="input"
               type="text"
@@ -89,7 +105,9 @@ export default function AddScholarship({ initialData ,handleBack }) {
             />
           </div>
           <div className="col-md-6 formField">
-            <label>Deadline</label>
+            <label>
+              Deadline<span style={{ color: "red" }}>*</span>
+            </label>
             <input
               className="input"
               type="text"
@@ -102,7 +120,9 @@ export default function AddScholarship({ initialData ,handleBack }) {
         </div>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>Level</label>
+            <label>
+              Level<span style={{ color: "red" }}>*</span>
+            </label>
             <input
               className="input"
               type="text"
@@ -113,7 +133,9 @@ export default function AddScholarship({ initialData ,handleBack }) {
             />
           </div>
           <div className="col-md-6 formField">
-            <label>Amount</label>
+            <label>
+              Amount<span style={{ color: "red" }}>*</span>
+            </label>
             <input
               className="input"
               type="text"
@@ -125,7 +147,7 @@ export default function AddScholarship({ initialData ,handleBack }) {
           </div>
         </div>
       </div>
-      <div className="button-container" onClick={saveScholarship}>
+      <div className="button-container">
         <button
           style={{
             backgroundColor: "#FF6477",
@@ -134,7 +156,8 @@ export default function AddScholarship({ initialData ,handleBack }) {
             color: "#fff",
             minWidth: "100px",
           }}
-          className="saveButton "
+          className="saveButton"
+          onClick={saveScholarship}
         >
           Save
         </button>

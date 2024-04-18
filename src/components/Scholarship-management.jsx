@@ -17,7 +17,7 @@ export default function ScholarshipManagement() {
 
   useEffect(() => {
     fetchScholarships();
-  }, [currentPage]);
+  }, [currentPage , isAdd]);
 
   const fetchScholarships = async () => {
     const queryParams = { page: currentPage, limit: 10 }; // Adjust according to your needs
@@ -25,7 +25,9 @@ export default function ScholarshipManagement() {
     if (response.status === 200) {
       setData(response?.data?.data?.list);
       setTotalCount(response?.data?.data?.totalCount);
-      setTotalPages(Math.ceil(response?.data?.data?.totalCount / queryParams.limit));
+      setTotalPages(
+        Math.ceil(response?.data?.data?.totalCount / queryParams.limit)
+      );
 
       // setTotalCount(response.data.totalCount);
       // setTotalPages(Math.ceil(response.data.totalCount / queryParams.limit));
@@ -35,11 +37,13 @@ export default function ScholarshipManagement() {
     }
   };
 
-  const openAddForm = (row) => {
-    if (row) {
-      setExistingScholarship(row);
-    }
+  const openAddForm = () => {
     setIsAdd(!isAdd);
+  };
+
+  const handleEdit = (row) => {
+    editScholarship(row);
+    openAddForm();
   };
 
   const editScholarship = (scholarship) => {
@@ -59,10 +63,10 @@ export default function ScholarshipManagement() {
           Scholarship Management {isAdd ? "> Add" : ""}
         </h1>
         <div className="flex justify-between gap-[0.2rem]">
-          <button className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]">
+          {/* <button className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]">
             <img src={filterIcon} alt="filter" />
             <p className="text-text text-[0.75rem] font-[600]">Filter</p>
-          </button>
+          </button> */}
           <button
             onClick={openAddForm}
             className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]"
@@ -81,6 +85,7 @@ export default function ScholarshipManagement() {
         />
       ) : (
         <CourseTable
+          component={"Scholarship"}
           columns={[
             {
               name: "Scholarship Name",
@@ -93,11 +98,17 @@ export default function ScholarshipManagement() {
             { name: "Course", enableSorting: true, searchingEnabled: true },
           ]}
           data={data}
-          mapping={["Name", "amount", "deadline", "universityName", "coursesName"]}
+          mapping={[
+            "Name",
+            "amount",
+            "deadline",
+            "universityName",
+            "coursesName",
+          ]}
           editScholarship={editScholarship}
           currentPage={currentPage}
           totalPages={totalPages}
-          fun={openAddForm}
+          fun={handleEdit}
           setCurrentPage={setCurrentPage}
         />
       )}

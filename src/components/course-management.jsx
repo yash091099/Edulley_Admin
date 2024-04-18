@@ -55,10 +55,10 @@ export default function CourseManagement() {
       <div className="flex justify-between">
         <h1 className="text-text text-[1.5rem] font-[600]">Course Management</h1>
         <div className="flex justify-between gap-[0.2rem]">
-          <button className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]">
+          {/* <button className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]">
             <img src={filterIcon} alt="filter" />
             <p className="text-text text-[0.75rem] font-[600]">Filter</p>
-          </button>
+          </button> */}
           <button onClick={openAddForm} className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]">
             <img src={addIcon} alt="add" />
             <p className="text-text text-[0.75rem] font-[600]">{isAdd ? "Back" : "Add"}</p>
@@ -69,6 +69,7 @@ export default function CourseManagement() {
         <AddCourse initialData={existingCourse} handleBack={handleBack} />
       ) : (
         <CourseTable
+          component="Course"
           columns={[
             { name: "NAME", enableSorting: true, searchingEnabled: true },
             { name: "DURATION", enableSorting: true, searchingEnabled: true },

@@ -5,10 +5,9 @@ import {
   editCareerDetails,
 } from "../context/services/client";
 import "./addCareer.css";
-import { toast } from "react-toastify";
 import toaster from "../Shared/toaster";
 
-const AddCareer = ({ initialData = !null , fetchCareers , handleBack }) => {
+const AddCareer = ({ initialData, fetchCareers, handleBack }) => {
   const [data, setData] = useState({
     latestQualification: "",
     specialization: "",
@@ -27,9 +26,7 @@ const AddCareer = ({ initialData = !null , fetchCareers , handleBack }) => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    if (name !== "coursesName") {
-      setData((prev) => ({ ...prev, [name]: value }));
-    }
+    setData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleCourseInput = (event) => {
@@ -47,42 +44,47 @@ const AddCareer = ({ initialData = !null , fetchCareers , handleBack }) => {
   };
 
   const saveData = async () => {
+    if (!data?.latestQualification || !data?.specialization || data?.coursesName.length === 0) {
+      toaster.error("Please fill in all required fields.");
+      return;
+    }
+
     const payload = {
       latestQualification: data.latestQualification,
       specialization: data.specialization,
       coursesName: data.coursesName,
     };
 
+
+    if (initialData) {
+      payload._id = initialData?._id;
+    }
+
     try {
       const response = initialData
-        ? await addCareerDetails(payload)
+        ? await editCareerDetails(payload, initialData._id)
         : await addCareerDetails(payload);
       if (response.status === 200) {
         handleBack();
+        fetchCareers(1);
         setData({
           latestQualification: "",
           specialization: "",
           coursesName: [],
-        })
-
-        fetchCareers(1);
-
+        });
         toaster.success(
           `Career details ${initialData ? "updated" : "added"} successfully!`
         );
       } else {
         toaster.error(`Error: ${response.message}`);
       }
-      console.log(
-        `Career details ${initialData ? "updated" : "added"} successfully!`
-      );
     } catch (error) {
+      toaster.error(`Error saving career details: ${error.message}`);
       console.error("Error saving career details:", error);
-      alert("Error saving career details: " + error.message);
     }
   };
 
-  const removeTag = (index) => {
+  const removeCourse = (index) => {
     setData((prev) => ({
       ...prev,
       coursesName: prev.coursesName.filter((_, i) => i !== index),
@@ -94,7 +96,7 @@ const AddCareer = ({ initialData = !null , fetchCareers , handleBack }) => {
       <h3 className="heading">Career Details</h3>
       <div className="row">
         <div className="col-md-6 formField">
-          <label>Latest Qualification</label>
+          <label>Latest Qualification *</label>
           <input
             className="input"
             type="text"
@@ -105,7 +107,7 @@ const AddCareer = ({ initialData = !null , fetchCareers , handleBack }) => {
           />
         </div>
         <div className="col-md-6 formField">
-          <label>Specialization</label>
+          <label>Specialization *</label>
           <input
             className="input"
             type="text"
@@ -118,7 +120,7 @@ const AddCareer = ({ initialData = !null , fetchCareers , handleBack }) => {
       </div>
       <div className="row">
         <div className="col-md-12 formField">
-          <label>Course Names</label>
+          <label>Course Names *</label>
           <input
             className="input"
             type="text"
@@ -126,30 +128,24 @@ const AddCareer = ({ initialData = !null , fetchCareers , handleBack }) => {
             onKeyDown={handleCourseInput}
           />
           {data?.coursesName?.length > 0 && (
-            <p>Course Names: {data?.coursesName?.join(", ")}</p>
+            <div className="tags-container">
+              {data?.coursesName?.map((course, index) => (
+                <div key={index} className="tag">
+                  {course}
+                  <button
+                    onClick={() => removeCourse(index)}
+                    className="remove-tag-btn"
+                  >
+                    &times;
+                  </button>
+                </div>
+              ))}
+            </div>
           )}
-          {/* <div className="tags-container">
-            {data.coursesName.map((course, index) => (
-              <div key={index} className="tag">
-                {course}
-                <button
-                  onClick={() => removeTag(index)}
-                  className="remove-tag-btn"
-                >
-                  &times;
-                </button>
-              </div>
-            ))}
-          </div> */}
         </div>
       </div>
       <div className="button-container">
         <button
-          disabled={
-            !data.latestQualification ||
-            !data.specialization ||
-            !data.coursesName.length
-          }
           style={{
             backgroundColor: "#FF6477",
             padding: "10px",

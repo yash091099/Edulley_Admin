@@ -16,7 +16,7 @@ export default function BlogManagement() {
 
   useEffect(() => {
     fetchBlogs();
-  }, [currentPage]);
+  }, [currentPage , isAdd]);
 
   const fetchBlogs = async () => {
     const response = await getAllBlogs({ page: currentPage, limit: 10 });
@@ -30,10 +30,10 @@ export default function BlogManagement() {
     }
   };
 
-  const openAddForm = (blog) => {
+  const openAddForm = () => {
     setIsAdd(true);
-    setExistingBlog(blog);
   };
+
 
   const handleBack = () => {
     setIsAdd(false);
