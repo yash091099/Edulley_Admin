@@ -63,7 +63,7 @@ export default function Reports() {
                     {showRevenue && <Line type="monotone" dataKey="Revenue" stroke="#BCE8B1" strokeWidth={4} fill="#A8B6FF" />}
                 </LineChart>
             </ReportCard>
-            <ReportCard label="Sales Statistics" value={`${reports?.total_orders_by_year?.reduce((a, b) => a + b, 0)}`} filterOptions={["October"]} onClick={() => setShowOrders(!showOrders)}>
+            {/* <ReportCard label="Sales Statistics" value={`${reports?.total_orders_by_year?.reduce((a, b) => a + b, 0)}`} filterOptions={["October"]} onClick={() => setShowOrders(!showOrders)}>
                 <BarChart width={1000} height={300} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="month" />
@@ -71,7 +71,7 @@ export default function Reports() {
                     <Tooltip />
                     {showOrders && <Bar dataKey="Orders" fill="#A8B6FF" barSize={20} />}
                 </BarChart>
-            </ReportCard>
+            </ReportCard> */}
         </div>
     );
 }

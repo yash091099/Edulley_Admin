@@ -24,7 +24,6 @@ export default function Table({
   return (
     <div className="flex flex-col gap-[2.5rem]">
       <div className="flex flex-col w-full h-full border border-[#DBDADE] overflow-x-auto">
-        {data.length > 0 ? (
           <table className="w-full">
             <thead>
               <tr className="border-b border-[#DBDADE]">
@@ -66,11 +65,20 @@ export default function Table({
                   ))}
                 </tr>
               ))}
+              {!selectedData.length && (
+                <tr>
+                  <td colSpan={mapping.length}> 
+                    <p className="text-[#4B465C]/50 text-[1rem] font-[400] text-center p-3 leading-[1.4675rem]">
+                      No data found
+                    </p>
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
-        ) : (
-          <div className="text-center py-[2rem]">No Data Found</div>
-        )}
+     
+          
+       
       </div>
       {data.length > 0 && (
         <div className="w-full flex justify-between items-center">
