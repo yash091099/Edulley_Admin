@@ -24,18 +24,18 @@ export default function AdminDashboard() {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
   const chartData = [
-    { name: "Jan", students: 400 },
-    { name: "Feb", students: 300 },
-    { name: "Mar", students: 300 },
-    { name: "Apr", students: 200 },
-    { name: "May", students: 278 },
-    { name: "Jun", students: 189 },
-    { name: "Jul", students: 239 },
-    { name: "Aug", students: 349 },
-    { name: "Sep", students: 400 },
-    { name: "Oct", students: 300 },
-    { name: "Nov", students: 300 },
-    { name: "Dec", students: 200 },
+    { name: "Jan", students: 0 },
+    { name: "Feb", students: 0 },
+    { name: "Mar", students: 0 },
+    { name: "Apr", students: 0 },
+    { name: "May", students: 0 },
+    { name: "Jun", students: 0 },
+    { name: "Jul", students: 0 },
+    { name: "Aug", students: 0 },
+    { name: "Sep", students: 0 },
+    { name: "Oct", students: 0 },
+    { name: "Nov", students: 0 },
+    { name: "Dec", students: 0 },
   ];
 
   useEffect(() => {
