@@ -1,1 +1,1 @@
-export const baseUrl = "http://ec2-44-206-228-149.compute-1.amazonaws.com:8001";
+export const baseUrl = "https://edulley.com";
