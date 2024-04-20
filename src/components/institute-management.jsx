@@ -48,7 +48,7 @@ export default function InstituteManagement() {
       setLoading(false);
     };
     fetchData();
-  }, [currentPage, pageSize]);
+  }, [currentPage, pageSize , isAdd]);
   
   
 

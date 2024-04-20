@@ -26,98 +26,92 @@ export default function ViewVUser({ handleBack, initialData }) {
       };
   const [formData, setFormData] = useState(initialFormData);
 
+  const updatedData = {
+    personalDetails: {
+      name: initialData?.fullName,
+      gender: initialData?.gender,
+      contactNumber: initialData?.contactNumber,
+      emailID: initialData?.email,
+      dob: initialData?.dob,
+      maritalStatus: initialData?.maritalStatus,
+
+      mailingAddressLine1: initialData?.mailingAddress?.addressLine1,
+      mailingAddressLine2: initialData?.mailingAddress?.addressLine2,
+      mailingCountry: initialData?.mailingAddress?.country,
+      mailingState: initialData?.mailingAddress?.state,
+      mailingPincode: initialData?.mailingAddress?.pinCode,
+
+      permanentAddressLine1: initialData?.permanentAddress?.addressLine1,
+      permanentAddressLine2: initialData?.permanentAddress?.addressLine2,
+      permanentCountry: initialData?.permanentAddress?.country,
+      permanentState: initialData?.permanentAddress?.state,
+      parmanentPinCode: initialData?.permanentAddress?.pinCode,
+
+      passportNumber: initialData?.passportInformation?.passportNumber,
+      passportExpiryDate: initialData?.passportInformation?.expiryDate,
+      passportStateOfBirth: initialData?.passportInformation?.birthState,
+      passportCountryOfBirth: initialData?.passportInformation?.birthCountry,
+      passportIssueCountry: initialData?.passportInformation?.issueCountry,
+      passportIssueDate: initialData?.passportInformation?.issueDate,
+    },
+    academicProfile: {
+      tenthInstitutionName:
+        initialData?.academicProfile?.secondary?.instituteName,
+      tenthBoard: initialData?.academicProfile?.secondary?.board,
+      tenthYearOfCompletion:
+        initialData?.academicProfile?.secondary?.completionYear,
+      tenthScore: initialData?.academicProfile?.secondary?.score,
+      tenthSpecialization:
+        initialData?.academicProfile?.secondary?.specialization,
+
+      twelfthInstitutionName:
+        initialData?.academicProfile?.seniorSecondary?.instituteName,
+      twelfthBoard: initialData?.academicProfile?.seniorSecondary?.board,
+      twelfthYearOfCompletion:
+        initialData?.academicProfile?.seniorSecondary?.completionYear,
+      twelfthScore: initialData?.academicProfile?.seniorSecondary?.score,
+      twelfthSpecialization:
+        initialData?.academicProfile?.seniorSecondary?.specialization,
+
+      ugInstitutionName: initialData?.academicProfile?.ug?.instituteName,
+      ugBoard: initialData?.academicProfile?.ug?.board,
+      ugYearOfCompletion: initialData?.academicProfile?.ug?.completionYear,
+      ugScore: initialData?.academicProfile?.ug?.score,
+      ugSpecialization: initialData?.academicProfile?.ug?.specialization,
+
+      pgInstitutionName: initialData?.academicProfile?.pg?.instituteName,
+      pgBoard: initialData?.academicProfile?.pg?.board,
+      pgYearOfCompletion: initialData?.academicProfile?.pg?.completionYear,
+      pgScore: initialData?.academicProfile?.pg?.score,
+      pgSpecialization: initialData?.academicProfile?.pg?.specialization,
+    },
+    workExperience: {
+      ...initialData?.workExperience,
+    },
+    testScores: {
+      ...initialData?.testScores,
+    },
+    userDocuments: {
+      ...initialData?.documents,
+    },
+  };
+
   useEffect(() => {
     if (initialData) {
-      const updatedData = {
-        personalDetails: {
-          name: initialData?.fullName,
-          gender: initialData?.gender,
-          contactNumber: initialData?.contactNumber,
-          emailID: initialData?.email,
-          dob: initialData?.dob,
-          maritalStatus: initialData?.maritalStatus,
-
-          mailingAddressLine1: initialData?.mailingAddress?.addressLine1,
-          mailingAddressLine2: initialData?.mailingAddress?.addressLine2,
-          mailingCountry: initialData?.mailingAddress?.country,
-          mailingState: initialData?.mailingAddress?.state,
-          mailingPincode: initialData?.mailingAddress?.pinCode,
-
-          permanentAddressLine1: initialData?.permanentAddress?.addressLine1,
-          permanentAddressLine2: initialData?.permanentAddress?.addressLine2,
-          permanentCountry: initialData?.permanentAddress?.country,
-          permanentState: initialData?.permanentAddress?.state,
-          parmanentPinCode: initialData?.permanentAddress?.pinCode,
-
-          passportNumber: initialData?.passportInformation?.passportNumber,
-          passportExpiryDate: initialData?.passportInformation?.expiryDate,
-          passportStateOfBirth: initialData?.passportInformation?.birthState,
-          passportCountryOfBirth:
-            initialData?.passportInformation?.birthCountry,
-          passportIssueCountry: initialData?.passportInformation?.issueCountry,
-          passportIssueDate: initialData?.passportInformation?.issueDate,
-        },
-        academicProfile: {
-          tenthInstitutionName:
-            initialData?.academicProfile?.secondary?.instituteName,
-          tenthBoard: initialData?.academicProfile?.secondary?.board,
-          tenthYearOfCompletion:
-            initialData?.academicProfile?.secondary?.completionYear,
-          tenthScore: initialData?.academicProfile?.secondary?.score,
-          tenthSpecialization:
-            initialData?.academicProfile?.secondary?.specialization,
-
-          twelfthInstitutionName:
-            initialData?.academicProfile?.seniorSecondary?.instituteName,
-          twelfthBoard: initialData?.academicProfile?.seniorSecondary?.board,
-          twelfthYearOfCompletion:
-            initialData?.academicProfile?.seniorSecondary?.completionYear,
-          twelfthScore: initialData?.academicProfile?.seniorSecondary?.score,
-          twelfthSpecialization:
-            initialData?.academicProfile?.seniorSecondary?.specialization,
-
-          ugInstitutionName: initialData?.academicProfile?.ug?.instituteName,
-          ugBoard: initialData?.academicProfile?.ug?.board,
-          ugYearOfCompletion: initialData?.academicProfile?.ug?.completionYear,
-          ugScore: initialData?.academicProfile?.ug?.score,
-          ugSpecialization: initialData?.academicProfile?.ug?.specialization,
-
-          pgInstitutionName: initialData?.academicProfile?.pg?.instituteName,
-          pgBoard: initialData?.academicProfile?.pg?.board,
-          pgYearOfCompletion: initialData?.academicProfile?.pg?.completionYear,
-          pgScore: initialData?.academicProfile?.pg?.score,
-          pgSpecialization: initialData?.academicProfile?.pg?.specialization,
-        },
-        workExperience: {
-          ...initialData?.workExperience,
-        },
-        testScores: {
-          ...initialData?.testScores,
-        },
-        userDocuments: {
-          ...initialData?.documents,
-        },
-      };
-
+      console.log(initialData, "initialData");
       setFormData(updatedData);
     }
-  }, [initialData]);
+  }, [initialData ]);
+
 
   useEffect(() => {
     formData &&
       localStorage.setItem("studentFormData", JSON.stringify(formData));
 
     return () => {
-      if (initialData) {
-        saveData();
-      }
       localStorage.removeItem("studentFormData");
     };
   }, [formData]);
-
-  useEffect(() => {
-    initialData && setFormData(initialData);
-  }, [initialData]);
 
   useEffect(() => {
     if (state === 6) {
@@ -126,6 +120,8 @@ export default function ViewVUser({ handleBack, initialData }) {
   }, [state]);
 
   const saveData = async () => {
+    console.log(formData);
+
     let dataToSend = {
       fullName: formData.personalDetails.name,
       gender: formData.personalDetails.gender,
@@ -148,12 +144,12 @@ export default function ViewVUser({ handleBack, initialData }) {
         pinCode: formData.personalDetails.permanentPincode,
       },
       passportInformation: {
-        passportNumber: formData.personalDetails.passportNumber,
-        issueCountry: formData.personalDetails.passportIssueCountry,
-        issueDate: formData.PersonalDetails.passportIssueDate,
-        expiryDate: formData.personalDetails.passportExpiryDate,
-        birthState: formData.personalDetails.passportStateOfBirth,
-        birthCountry: formData.personalDetails.passportCountryOfBirth,
+        passportNumber: formData.personalDetails?.passportNumber,
+        issueCountry: formData.personalDetails?.passportIssueCountry,
+        issueDate: formData.PersonalDetails?.passportIssueDate,
+        expiryDate: formData.personalDetails?.passportExpiryDate,
+        birthState: formData.personalDetails?.passportStateOfBirth,
+        birthCountry: formData.personalDetails?.passportCountryOfBirth,
       },
       academicProfile: {
         secondary: {

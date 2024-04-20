@@ -26,8 +26,8 @@ const AddInstituteForm = ({
     },
     universityStatsData: {
       studentsPerStaff: initialFormData?.universityStats?.studentsPerStaff || 0,
-      fullTimeStudents: initialFormData?.universityStats?.fullTimeStudents || 0,
-      internationalStudentsPercentage: initialFormData?.universityStats?.internationalStudentsPercentage || 0,
+      fulltimeStudents: initialFormData?.universityStats?.fulltimeStudents || 0,
+      internationalStudentPercentage: initialFormData?.universityStats?.internationalStudentPercentage || 0,
       studentSatisfactionRate: initialFormData?.universityStats?.studentSatisfactionRate || 0,
     },
     uniqueUniversityInfoData: {
@@ -61,19 +61,22 @@ const AddInstituteForm = ({
       brochure: formData?.overviewData?.brochure,
       overview: formData?.overviewData?.overview,
       admissionReq: formData?.overviewData?.requirements,
-      universityStats: formData?.universityStatsData,
       uniqueUniversityInfo: formData?.uniqueUniversityInfoData,
+      universityStats: formData?.universityStatsData,
       ranking: formData?.rankingData,
     };
 
-    payload.universityStats.studentsPerStaff = Number(payload.universityStats.studentsPerStaff);
-    payload.universityStats.fullTimeStudents = Number(payload.universityStats.fullTimeStudents);
-    payload.universityStats.internationalStudentsPercentage = payload.universityStats.internationalStudentsPercentage?.toString();
-    payload.universityStats.studentSatisfactionRate = payload.universityStats.studentSatisfactionRate?.toString();
+
+    // payload.universityStats.studentsPerStaff = Number(formData.universityStatsData.studentsPerStaff);
+    // payload.universityStats.fulltimeStudents = Number(formData.universityStatsData.fulltimeStudents);
+    // payload.universityStats.internationalStudentsPercentage = formData.universityStatsData.internationalStudentsPercentage?.toString();
+    // payload.universityStats.studentSatisfactionRate = formData.universityStatsData.studentSatisfactionRate?.toString();
+    console.log(payload, "payload");
 
     if (initialFormData) {
       payload.instituteId = initialFormData?._id;
     }
+
 
     const action = initialFormData ? editInstitute : addInstitute;
     action(payload)
@@ -83,8 +86,8 @@ const AddInstituteForm = ({
             ? "Institute updated successfully!"
             : "Institute added successfully!"
         );
-        resetFormData();
         openAddForm();
+        resetFormData();
 
       })
       .catch((error) => {

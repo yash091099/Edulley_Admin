@@ -28,9 +28,9 @@ export default function StudentManagement() {
     try {
       const response = await getAllStudents({ page: page, limit: 10 });
       if (response.status === 200) {
-        setStudents(response.data.data.list);
-        setFilteredStudents(response.data.data.list);
-        setTotalPages(Math.ceil(response.data.totalCount / 10));
+        setStudents(response.data?.data?.list);
+        setFilteredStudents(response?.data?.data?.list);
+        setTotalPages(Math.ceil(response?.data?.data?.totalCount / 10));
       } else {
         console.error("Failed to fetch student data:", response.message);
       }
@@ -43,12 +43,12 @@ export default function StudentManagement() {
   const columns = [
     { name: "NAME", enableSorting: true, searchingEnabled: true },
     { name: "EMAIL", enableSorting: true, searchingEnabled: true },
-    { name: "ADDRESS", enableSorting: true, searchingEnabled: true },
+    { name: "gender", enableSorting: true, searchingEnabled: true },
     { name: "PHONE", enableSorting: true, searchingEnabled: true },
     { name: "DATE JOINED", enableSorting: true, searchingEnabled: true },
   ];
 
-  const mapping = ["Name", "Email", "Address", "Phone", "Date Joined"];
+  const mapping = ["fullName", "email", "gender", "contactNumber", "createdAt"];
 
   const openAddForm = () => {
     setAdd(!add);
@@ -80,6 +80,8 @@ export default function StudentManagement() {
     setFilter("");
     setFilteredStudents(students);
   };
+
+  
 
   return (
     <>
@@ -137,18 +139,7 @@ export default function StudentManagement() {
           <Table
             component="Student"
             columns={columns}
-            data={filteredStudents.map((student) => ({
-              Name: student.fullName,
-              Email: student.email,
-              Address: student.mailingAddress.addressLine1,
-              Phone: student.contactNumber,
-              DateJoined:
-                student.createdAt &&
-                new Date(student.createdAt).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                }),
+            data={filteredStudents?.map((student) => ({
               ...student,
             }))}
             mapping={mapping}

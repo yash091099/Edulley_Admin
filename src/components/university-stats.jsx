@@ -7,14 +7,14 @@ const validationSchema = Yup.object({
   studentsPerStaff: Yup.number()
     .required('This field is required')
     .positive('Must be a positive number'),
-  fullTimeStudents: Yup.number()
+    fulltimeStudents: Yup.number()
     .required('This field is required')
     .positive('Must be a positive number'),
-  internationalStudentsPercentage: Yup.number()
+    internationalStudentPercentage: Yup.number()
     .required('This field is required')
     .min(0, 'Minimum 0')
     .max(100, 'Maximum 100'),
-  studentSatisfactionRate: Yup.number()
+    studentSatisfactionRate: Yup.number()
     .required('This field is required')
     .min(0, 'Minimum 0')
     .max(100, 'Maximum 100'),
@@ -25,9 +25,9 @@ const UniversityStats = ({ onDataChange, initialData }) => {
   return (
     <Formik
       initialValues={{
-        studentsPerStaff: initialData?.studentsPerStaff || '',
-        fullTimeStudents: initialData?.fullTimeStudents || '',
-        internationalStudentsPercentage: initialData?.internationalStudentsPercentage || '',
+        studentsPerStaff: initialData?.studentsPerStaff || 0,
+        fulltimeStudents: initialData?.fulltimeStudents || 0,
+        internationalStudentPercentage: initialData?.internationalStudentPercentage || '',
         studentSatisfactionRate: initialData?.studentSatisfactionRate || ''
       }}
       validationSchema={validationSchema}
@@ -42,8 +42,8 @@ const UniversityStats = ({ onDataChange, initialData }) => {
           <h3 className="heading">University Stats</h3>
           <div className="row">
             <CustomInputField label="No. of students per staff" name="studentsPerStaff" placeholder="Enter number" onDataChange={onDataChange} formik={formik} />
-            <CustomInputField label="No. of full-time students" name="fullTimeStudents" placeholder="Enter number" onDataChange={onDataChange} formik={formik} />
-            <CustomInputField label="Percentage of International students" name="internationalStudentsPercentage" placeholder="Enter percentage" onDataChange={onDataChange} formik={formik} />
+            <CustomInputField label="No. of full-time students" name="fulltimeStudents" placeholder="Enter number" onDataChange={onDataChange} formik={formik} />
+            <CustomInputField label="Percentage of International students" name="internationalStudentPercentage" placeholder="Enter percentage" onDataChange={onDataChange} formik={formik} />
             <CustomInputField label="Student Satisfaction Rate" name="studentSatisfactionRate" placeholder="Enter percentage" onDataChange={onDataChange} formik={formik} />
           </div>
         </Form>
