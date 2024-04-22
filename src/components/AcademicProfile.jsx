@@ -30,6 +30,10 @@ export default function AcademicProfile({ setFormData , formData , setState , st
     <Formik
       initialValues={{
         tenthInstitutionName: formData?.academicProfile?.tenthInstitutionName || "",
+        tenthBoard: formData?.academicProfile?.tenthBoard || "",
+        tenthScore: formData?.academicProfile?.tenthScore || "",
+        tenthYearOfCompletion: formData?.academicProfile?.tenthYearOfCompletion || "",
+        tenthSpecialization: formData?.academicProfile?.tenthSpecialization || "",
         twelfthInstitutionName: formData?.academicProfile?.twelfthInstitutionName || "",
         twelfthBoard: formData?.academicProfile?.twelfthBoard || "",
         twelfthScore: formData?.academicProfile?.twelfthScore || "",

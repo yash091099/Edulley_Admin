@@ -14,97 +14,190 @@ import { addStudent, editStudent } from "../context/services/client";
 export default function ViewVUser({ handleBack, initialData }) {
   const [state, setState] = useState(1);
 
-  const localStorageData = localStorage.getItem("studentFormData");
-  const initialFormData = localStorageData
-    ? JSON.parse(localStorageData)
-    : {
-        personalDetails: {},
-        academicProfile: {},
-        workExperience: {},
-        testScores: {},
-        userDocuments: {},
-      };
-  const [formData, setFormData] = useState(initialFormData);
+  // console.log(initialData);
+  // const localStorageData = localStorage.getItem("studentFormData");
+  // const initialFormData = localStorageData
+  //   ? JSON.parse(localStorageData)
+  //   : {
+  //       personalDetails: {},
+  //       academicProfile: {},
+  //       workExperience: {},
+  //       testScores: {},
+  //       userDocuments: {},
+  //     };
+  // useEffect(() => {
+  //   if (initialData) {
+  //     const updatedData = {
+  //       personalDetails: {
+  //         name: initialData?.fullName,
+  //         gender: initialData?.gender,
+  //         contactNumber: initialData?.contactNumber,
+  //         emailID: initialData?.email,
+  //         dob: initialData?.dob,
+  //         maritalStatus: initialData?.maritalStatus,
 
-  const updatedData = {
-    personalDetails: {
-      name: initialData?.fullName,
-      gender: initialData?.gender,
-      contactNumber: initialData?.contactNumber,
-      emailID: initialData?.email,
-      dob: initialData?.dob,
-      maritalStatus: initialData?.maritalStatus,
+  //         mailingAddressLine1: initialData?.mailingAddress?.addressLine1,
+  //         mailingAddressLine2: initialData?.mailingAddress?.addressLine2,
+  //         mailingCountry: initialData?.mailingAddress?.country,
+  //         mailingState: initialData?.mailingAddress?.state,
+  //         mailingPincode: initialData?.mailingAddress?.pinCode,
 
-      mailingAddressLine1: initialData?.mailingAddress?.addressLine1,
-      mailingAddressLine2: initialData?.mailingAddress?.addressLine2,
-      mailingCountry: initialData?.mailingAddress?.country,
-      mailingState: initialData?.mailingAddress?.state,
-      mailingPincode: initialData?.mailingAddress?.pinCode,
+  //         permanentAddressLine1: initialData?.permanentAddress?.addressLine1,
+  //         permanentAddressLine2: initialData?.permanentAddress?.addressLine2,
+  //         permanentCountry: initialData?.permanentAddress?.country,
+  //         permanentState: initialData?.permanentAddress?.state,
+  //         parmanentPinCode: initialData?.permanentAddress?.pinCode,
 
-      permanentAddressLine1: initialData?.permanentAddress?.addressLine1,
-      permanentAddressLine2: initialData?.permanentAddress?.addressLine2,
-      permanentCountry: initialData?.permanentAddress?.country,
-      permanentState: initialData?.permanentAddress?.state,
-      parmanentPinCode: initialData?.permanentAddress?.pinCode,
+  //         passportNumber: initialData?.passportInformation?.passportNumber,
+  //         passportExpiryDate: initialData?.passportInformation?.expiryDate,
+  //         passportStateOfBirth: initialData?.passportInformation?.birthState,
+  //         passportCountryOfBirth:
+  //           initialData?.passportInformation?.birthCountry,
+  //         passportIssueCountry: initialData?.passportInformation?.issueCountry,
+  //         passportIssueDate: initialData?.passportInformation?.issueDate,
+  //       },
+  //       academicProfile: {
+  //         tenthInstitutionName:
+  //           initialData?.academicProfile?.secondary?.instituteName,
+  //         tenthBoard: initialData?.academicProfile?.secondary?.board,
+  //         tenthYearOfCompletion:
+  //           initialData?.academicProfile?.secondary?.completionYear,
+  //         tenthScore: initialData?.academicProfile?.secondary?.score,
+  //         tenthSpecialization:
+  //           initialData?.academicProfile?.secondary?.specialization,
 
-      passportNumber: initialData?.passportInformation?.passportNumber,
-      passportExpiryDate: initialData?.passportInformation?.expiryDate,
-      passportStateOfBirth: initialData?.passportInformation?.birthState,
-      passportCountryOfBirth: initialData?.passportInformation?.birthCountry,
-      passportIssueCountry: initialData?.passportInformation?.issueCountry,
-      passportIssueDate: initialData?.passportInformation?.issueDate,
-    },
-    academicProfile: {
-      tenthInstitutionName:
-        initialData?.academicProfile?.secondary?.instituteName,
-      tenthBoard: initialData?.academicProfile?.secondary?.board,
-      tenthYearOfCompletion:
-        initialData?.academicProfile?.secondary?.completionYear,
-      tenthScore: initialData?.academicProfile?.secondary?.score,
-      tenthSpecialization:
-        initialData?.academicProfile?.secondary?.specialization,
+  //         twelfthInstitutionName:
+  //           initialData?.academicProfile?.seniorSecondary?.instituteName,
+  //         twelfthBoard: initialData?.academicProfile?.seniorSecondary?.board,
+  //         twelfthYearOfCompletion:
+  //           initialData?.academicProfile?.seniorSecondary?.completionYear,
+  //         twelfthScore: initialData?.academicProfile?.seniorSecondary?.score,
+  //         twelfthSpecialization:
+  //           initialData?.academicProfile?.seniorSecondary?.specialization,
 
-      twelfthInstitutionName:
-        initialData?.academicProfile?.seniorSecondary?.instituteName,
-      twelfthBoard: initialData?.academicProfile?.seniorSecondary?.board,
-      twelfthYearOfCompletion:
-        initialData?.academicProfile?.seniorSecondary?.completionYear,
-      twelfthScore: initialData?.academicProfile?.seniorSecondary?.score,
-      twelfthSpecialization:
-        initialData?.academicProfile?.seniorSecondary?.specialization,
+  //         ugInstitutionName: initialData?.academicProfile?.UG?.instituteName,
+  //         ugBoard: initialData?.academicProfile?.UG?.board,
+  //         ugYearOfCompletion: initialData?.academicProfile?.UG?.completionYear,
+  //         ugScore: initialData?.academicProfile?.UG?.score,
+  //         ugSpecialization: initialData?.academicProfile?.UG?.specialization,
 
-      ugInstitutionName: initialData?.academicProfile?.ug?.instituteName,
-      ugBoard: initialData?.academicProfile?.ug?.board,
-      ugYearOfCompletion: initialData?.academicProfile?.ug?.completionYear,
-      ugScore: initialData?.academicProfile?.ug?.score,
-      ugSpecialization: initialData?.academicProfile?.ug?.specialization,
+  //         pgInstitutionName: initialData?.academicProfile?.pg?.instituteName,
+  //         pgBoard: initialData?.academicProfile?.pg?.board,
+  //         pgYearOfCompletion: initialData?.academicProfile?.pg?.completionYear,
+  //         pgScore: initialData?.academicProfile?.pg?.score,
+  //         pgSpecialization: initialData?.academicProfile?.pg?.specialization,
+  //       },
+  //       workExperience: {
+  //         ...initialData?.workExperience,
+  //       },
+  //       testScores: {
+  //         ...initialData?.testScores,
+  //       },
+  //       userDocuments: {
+  //         ...initialData?.documents,
+  //       },
+  //     };
 
-      pgInstitutionName: initialData?.academicProfile?.pg?.instituteName,
-      pgBoard: initialData?.academicProfile?.pg?.board,
-      pgYearOfCompletion: initialData?.academicProfile?.pg?.completionYear,
-      pgScore: initialData?.academicProfile?.pg?.score,
-      pgSpecialization: initialData?.academicProfile?.pg?.specialization,
-    },
-    workExperience: {
-      ...initialData?.workExperience,
-    },
-    testScores: {
-      ...initialData?.testScores,
-    },
-    userDocuments: {
-      ...initialData?.documents,
-    },
+  //     // console.log(initialData, "initialData");
+  //     setFormData(updatedData);
+  //   }
+  // }, [initialData]);
+
+  const defaultFormData = {
+    personalDetails: {},
+    academicProfile: {},
+    workExperience: [],
+    testScores: {},
+    userDocuments: {},
   };
 
-  useEffect(() => {
+
+  const getInitialFormData = () => {
+    console.log(initialData, "initialData");
+    const localStorageData = localStorage.getItem("studentFormData");
     if (initialData) {
-      console.log(initialData, "initialData");
-      setFormData(updatedData);
+      return {
+        personalDetails: {
+          name: initialData?.fullName,
+          gender: initialData?.gender,
+          contactNumber: initialData?.contactNumber,
+          emailID: initialData?.email,
+          dob: initialData?.dob,
+          maritalStatus: initialData?.maritalStatus,
+
+          mailingAddressLine1: initialData?.mailingAddress?.addressLine1,
+          mailingAddressLine2: initialData?.mailingAddress?.addressLine2,
+          mailingCountry: initialData?.mailingAddress?.country,
+          mailingState: initialData?.mailingAddress?.state,
+          mailingPincode: initialData?.mailingAddress?.pinCode,
+          mailingCity: initialData?.mailingAddress?.city,
+
+          permanentAddressLine1: initialData?.permanentAddress?.addressLine1,
+          permanentAddressLine2: initialData?.permanentAddress?.addressLine2,
+          permanentCountry: initialData?.permanentAddress?.country,
+          permanentState: initialData?.permanentAddress?.state,
+          parmanentPinCode: initialData?.permanentAddress?.pinCode,
+          permanentCity: initialData?.permanentAddress?.city,
+
+          passportNumber: initialData?.passportInformation?.passportNumber,
+          passportExpiryDate: initialData?.passportInformation?.expiryDate,
+          passportStateOfBirth: initialData?.passportInformation?.birthState,
+          passportCountryOfBirth:
+            initialData?.passportInformation?.birthCountry,
+          passportIssueCountry: initialData?.passportInformation?.issueCountry,
+          passportIssueDate: initialData?.passportInformation?.issueDate,
+        },
+        academicProfile: {
+          tenthInstitutionName:
+            initialData?.academicProfile?.secondary?.instituteName,
+          tenthBoard: initialData?.academicProfile?.secondary?.board,
+          tenthYearOfCompletion:
+            initialData?.academicProfile?.secondary?.completionYear,
+          tenthScore: initialData?.academicProfile?.secondary?.score,
+          tenthSpecialization:
+            initialData?.academicProfile?.secondary?.specialization,
+
+          twelfthInstitutionName:
+            initialData?.academicProfile?.seniorSecondary?.instituteName,
+          twelfthBoard: initialData?.academicProfile?.seniorSecondary?.board,
+          twelfthYearOfCompletion:
+            initialData?.academicProfile?.seniorSecondary?.completionYear,
+          twelfthScore: initialData?.academicProfile?.seniorSecondary?.score,
+          twelfthSpecialization:
+            initialData?.academicProfile?.seniorSecondary?.specialization,
+
+          ugInstitutionName: initialData?.academicProfile?.UG?.instituteName,
+          ugBoard: initialData?.academicProfile?.UG?.board,
+          ugYearOfCompletion: initialData?.academicProfile?.UG?.completionYear,
+          ugScore: initialData?.academicProfile?.UG?.score,
+          ugSpecialization: initialData?.academicProfile?.UG?.specialization,
+
+          pgInstitutionName: initialData?.academicProfile?.PG?.instituteName,
+          pgBoard: initialData?.academicProfile?.PG?.board,
+          pgYearOfCompletion: initialData?.academicProfile?.PG?.completionYear,
+          pgScore: initialData?.academicProfile?.PG?.score,
+          pgSpecialization: initialData?.academicProfile?.PG?.specialization,
+        },
+        workExperience: initialData?.workExperience[0] ? initialData?.workExperience : [],
+        testScores: {
+          ...initialData?.tests,
+        },
+        userDocuments: {
+          ...initialData?.documents,
+        },
+      }
+
+    } else if (localStorageData) {
+      return JSON.parse(localStorageData);
+    } else {
+      return defaultFormData;
     }
-  }, [initialData ]);
+  };
+  const [formData, setFormData] = useState(getInitialFormData());
 
 
   useEffect(() => {
+    
     formData &&
       localStorage.setItem("studentFormData", JSON.stringify(formData));
 
@@ -181,17 +274,8 @@ export default function ViewVUser({ handleBack, initialData }) {
           specialization: formData.academicProfile.pgSpecialization,
         },
       },
-      workExperience: [
-        {
-          jobTitle: formData.workExperience.jobTitle,
-          company: formData.workExperience.company,
-          location: formData.workExperience.location,
-          jobSummary: formData.workExperience.jobSummary,
-          joiningDate: formData.workExperience.joiningDate,
-          workedTill: formData.workExperience.workedTill,
-        },
-      ],
-      testScores: formData.testScores,
+      workExperience: formData.workExperience,
+      tests: formData.testScores,
       documents: {
         document1: formData.userDocuments.document1,
         document2: formData.userDocuments.document2,
@@ -210,7 +294,7 @@ export default function ViewVUser({ handleBack, initialData }) {
         ? await editStudent(dataToSend)
         : await addStudent(dataToSend);
       if (response.status === 200) {
-        setFormData(initialFormData);
+        getInitialFormData
         handleBack();
       } else {
         toaster.error(response.message);

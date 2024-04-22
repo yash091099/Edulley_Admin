@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
@@ -13,15 +13,18 @@ const validationSchema = Yup.object({
 });
 
 export default function WorkBackground({ setFormData , formData , setState , state}) {
+
+  console.log(formData.workExperience, "formData");
+  
   return (
     <Formik
       initialValues={{
-        jobTitle: formData?.workExperience?.jobTitle || "",
-        company: formData?.workExperience?.company || "",
-        location: formData?.workExperience?.location || "",
-        jobSummary: formData?.workExperience?.jobSummary || "",
-        joiningDate: formData?.workExperience?.joiningDate || "",
-        workedTill: formData?.workExperience?.workedTill || "",
+        jobTitle: formData?.workExperience[0]?.jobTitle || "",
+        company: formData?.workExperience[0]?.company || "",
+        location: formData?.workExperience[0]?.location || "",
+        jobSummary: formData?.workExperience[0]?.jobSummary || "",
+        joiningDate: formData?.workExperience[0]?.joiningDate?.split("T")[0] || "",
+        workedTill: formData?.workExperience[0]?.workedTill?.split("T")[0] || "",
       }}
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting, resetForm }) => {

@@ -21,7 +21,7 @@ export default function StudentManagement() {
 
   useEffect(() => {
     fetchStudents(currentPage);
-  }, [currentPage]);
+  }, [currentPage , add]);
 
   const fetchStudents = async (page) => {
     setLoading(true);
