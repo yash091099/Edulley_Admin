@@ -1,27 +1,11 @@
 import React from "react";
-import TableButton from "./TableButton";
 import upDark from "../assets/svg/up-icon-dark.svg";
 import downLight from "../assets/svg/down-icon-light.svg";
 import StatusField from "./StatusField";
 import NameField from "./NameField";
 
-export default function Table({
-  columns,
-  data,
-  mapping,
-  fun,
-  viewDetails,
-  currentPage,
-  setCurrentPage,
-  totalPages,
-}) {
-  const perPage = 10;
-  const startIndex = (currentPage - 1) * perPage;
-  const selectedData = data?.slice(startIndex, startIndex + perPage);
-  const displayStart = Math.min(startIndex + 1, data?.length);
-  const displayEnd = Math.min(startIndex + perPage, data?.length);
-
-  console.log(data, "selectedData");
+export default function TableWithoutPagination({ columns, data, mapping, fun }) {
+  const selectedData = data?.slice(0, 10);
 
   return (
     <div className="flex flex-col gap-[2.5rem]">
@@ -29,7 +13,7 @@ export default function Table({
         <table className="w-full">
           <thead>
             <tr className="border-b border-[#DBDADE]">
-              {columns.map((column, index) => (
+              {columns?.map((column, index) => (
                 <th key={index}>
                   <div className="w-fit flex gap-8 items-center px-[0.7rem] py-[0.62rem]">
                     <p className="text-[#4B465C] text-[0.71563rem] font-[600] tracking-[0.07813rem]">
@@ -53,12 +37,12 @@ export default function Table({
             </tr>
           </thead>
           <tbody>
-            {selectedData.map((row, rowIndex) => (
+            {selectedData?.map((row, rowIndex) => (
               <tr
                 key={rowIndex}
-                className={`cursor-pointer h-[5rem] border-y border-[#DBDADE]`}
+                className="cursor-pointer h-[5rem] border-y border-[#DBDADE]"
               >
-                {mapping.map((key, keyIndex) => (
+                {mapping?.map((key, keyIndex) => (
                   <td key={keyIndex} onClick={() => fun(row, key)}>
                     <div className="w-fit flex gap-8 items-center px-[0.7rem] py-[0.62rem]">
                       {renderField(row, key)}
@@ -69,7 +53,7 @@ export default function Table({
             ))}
             {!selectedData?.length && (
               <tr>
-                <td colSpan={mapping.length}>
+                <td colSpan={mapping?.length}>
                   <p className="text-[#4B465C]/50 text-[1rem] font-[400] text-center p-3 leading-[1.4675rem]">
                     No data found
                   </p>
@@ -79,33 +63,6 @@ export default function Table({
           </tbody>
         </table>
       </div>
-      {data.length > 0 && (
-        <div className="w-full flex justify-between items-center">
-          <p className="text-[#4B465C]/50 text-[1rem] font-[400] leading-[1.4675rem]">
-            Showing {displayStart} to {displayEnd} of {data.length}
-          </p>
-          <div className="flex gap-[0.31rem]">
-            <TableButton
-              label="Previous"
-              action={() => setCurrentPage(Math.max(1, currentPage - 1))}
-            />
-            {[...Array(totalPages)].map((_, index) => (
-              <TableButton
-                key={index}
-                label={index + 1}
-                activeButton={currentPage === index + 1}
-                action={() => setCurrentPage(index + 1)}
-              />
-            ))}
-            <TableButton
-              label="Next"
-              action={() =>
-                setCurrentPage(Math.min(totalPages, currentPage + 1))
-              }
-            />
-          </div>
-        </div>
-      )}
     </div>
   );
 }
@@ -115,47 +72,37 @@ function renderField(row, key) {
     case "Status":
       return <StatusField label={row[key]} />;
     case "Name":
-      return <NameField name={row[key]} />;
     case "fullName":
+    case "University Name":
       return <NameField name={row[key]} />;
     case "date":
       const date = new Date(row[key]);
-      const formattedDate = `${
-        date.getMonth() + 1
-      }/${date.getDate()}/${date.getFullYear()}`;
       return (
         <p className="text-[#4B465C] text-[1.125rem] font-[400]">
-          {formattedDate}
+          {`${date?.getMonth() + 1}/${date?.getDate()}/${date?.getFullYear()}`}
         </p>
       );
     case "createdAt":
       return (
         <p className="text-[#4B465C] text-[1.125rem] font-[400]">
-          {new Date(row[key]).toLocaleDateString("en-US", {
+          {new Date(row[key])?.toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
             day: "numeric",
           })}
         </p>
       );
-    case "University Name":
-      return <NameField name={row[key]} />;
     case "tags":
       return (
         <div className="flex gap-2">
           {row[key].map((tag, index) => (
-            <p
-              key={index}
-              className="text-[#4B465C] text-[1.125rem] font-[400]"
-            >
+            <p key={index} className="text-[#4B465C] text-[1.125rem] font-[400]">
               {index === row[key].length - 1 ? tag : `${tag}, `}
             </p>
           ))}
         </div>
       );
     default:
-      return (
-        <p className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]}</p>
-      );
+      return <p className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]}</p>;
   }
 }

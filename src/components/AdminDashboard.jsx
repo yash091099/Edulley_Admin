@@ -10,6 +10,7 @@ import revenueIcon from "../assets/svg/revenue.svg";
 import graph from "../assets/Graph_1.png";
 import { fetchDashboardData } from "../context/services/client";
 import CustomLoader from "./loader";
+import TableWithoutPagination from "./tableWithoutpagination";
 
 export default function AdminDashboard() {
   const [data, setData] = useState({
@@ -49,6 +50,7 @@ export default function AdminDashboard() {
           courses: response?.data?.data?.courses,
           universities: response?.data?.data?.universities,
           recentStudents: response?.data?.data?.recentStudents,
+          recentCourses: response?.data?.data?.recentCourses,
         });
       } else {
         console.error("Failed to fetch data:", response.message);
@@ -61,7 +63,7 @@ export default function AdminDashboard() {
   const columns = [
     { name: "NAME", enableSorting: true, searchingEnabled: true },
     { name: "EMAIL", enableSorting: true, searchingEnabled: true },
-    { name: "LOCATION", enableSorting: true, searchingEnabled: true },
+    { name: "GENDER", enableSorting: true, searchingEnabled: true },
     { name: "PHONE", enableSorting: true, searchingEnabled: true },
     { name: "DATE JOINED", enableSorting: true, searchingEnabled: true },
   ];
@@ -108,20 +110,53 @@ export default function AdminDashboard() {
           <h1 className="text-text text-[1.5rem] font-[600]">
             Recent Students
           </h1>
-          <Table
-            columns={columns}
-            data={data?.recentStudents}
-            mapping={["Name", "Email", "Location", "Phone", "Date Joined"]}
+          <TableWithoutPagination
+           columns={columns}
+            data={data.recentStudents}
+            mapping={["fullName", "email", "gender", "contactNumber", "createdAt"]}
+            fun={console.log}
           />
         </div>
         <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-md">
           <h1 className="text-text text-[1.5rem] font-[600]">
-            Recent Educators
+            Recent Courses
           </h1>
-          <Table
-            columns={columns}
-            data={data.recentStudents}
-            mapping={["Name", "Email", "Location", "Phone", "Date Joined"]}
+          <TableWithoutPagination
+          component="Course"
+            columns={[
+              { name: "NAME", enableSorting: true, searchingEnabled: true },
+              { name: "DURATION", enableSorting: true, searchingEnabled: true },
+              { name: "FEE", enableSorting: true, searchingEnabled: true },
+              {
+                name: "LAST DATE",
+                enableSorting: true,
+                searchingEnabled: true,
+              },
+              {
+                name: "APPLICATION FEE",
+                enableSorting: true,
+                searchingEnabled: true,
+              },
+            ]}
+            data={data?.recentCourses?.map((course) => ({
+              courseName: course.courseName,
+              duration: course.uniqueCourseInfo?.duration,
+              fee: course.uniqueCourseInfo?.fee,
+              applicationDeadline: new Date(
+                course.uniqueCourseInfo?.applicationDeadline
+              ).toLocaleDateString(),
+              applicationFee: course.uniqueCourseInfo?.applicationFee,
+              ...course,
+            }))}
+            mapping={[
+              "courseName",
+              "duration",
+              "fee",
+              "applicationDeadline",
+              "applicationFee",
+            ]}
+            fun={console.log}
+            
           />
         </div>
       </div>
