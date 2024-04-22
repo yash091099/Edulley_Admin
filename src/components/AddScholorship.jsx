@@ -7,7 +7,7 @@ export default function AddScholarship({ initialData, handleBack }) {
     name: initialData?.name || "",
     universityName: initialData?.universityName || "",
     coursesName: initialData?.coursesName || "",
-    deadline: initialData?.deadline || "",
+    deadline: initialData?.deadline.split("T")[0] || "",
     level: initialData?.level || "",
     amount: initialData?.amount || "",
   });
@@ -112,7 +112,7 @@ export default function AddScholarship({ initialData, handleBack }) {
             </label>
             <input
               className="input"
-              type="text"
+              type="date"
               name="deadline"
               placeholder="Add Deadline"
               value={data.deadline}

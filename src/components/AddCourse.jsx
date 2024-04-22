@@ -14,12 +14,12 @@ const AddCourse = ({ initialData, handleBack }) => {
     overview: initialData?.overview || "",
     modules: initialData?.modules || "",
     requirements: initialData?.requirements || "",
-    fee: initialData?.fee || "",
+    fee: initialData?.uniqueCourseInfo?.fee || "",
     duration: initialData?.duration || "",
-    applicationDeadline: initialData?.applicationDeadline || "",
-    applicationFee: initialData?.applicationFee || "",
-    upcomingIntakes: initialData?.upcomingIntakes || "",
-    modeOfStudy: initialData?.modeOfStudy || "",
+    applicationDeadline: initialData?.uniqueCourseInfo?.applicationDeadline.split("T")[0] || "",
+    applicationFee: initialData?.uniqueCourseInfo?.applicationFee || "",
+    upcomingIntakes: initialData?.uniqueCourseInfo?.upcomingIntake || "",
+    modeOfStudy: initialData?.uniqueCourseInfo?.studyMode || "",
   });
 
   const fileInputRefs = {
@@ -57,7 +57,7 @@ const AddCourse = ({ initialData, handleBack }) => {
         duration: parseInt(data.duration),
         applicationDeadline: data.applicationDeadline?.split("T")[0], // Convert to Date object
         applicationFee: parseInt(data.applicationFee),
-        upcomingIntakes: data.upcomingIntakes,
+        upcomingIntake: data.upcomingIntakes,
         studyMode: data.modeOfStudy,
       },
     };
