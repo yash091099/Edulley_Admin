@@ -16,7 +16,7 @@ const AddCourse = ({ initialData, handleBack }) => {
     requirements: initialData?.requirements || "",
     fee: initialData?.uniqueCourseInfo?.fee || "",
     duration: initialData?.duration || "",
-    applicationDeadline: initialData?.uniqueCourseInfo?.applicationDeadline.split("T")[0] || "",
+    applicationDeadline: initialData?.uniqueCourseInfo?.applicationDeadline?.split("T")[0] || "",
     applicationFee: initialData?.uniqueCourseInfo?.applicationFee || "",
     upcomingIntakes: initialData?.uniqueCourseInfo?.upcomingIntake || "",
     modeOfStudy: initialData?.uniqueCourseInfo?.studyMode || "",

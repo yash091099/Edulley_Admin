@@ -7,7 +7,7 @@ export default function AddScholarship({ initialData, handleBack }) {
     name: initialData?.name || "",
     universityName: initialData?.universityName || "",
     coursesName: initialData?.coursesName || "",
-    deadline: initialData?.deadline.split("T")[0] || "",
+    deadline: initialData?.deadline?.split("T")[0] || "",
     level: initialData?.level || "",
     amount: initialData?.amount || "",
   });

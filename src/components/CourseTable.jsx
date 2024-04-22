@@ -80,7 +80,7 @@ function renderField(row, key, keyIndex) {
     case "Name":
       return <NameFieldCourse name={row[key]} />;
     case "deadline":
-      return <p className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key].split("T")[0]}</p>;
+      return <p className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]?.split("T")[0]}</p>;
     default:
       return <p className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]}</p>;
   }
