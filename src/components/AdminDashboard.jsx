@@ -8,7 +8,7 @@ import rejectedIcon from "../assets/svg/rejected-orders.svg";
 import productsIcon from "../assets/svg/products.svg";
 import revenueIcon from "../assets/svg/revenue.svg";
 import graph from "../assets/Graph_1.png";
-import { fetchDashboardData } from "../context/services/client";
+import { fetchDashboardData, getStudentByMonth } from "../context/services/client";
 import CustomLoader from "./loader";
 import TableWithoutPagination from "./tableWithoutpagination";
 
@@ -24,20 +24,7 @@ export default function AdminDashboard() {
 
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
-  const chartData = [
-    { name: "Jan", students: 0 },
-    { name: "Feb", students: 0 },
-    { name: "Mar", students: 0 },
-    { name: "Apr", students: 0 },
-    { name: "May", students: 0 },
-    { name: "Jun", students: 0 },
-    { name: "Jul", students: 0 },
-    { name: "Aug", students: 0 },
-    { name: "Sep", students: 0 },
-    { name: "Oct", students: 0 },
-    { name: "Nov", students: 0 },
-    { name: "Dec", students: 0 },
-  ];
+  const [chartData , setChartData] = useState([])
 
   useEffect(() => {
     const loadData = async () => {
@@ -57,6 +44,19 @@ export default function AdminDashboard() {
       }
       setLoader(false);
     };
+
+    const getStudentsByMonth = async () => {
+      const response = await getStudentByMonth();
+      if (response.status === 200) {
+        setChartData(response?.data?.data)
+
+      } else {
+        console.error("Failed to fetch data:", response.message);
+      }
+    };
+    getStudentsByMonth();
+     
+
     loadData();
   }, []);
 

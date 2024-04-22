@@ -27,7 +27,7 @@ export default function ReportCard({ label, value, data,name, filterOptions, sel
           <LineChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
-            <YAxis />
+            <YAxis domain={[0, 'dataMax + 5']} />
             <Tooltip />
             <Line type="monotone" dataKey="students" stroke="#FF6477" strokeWidth={2} />
           </LineChart>

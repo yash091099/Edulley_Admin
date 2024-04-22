@@ -6,8 +6,8 @@ export const fetchDashboardData = () => {
   return instance.get(url);
 }
 
-export const getReports = () => {
-  const url = `${baseUrl}/v1/metrics/reports`;
+export const getStudentByMonth = () => {
+  const url = `${baseUrl}/v1/student/groupBy/month`;
   return instance.get(url);
 }
 
