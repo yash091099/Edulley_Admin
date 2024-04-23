@@ -53,7 +53,7 @@ export default function Table({
             </tr>
           </thead>
           <tbody>
-            {selectedData.map((row, rowIndex) => (
+            {selectedData?.map((row, rowIndex) => (
               <tr
                 key={rowIndex}
                 className={`cursor-pointer h-[5rem] border-y border-[#DBDADE]`}

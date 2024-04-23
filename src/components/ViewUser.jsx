@@ -274,7 +274,7 @@ export default function ViewVUser({ handleBack, initialData }) {
           specialization: formData.academicProfile.pgSpecialization,
         },
       },
-      workExperience: formData.workExperience,
+      workExperience: [formData.workExperience],
       tests: formData.testScores,
       documents: {
         document1: formData.userDocuments.document1,

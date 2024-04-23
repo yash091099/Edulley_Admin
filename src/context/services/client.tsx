@@ -17,6 +17,12 @@ export const getAllStudents = (queryParams) => {
   return instance.get(url);
 };
 
+export const getApplications = (queryParams) => {
+  const queryString = new URLSearchParams(queryParams)?.toString();
+  const url = `${baseUrl}/v1/application/list/pagination?${queryString}`;
+  return instance.get(url);
+}
+
 
 export const addClient = (payload) => {
   const url = `${baseUrl}v1/clients/superadmin/add/basic/details`;
