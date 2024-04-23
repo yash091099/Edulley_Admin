@@ -8,7 +8,7 @@ import WorkBackground from "./WorkBackground";
 import TestScores from "./TestScores";
 import ViewUserDocument from "./ViewUserDocument";
 import { FormDataProvider } from "./FormDataContext.jsx";
-import toaster from "../Shared/toaster.jsx";
+import {toast} from "react-hot-toast";
 import { addStudent, editStudent } from "../context/services/client";
 
 export default function ViewVUser({ handleBack, initialData }) {
@@ -294,10 +294,10 @@ export default function ViewVUser({ handleBack, initialData }) {
         ? await editStudent(dataToSend)
         : await addStudent(dataToSend);
       if (response.status === 200) {
-        getInitialFormData
+        getInitialFormData()
         handleBack();
       } else {
-        toaster.error(response.message);
+        toast.error(response.message);
       }
     } catch (error) {
       console.log(error);

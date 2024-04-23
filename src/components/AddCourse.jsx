@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { addCourse, editCourse } from "../context/services/client";
-import toaster from "../Shared/toaster";
+import {toast} from "react-hot-toast";
 
 const AddCourse = ({ initialData, handleBack }) => {
 
@@ -37,8 +37,7 @@ const AddCourse = ({ initialData, handleBack }) => {
     const requiredFields = ["courseName", "universityName", "level", "overview", "modules", "requirements", "fee", "duration", "applicationDeadline", "applicationFee", "upcomingIntakes", "modeOfStudy"];
     const emptyFields = requiredFields.filter(field => !data[field]);
     if (emptyFields.length > 0) {
-      // Show toaster with message to fill all required fields
-      toaster.error("Please fill all required fields");
+      toast.error("Please fill all required fields");
       return;
     }
 
@@ -70,7 +69,7 @@ const AddCourse = ({ initialData, handleBack }) => {
         await addCourse(payload); // Replace with actual API call
       }
       // Show success message
-      toaster.success(`Course ${initialData ? "updated" : "added"} successfully!`);
+      toast.success(`Course ${initialData ? "updated" : "added"} successfully!`);
       handleBack();
       // Reset the form or handle post-save actions
       setData({
@@ -91,7 +90,7 @@ const AddCourse = ({ initialData, handleBack }) => {
       });
     } catch (error) {
       // Handle error scenarios
-      toaster.error(`Error saving course: ${error.message}`);
+      toast.error(`Error saving course: ${error.message}`);
     }
   };
 

@@ -5,7 +5,7 @@ import {
   editCareerDetails,
 } from "../context/services/client";
 import "./addCareer.css";
-import toaster from "../Shared/toaster";
+import {toast} from "react-hot-toast";
 
 const AddCareer = ({ initialData, fetchCareers, handleBack }) => {
   const [data, setData] = useState({
@@ -45,7 +45,7 @@ const AddCareer = ({ initialData, fetchCareers, handleBack }) => {
 
   const saveData = async () => {
     if (!data?.latestQualification || !data?.specialization || data?.coursesName.length === 0) {
-      toaster.error("Please fill in all required fields.");
+      toast.error("Please fill in all required fields.");
       return;
     }
 
@@ -72,14 +72,14 @@ const AddCareer = ({ initialData, fetchCareers, handleBack }) => {
           specialization: "",
           coursesName: [],
         });
-        toaster.success(
+        toast.success(
           `Career details ${initialData ? "updated" : "added"} successfully!`
         );
       } else {
-        toaster.error(`Error: ${response.message}`);
+        toast.error(`Error: ${response.message}`);
       }
     } catch (error) {
-      toaster.error(`Error saving career details: ${error.message}`);
+      toast.error(`Error saving career details: ${error.message}`);
       console.error("Error saving career details:", error);
     }
   };

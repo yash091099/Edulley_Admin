@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useNavigate, createBrowserRouter, RouterProvider, useRoutes } from "react-router-dom";
 import Root from "./pages/Root";
 import Login from "./components/Login";
+import { Toaster } from "react-hot-toast";
+
 import Dashboard from "./pages/Dashboard";
 import ProfileManagement from "./components/ProfileManagement";
 import UserManagement from "./components/UserManagement";
@@ -17,7 +19,6 @@ import ScholarshipManagement from "./components/Scholarship-management";
 import ApplicationManagement from "./components/Applications-management";
 import BlogManagement from "./components/Blog-management";
 import CareerManagement from "./components/Career-management";
-import './Shared/ToastStyles.css';
 
 function AuthGuard({ children }) {
   const navigate = useNavigate();
@@ -63,7 +64,21 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={routes} />;
+  return (
+<>
+<Toaster
+        position="top-right"
+        reverseOrder={false}
+        toastOptions={{
+          style: {
+            backgroundColor: '#FF6477',
+            color: '#FFFFFF',
+          },
+        }}
+      />
+<RouterProvider router={routes} />;
+</>
+  )
 }
 
 export default App;

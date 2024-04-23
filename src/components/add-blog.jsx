@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./overviewInstute.css";
 import { addBlog, editBlog, uploadFile } from "../context/services/client";
-import toaster from "../Shared/toaster";
-
+import {toast} from "react-hot-toast";
 const AddBlog = ({ existingBlog , openAddForm }) => {
   const [data, setData] = useState({
     blogHeading: "",
@@ -28,7 +27,7 @@ const AddBlog = ({ existingBlog , openAddForm }) => {
 
   const saveBlog = () => {
     if (!data?.blogHeading || !data?.date || !data?.content) {
-      toaster.error("Please fill in all required fields.");
+      toast.error("Please fill in all required fields.");
       return;
     }
 
@@ -46,7 +45,7 @@ const AddBlog = ({ existingBlog , openAddForm }) => {
     action(payload)
       .then(() => {
         openAddForm();
-        toaster.success(
+        toast.success(
           existingBlog
             ? "Blog updated successfully!"
             : "Blog added successfully!"
@@ -54,7 +53,7 @@ const AddBlog = ({ existingBlog , openAddForm }) => {
         resetForm();
       })
       .catch((error) => {
-        toaster.error(`Error: ${error.message}`);
+        toast.error(`Error: ${error.message}`);
       });
   };
 

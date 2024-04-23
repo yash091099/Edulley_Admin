@@ -4,7 +4,7 @@ import PrimaryButton from "./PrimaryButton";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/images/Edulley-logo.png";
 import { loginUser } from "../context/services/login";
-import toaster from "../Shared/toaster";
+import {toast} from "react-hot-toast";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -23,13 +23,13 @@ export default function Login() {
       const { data, status } = await loginUser({ adminId, password });
       if (status === 200) {
         localStorage.setItem("userData", JSON.stringify(data.data));
-        toaster.success("User logged in");
+        toast.success("User logged in");
         navigate("/dashboard");
       } else {
-        toaster.error(data?.message || "An error occurred");
+        toast.error(data?.message || "An error occurred");
       }
     } catch (err) {
-      toaster.error(err.response?.data.message || "An error occurred");
+      toast.error(err.response?.data.message || "An error occurred");
     } finally {
       setLoading(false);
     }
