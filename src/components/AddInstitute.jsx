@@ -5,7 +5,7 @@ import Ranking from "./ranking";
 import UniqueUniversityInfo from "./unique-university-info";
 import { data } from "autoprefixer";
 import { addInstitute, editInstitute } from "../context/services/client";
-import toaster from "../Shared/toaster";
+import {toast} from "react-hot-toast";
 // import "./addInstitute.css";
 
 const AddInstituteForm = ({
@@ -81,7 +81,7 @@ const AddInstituteForm = ({
     const action = initialFormData ? editInstitute : addInstitute;
     action(payload)
       .then(() => {
-        toaster.success(
+        toast.success(
           initialFormData
             ? "Institute updated successfully!"
             : "Institute added successfully!"
@@ -91,7 +91,7 @@ const AddInstituteForm = ({
 
       })
       .catch((error) => {
-        toaster.error(`Error: ${error.message}`);
+        toast.error(`Error: ${error.message}`);
       });
   };
 

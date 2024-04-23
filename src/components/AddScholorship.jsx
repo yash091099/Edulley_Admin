@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { addScholarship, editScholarship } from "../context/services/client";
-import toaster from "../Shared/toaster";
+import {toast} from "react-hot-toast";
 
 export default function AddScholarship({ initialData, handleBack }) {
   const [data, setData] = useState({
@@ -20,7 +20,7 @@ export default function AddScholarship({ initialData, handleBack }) {
   const validateFields = () => {
     for (const key in data) {
       if (!data[key]) {
-        toaster.error(`Please fill in all fields.`);
+        toast.error(`Please fill in all fields.`);
         return false;
       }
     }
@@ -49,12 +49,12 @@ export default function AddScholarship({ initialData, handleBack }) {
 
       if (response.status === 200) {
         handleBack();
-        toaster.success(`Scholarship ${initialData ? "updated" : "added"} successfully!`);
+        toast.success(`Scholarship ${initialData ? "updated" : "added"} successfully!`);
       } else {
-        toaster.error(`Error: ${response.message}`);
+        toast.error(`Error: ${response.message}`);
       }
     } catch (error) {
-      toaster.error(`Error saving scholarship: ${error.message}`);
+      toast.error(`Error saving scholarship: ${error.message}`);
       console.error(`Error saving scholarship: ${error.message}`);
       // Handle error scenarios
     }
