@@ -43,7 +43,7 @@ export default function StudentManagement() {
   const columns = [
     { name: "NAME", enableSorting: true, searchingEnabled: true },
     { name: "EMAIL", enableSorting: true, searchingEnabled: true },
-    { name: "gender", enableSorting: true, searchingEnabled: true },
+    { name: "GENDER", enableSorting: true, searchingEnabled: true },
     { name: "PHONE", enableSorting: true, searchingEnabled: true },
     { name: "DATE JOINED", enableSorting: true, searchingEnabled: true },
   ];
