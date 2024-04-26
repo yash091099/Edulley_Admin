@@ -54,12 +54,14 @@ export default function InstituteManagement() {
 
   const openAddForm = () => {
     setIsAdd(!isAdd);
+    setExistingInstitute(null);
 
   };
 
   const handleEdit = (row) => {
     setExistingInstitute(row);
-    openAddForm();
+    // openAddForm();
+    setIsAdd(!isAdd);
   };
 
   return (

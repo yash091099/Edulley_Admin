@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import "./overviewInstute.css";
+import CustomLoader from './loader';
 
 // Create a validation schema using Yup
 const validationSchema = Yup.object({
@@ -14,11 +15,14 @@ const validationSchema = Yup.object({
 
 const Overview = ({ onDataChange, initialData , resetVersion }) => {
 
+  const [loading, setLoading] = useState(false);
+
   console.log(initialData);
   // Function to handle file uploads and update Formik state
   const handleFileChange = async (event, setFieldValue, fieldName) => {
     const file = event.target.files[0];
     if (file) {
+      setLoading(true);
       try {
         const formData = new FormData();
         formData.append("file", file);
@@ -31,9 +35,13 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
         }
         const responseData = await response.json();
         const uploadedUrl = responseData.publicUrl;
-        setFieldValue(fieldName, uploadedUrl); // Update the Formik state
+        setFieldValue(fieldName, uploadedUrl);
+        console.log("Updated Field:", fieldName, uploadedUrl);
+        
         onDataChange({...initialData, [fieldName]: uploadedUrl}); // Update the external state
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.error("Error uploading file:", error.message);
       }
     }
@@ -46,6 +54,7 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
   }, [resetVersion]);
 
   return (
+    <>
     <Formik
       initialValues={{
         universityName: initialData?.universityName || "",
@@ -55,7 +64,7 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
         requirements: initialData?.requirements || "",
         brochure: initialData?.brochure || "",
         logo: initialData?.logo || "",
-        banner: initialData?.bannerImage || "",
+        banner: initialData?.banner || "",
       }}
 
       validationSchema={validationSchema}
@@ -152,6 +161,9 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
         </Form>
       )}
     </Formik>
+
+    {loading && <CustomLoader />}
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import CustomLoader from "./loader";
 
 // Define the validation schema using Yup
 const rankingValidationSchema = Yup.object().shape({
@@ -12,12 +13,15 @@ const rankingValidationSchema = Yup.object().shape({
 });
 
 const Ranking = ({ onDataChange, initialData }) => {
+
+  const [loading , setLoading] = useState(false);
   
   // Handle file changes for the logo
   const handleFileChange = async (event, setFieldValue) => {
     const file = event.target.files[0];
     if (!file) return; // Exit if no file is selected
     try {
+      setLoading(true);
       const formData = new FormData();
       formData.append("file", file);
       const response = await fetch("https://api.mymultimeds.com/api/file/upload", {
@@ -31,12 +35,16 @@ const Ranking = ({ onDataChange, initialData }) => {
       const uploadedUrl = responseData.publicUrl;
       setFieldValue("logo", uploadedUrl); // Update Formik state
       onDataChange({ ...initialData, logo: uploadedUrl }); // Update parent component's state
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error("Error uploading file:", error.message);
     }
   };
 
   return (
+
+    <>
     <Formik
       initialValues={{
         logo: initialData?.logo || "",
@@ -89,6 +97,9 @@ const Ranking = ({ onDataChange, initialData }) => {
         </Form>
       )}
     </Formik>
+
+    {loading && <CustomLoader/>}
+    </>
   );
 };
 
