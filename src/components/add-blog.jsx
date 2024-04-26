@@ -1,32 +1,39 @@
 import React, { useEffect, useState } from "react";
 import "./overviewInstute.css";
 import { addBlog, editBlog, uploadFile } from "../context/services/client";
-import {toast} from "react-hot-toast";
-const AddBlog = ({ existingBlog , openAddForm }) => {
+import { toast } from "react-hot-toast";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Import Quill stylesheet
+import CustomLoader from "./loader";
+
+const AddBlog = ({ existingBlog, openAddForm }) => {
+  console.log(existingBlog, "existingBlog");
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
-    blogHeading: "",
-    date: "",
-    banner: "",
-    tags: [],
-    quote: "",
-    content: "",
+    blogHeading: existingBlog?.heading || "",
+    date: existingBlog?.date ? existingBlog?.date?.split("T")[0] : "",
+    banner: existingBlog?.bannerImage || "",
+    tags: existingBlog?.tags || [],
+    quote: existingBlog?.quote || "",
+    content: existingBlog?.content || ""
   });
 
-  useEffect(() => {
-    if (existingBlog) {
-      setData({
-        blogHeading: existingBlog?.heading || "",
-        date: existingBlog?.date?.split("T")[0] || "",
-        banner: existingBlog?.bannerImage || "",
-        tags: existingBlog?.tags || [],
-        quote: existingBlog?.quote || "",
-        content: existingBlog?.content || "",
-      });
-    }
-  }, [existingBlog]);
+  // When the component receives an existing blog, it updates the form
+  // useEffect(() => {
+  //   if (existingBlog) {
+  //     setData({
+  //       blogHeading: existingBlog.heading || "",
+  //       date: existingBlog.date ? existingBlog.date.split("T")[0] : "",
+  //       banner: existingBlog.bannerImage || "",
+  //       tags: existingBlog.tags || [],
+  //       quote: existingBlog.quote || "",
+  //       content: existingBlog.content || "",
+  //     });
+  //   }
+  // }, [existingBlog]);
 
   const saveBlog = () => {
-    if (!data?.blogHeading || !data?.date || !data?.content) {
+    if (!data.blogHeading || !data.date || !data.content) {
       toast.error("Please fill in all required fields.");
       return;
     }
@@ -45,11 +52,7 @@ const AddBlog = ({ existingBlog , openAddForm }) => {
     action(payload)
       .then(() => {
         openAddForm();
-        toast.success(
-          existingBlog
-            ? "Blog updated successfully!"
-            : "Blog added successfully!"
-        );
+        toast.success(existingBlog ? "Blog updated successfully!" : "Blog added successfully!");
         resetForm();
       })
       .catch((error) => {
@@ -71,6 +74,7 @@ const AddBlog = ({ existingBlog , openAddForm }) => {
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     try {
+      setLoading(true);
       const formData = new FormData();
       formData.append("file", file);
       const response = await fetch(
@@ -81,38 +85,60 @@ const AddBlog = ({ existingBlog , openAddForm }) => {
         }
       );
       if (!response.ok) {
-        throw new Error(`Failed to upload file: ${response.statusText}`);
+        throw new Error(`⁠Failed to upload file: ${response.statusText}`);
       }
       const responseData = await response.json();
       const uploadedUrl = responseData.publicUrl;
       setData((prev) => ({ ...prev, banner: uploadedUrl }));
+      setLoading(false);
     } catch (error) {
-      console.error("Error uploading file:", error.message);
+      setLoading(false);
+      toast.error(`Error uploading file: ${error.message}`);
     }
   };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setData((prev) => ({ ...prev, [name]: value }));
+    setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleTagInput = (event) => {
     if (event.key === "Enter" && event.target.value.trim() !== "") {
       const newTag = event.target.value;
-      setData((prev) => ({
-        ...prev,
-        tags: [...prev.tags, newTag], // Adds new tag to array
+      setData((prevData) => ({
+        ...prevData,
+        tags: [...prevData.tags, newTag],
       }));
-      event.target.value = ""; // Clear input after adding tag
+      event.target.value = "";
     }
   };
 
-  const removeTag = (index) => {
-    setData((prev) => ({
-      ...prev,
-      tags: prev.tags.filter((_, idx) => idx !== index), // Removes tag by index
+  const removeTag = (indexToRemove) => {
+    setData((prevData) => ({
+      ...prevData,
+      tags: prevData.tags.filter((_, index) => index !== indexToRemove),
     }));
   };
+
+  const modules = {
+    toolbar: [
+      [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+      [{ 'size': [] }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [{'list': 'ordered'}, {'list': 'bullet'}, 
+       {'indent': '-1'}, {'indent': '+1'}],
+      ['link', 'image', 'video'],
+      ['clean']
+    ],
+  };
+
+  const formats = [
+    'header', 'font', 'size',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'image', 'video'
+  ];
+
 
   return (
     <>
@@ -150,7 +176,6 @@ const AddBlog = ({ existingBlog , openAddForm }) => {
               onChange={handleFileChange}
               style={{ display: "none" }}
             />
-
             <label
               onClick={() =>
                 document.querySelector('input[type="file"]').click()
@@ -186,28 +211,26 @@ const AddBlog = ({ existingBlog , openAddForm }) => {
             )}
           </div>
         </div>
-        <div className="row">
-          <div className="col-md-12 formField">
-            <label>Content*</label>
-            <textarea
-              name="content"
-              value={data?.content}
-              placeholder="Add Content"
-              onChange={handleInputChange}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-12 formField">
-            <label>Quote</label>
-            <textarea
-              name="quote"
-              value={data?.quote}
-              placeholder="Add Quote"
-              onChange={handleInputChange}
-            />
-          </div>
-        </div>
+        <div className="textEditor col-md-12">
+        <label>Content*</label>
+        <ReactQuill
+          theme="snow"
+          value={data.content}
+          onChange={(content) => setData({ ...data, content })}
+          modules={modules}
+          formats={formats}
+        />
+      </div>
+      <div className="textEditor col-md-12">
+        <label>Quote</label>
+        <ReactQuill
+          theme="snow"
+          value={data.quote}
+          onChange={(quote) => setData({ ...data, quote })}
+          modules={modules}
+          formats={formats}
+        />
+      </div>
         <div className="button-container">
           <button
             className="saveButton"
@@ -219,12 +242,12 @@ const AddBlog = ({ existingBlog , openAddForm }) => {
               minWidth: "100px",
             }}
             onClick={saveBlog}
-            // disabled={!data?.blogHeading || !data?.date || !data?.content}
           >
             Save
           </button>
         </div>
       </div>
+      {loading && <CustomLoader />}
     </>
   );
 };
