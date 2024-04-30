@@ -148,3 +148,8 @@ export const editStudent = (payload) => {
   return instance.post(url, payload);
 };
 
+export const getApplicationsById = (id) => {
+  const url = `${baseUrl}/v1/application/user/applied/?userId=${id}`;
+  return instance.get(url);
+}
+

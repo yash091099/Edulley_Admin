@@ -19,6 +19,7 @@ import ScholarshipManagement from "./components/Scholarship-management";
 import ApplicationManagement from "./components/Applications-management";
 import BlogManagement from "./components/Blog-management";
 import CareerManagement from "./components/Career-management";
+import ApplicationList from "./components/ApplicationList";
 
 function AuthGuard({ children }) {
   const navigate = useNavigate();
@@ -58,6 +59,8 @@ function App() {
         { path: "reports", element: <Reports /> },
         { path: "Scholarship-management", element: <ScholarshipManagement /> },
         { path: "Applications-management", element: <ApplicationManagement /> },
+        // application by userId
+        { path:"application-management/:userId", element: <ApplicationList /> },
         { path: "Blog-management", element: <BlogManagement /> },
         { path: "Career-management", element: <CareerManagement /> },
       ],

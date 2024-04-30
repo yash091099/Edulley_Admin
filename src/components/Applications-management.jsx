@@ -85,7 +85,7 @@ export default function ApplicationManagement() {
             ...application,
             ViewProfile: (
               <button
-                onClick={() => navigate(`/dashboard/application/${application._id}`)}
+              onClick={() => navigate(`/dashboard/application-management/${application?.userId?._id}`)}
                 className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]"
               >
                 View Profile
@@ -97,7 +97,7 @@ export default function ApplicationManagement() {
           currentPage={currentPage}
           totalPages={totalPages}
           setCurrentPage={setCurrentPage}
-          fun={() => navigate("/dashboard/application")}
+          // fun={() => navigate("/dashboard/application")}
           // viewDetails={viewDetails}
         />
       </>
