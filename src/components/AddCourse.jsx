@@ -159,6 +159,7 @@ const AddCourse = ({ initialData, handleBack }) => {
               ref={fileInputRefs.bannerImage}
               onChange={handleFileChange}
             />
+           {data.bannerImage && <img src={data.bannerImage} style={{ width: "100px", height: "100px" }} alt="Banner Image" />}
           </div>
           <div className="formField col-md-6 formField">
             <label htmlFor="courseLogo">Course Logo</label>
@@ -169,6 +170,7 @@ const AddCourse = ({ initialData, handleBack }) => {
               ref={fileInputRefs.courseLogo}
               onChange={handleFileChange}
             />
+            {data.courseLogo && <img src={data.courseLogo} style={{ width: "100px", height: "100px" }} alt="Course Logo" />}
           </div>
         </div>
         <div className="row">

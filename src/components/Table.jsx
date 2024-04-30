@@ -21,7 +21,6 @@ export default function Table({
   const displayStart = Math.min(startIndex + 1, data?.length);
   const displayEnd = Math.min(startIndex + perPage, data?.length);
 
-  console.log(data, "selectedData");
 
   return (
     <div className="flex flex-col gap-[2.5rem]">
@@ -153,6 +152,19 @@ function renderField(row, key) {
           ))}
         </div>
       );
+    case "coursesName":
+      return(
+        <div className="flex gap-2">
+          {row[key].map((courseName, index) => (
+            <p
+              key={index}
+              className="text-[#4B465C] text-[1.125rem] font-[400]"
+            >
+              {index === row[key].length - 1 ? courseName : `${courseName}, `}
+            </p>
+          ))}
+        </div>
+      )
     default:
       return (
         <p className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]}</p>

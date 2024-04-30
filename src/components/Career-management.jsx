@@ -80,7 +80,7 @@ export default function CareerManagement() {
           columns={[
             { name: "Latest Qualification", enableSorting: true, searchingEnabled: true },
             { name: "Specialization", enableSorting: true, searchingEnabled: true },
-            { name: "Tags", enableSorting: true, searchingEnabled: true }
+            { name: "Courses Name", enableSorting: true, searchingEnabled: true }
           ]}
           data={careers}
           mapping={["latestQualification", "specialization", "coursesName"]}

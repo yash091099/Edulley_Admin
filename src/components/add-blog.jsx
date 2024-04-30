@@ -7,7 +7,6 @@ import 'react-quill/dist/quill.snow.css'; // Import Quill stylesheet
 import CustomLoader from "./loader";
 
 const AddBlog = ({ existingBlog, openAddForm }) => {
-  console.log(existingBlog, "existingBlog");
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     blogHeading: existingBlog?.heading || "",
@@ -17,20 +16,6 @@ const AddBlog = ({ existingBlog, openAddForm }) => {
     quote: existingBlog?.quote || "",
     content: existingBlog?.content || ""
   });
-
-  // When the component receives an existing blog, it updates the form
-  // useEffect(() => {
-  //   if (existingBlog) {
-  //     setData({
-  //       blogHeading: existingBlog.heading || "",
-  //       date: existingBlog.date ? existingBlog.date.split("T")[0] : "",
-  //       banner: existingBlog.bannerImage || "",
-  //       tags: existingBlog.tags || [],
-  //       quote: existingBlog.quote || "",
-  //       content: existingBlog.content || "",
-  //     });
-  //   }
-  // }, [existingBlog]);
 
   const saveBlog = () => {
     if (!data.blogHeading || !data.date || !data.content) {
@@ -185,6 +170,14 @@ const AddBlog = ({ existingBlog, openAddForm }) => {
             >
               Upload Banner
             </label>
+
+            {data?.banner && (
+              <img
+                src={data?.banner}
+                alt="Uploaded Banner"
+                style={{ width: "100px", height: "100px" }}
+              />
+            )}
           </div>
           <div className="col-md-6 formField">
             <label>Tags</label>
