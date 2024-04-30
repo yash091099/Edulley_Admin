@@ -53,7 +53,7 @@ export default function InstitutionTable({ columns, data, mapping, fun, viewDeta
                     }}
                   >
                     <div className="w-fit flex gap-8 items-center px-[0.7rem] py-[0.62rem]">
-                      {renderField(row, key, viewDetails, keyIndex)}
+                      {renderField(row, key, viewDetails, keyIndex , fun)}
                     </div>
                   </td>
                 ))}
@@ -66,7 +66,7 @@ export default function InstitutionTable({ columns, data, mapping, fun, viewDeta
   );
 }
 
-function renderField(row, key, viewDetails, keyIndex) {
+function renderField(row, key, viewDetails, keyIndex , fun) {
   if (key === "universityName") {
     return (
       <NameFieldInstiture
@@ -90,7 +90,22 @@ function renderField(row, key, viewDetails, keyIndex) {
         ))}
       </div>
     );
-  } else {
+  }
+  else if (key ==="brochure") {
+    return (
+      <a
+        href={row[key]}
+        target="_blank"
+        onClick={(e) => e.stopPropagation()}
+        className="text-[#4B465C] text-[1.125rem] font-[400]"
+        style={{ textDecoration: "underline"  }}
+      >
+        view brochure
+      </a>
+    );
+  }
+    
+   else {
     return <p className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]}</p>;
   }
 }

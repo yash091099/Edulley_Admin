@@ -17,6 +17,7 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
 
   const [loading, setLoading] = useState(false);
 
+
   console.log(initialData);
   // Function to handle file uploads and update Formik state
   const handleFileChange = async (event, setFieldValue, fieldName) => {
@@ -37,15 +38,17 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
         const uploadedUrl = responseData.publicUrl;
         setFieldValue(fieldName, uploadedUrl);
         console.log("Updated Field:", fieldName, uploadedUrl);
-        
         onDataChange({...initialData, [fieldName]: uploadedUrl}); // Update the external state
         setLoading(false);
+        
+        // If the uploaded file is a PDF, display a preview
       } catch (error) {
         setLoading(false);
         console.error("Error uploading file:", error.message);
       }
     }
   };
+
 
   // resetForm();
 
@@ -91,6 +94,11 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
               <label>Logo</label>
               <input className="input" type="file" name="logo" onChange={(e) => handleFileChange(e, setFieldValue, 'logo')} style={{ display: 'none' }} id="logo-upload" />
               <label htmlFor="logo-upload" className="btn btn-secondary">Upload Logo</label>
+              {values.logo && (
+                <div className="preview-container">
+                  <img src={values.logo} alt="Logo Preview" className="preview-image" />
+                </div>
+              )}
               <ErrorMessage name="logo" component="div" className="error" />
             </div>
           </div>
@@ -118,19 +126,28 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
           <div className='row'>
             <div className="col-md-6 formField">
               <label>Banner</label>
-              <input className="input" type="file" name="banner" onChange={(e) => handleFileChange(e, setFieldValue, 'banner')} style={{ display: 'none' }} id="banner-upload" />
+              <input className="input" type="file" accept='image/*' name="banner" onChange={(e) => handleFileChange(e, setFieldValue, 'banner')} style={{ display: 'none' }} id="banner-upload" />
               <label htmlFor="banner-upload" className="btn btn-secondary">Upload Banner</label>
-              <ErrorMessage name="banner" component="div" className="error" />
+              {values.banner && (
+                <div className="preview-container">
+                  <img src={values.banner} alt="Banner Preview" className="preview-image" />
+                </div>
+              )}
+              {/* <ErrorMessage name="banner" component="div" className="error" /> */}
             </div>
 
             <div className="col-md-6 formField">
               <label>Brochure</label>
-              <Field className="input" type="text" name="brochure" placeholder="Add Brochure"
+              <input className="input" accept='application/pdf' type="file" name="brochure" placeholder="Add Brochure"
                 onChange={e => {
-                  setFieldValue("brochure", e.target.value);
-                  onDataChange({...values, brochure: e.target.value});
+                  handleFileChange(e, setFieldValue, 'brochure');
                 }} />
-              <ErrorMessage name="brochure" component="div" className="error" />
+              {/* preview */}
+              {values.brochure && (
+                <div className="preview-container">
+                  <embed src={values.brochure} type="application/pdf" width="200" height="200" />
+                </div>
+              )}
             </div>
           </div>
 

@@ -2,7 +2,7 @@ import React from "react";
 import tempImg from "../assets/images/Avatar.png";
 export default function NameFieldInstiture(props) {
   return (
-    <div className="flex gap-[0.62rem] items-center">
+    <div  className="flex gap-[0.62rem] items-center">
       <div>
         {/* get image from props */}
         <img style={{ width: "50px", height: "50px" , borderRadius:"50%" }} src={props?.universityLogo} alt="img" />

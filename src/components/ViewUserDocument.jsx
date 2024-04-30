@@ -44,14 +44,14 @@ export default function ViewUserDocument({setFormData , formData , setState , st
         setSubmitting(false);
       }}
     >
-      {({ setFieldValue, errors, touched, handleSubmit, isSubmitting }) => (
+      {({ setFieldValue, errors, touched, handleSubmit, isSubmitting, values }) => (
         <Form onSubmit={handleSubmit} className="main-container">
           <h3 className="heading">Documents uploaded by Student</h3>
           <div className="row">
-            <FileUploadField name="document1" label="Document 1" setFieldValue={setFieldValue} error={errors.document1} touched={touched.document1} />
-            <FileUploadField name="document2" label="Document 2" setFieldValue={setFieldValue} error={errors.document2} touched={touched.document2} />
-            <FileUploadField name="document3" label="Document 3" setFieldValue={setFieldValue} error={errors.document3} touched={touched.document3} />
-            <FileUploadField name="document4" label="Document 4" setFieldValue={setFieldValue} error={errors.document4} touched={touched.document4} />
+            <FileUploadField name="document1" label="Document 1" setFieldValue={setFieldValue} error={errors.document1} touched={touched.document1} value={values.document1} />
+            <FileUploadField name="document2" label="Document 2" setFieldValue={setFieldValue} error={errors.document2} touched={touched.document2} value={values.document2} />
+            <FileUploadField name="document3" label="Document 3" setFieldValue={setFieldValue} error={errors.document3} touched={touched.document3} value={values.document3} />
+            <FileUploadField name="document4" label="Document 4" setFieldValue={setFieldValue} error={errors.document4} touched={touched.document4} value={values.document4} />
           </div>
           <div className="button-container">
             <button type="submit" disabled={isSubmitting} className="saveButton" style={{backgroundColor:"#FF6477", padding:"10px", borderRadius:"4px", color:"#fff", minWidth:"100px"}}>
@@ -64,7 +64,7 @@ export default function ViewUserDocument({setFormData , formData , setState , st
   );
 }
 
-function FileUploadField({ name, label, setFieldValue, error, touched }) {
+function FileUploadField({ name, label, setFieldValue, error, touched, value }) {
   return (
     <div className="col-md-6 formField">
       <label>{label}</label>
@@ -77,10 +77,18 @@ function FileUploadField({ name, label, setFieldValue, error, touched }) {
         className="input"
       />
       {touched && error && <div className="error">{error}</div>} 
+      {value && (
+        <div className="preview-container">
+          {name.endsWith('pdf') ? (
+            <embed src={value} type="application/pdf" width="200" height="200" />
+          ) : (
+            <img src={value} alt={label} className="preview-image" />
+          )}
+        </div>
+      )}
     </div>
   );
 }
-
 
 // Handle file upload and set URL in formik values
 async function handleFileChange(file, fieldName, updateFieldValue) {
