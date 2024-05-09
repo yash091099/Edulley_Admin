@@ -1,5 +1,10 @@
 import { useEffect } from "react";
-import { useNavigate, createBrowserRouter, RouterProvider, useRoutes } from "react-router-dom";
+import {
+  useNavigate,
+  createBrowserRouter,
+  RouterProvider,
+  useRoutes,
+} from "react-router-dom";
 import Root from "./pages/Root";
 import Login from "./components/Login";
 import { Toaster } from "react-hot-toast";
@@ -20,6 +25,7 @@ import ApplicationManagement from "./components/Applications-management";
 import BlogManagement from "./components/Blog-management";
 import CareerManagement from "./components/Career-management";
 import ApplicationList from "./components/ApplicationList";
+import ApplicationStatus from "./components/applicationStatus";
 
 function AuthGuard({ children }) {
   const navigate = useNavigate();
@@ -46,7 +52,11 @@ function App() {
     },
     {
       path: "/dashboard",
-      element: <AuthGuard><Dashboard /></AuthGuard>,
+      element: (
+        <AuthGuard>
+          <Dashboard />
+        </AuthGuard>
+      ),
       children: [
         { path: "", element: <AdminDashboard /> },
         { path: "profile-management", element: <ProfileManagement /> },
@@ -60,7 +70,11 @@ function App() {
         { path: "Scholarship-management", element: <ScholarshipManagement /> },
         { path: "Applications-management", element: <ApplicationManagement /> },
         // application by userId
-        { path:"application-management/:userId", element: <ApplicationList /> },
+        {
+          path: "application-management/:userId",
+          element: <ApplicationList />,
+        },
+        {  path:"/dashboard/application/status/:data", element: <ApplicationStatus /> },
         { path: "Blog-management", element: <BlogManagement /> },
         { path: "Career-management", element: <CareerManagement /> },
       ],
@@ -68,20 +82,20 @@ function App() {
   ]);
 
   return (
-<>
-<Toaster
+    <>
+      <Toaster
         position="top-right"
         reverseOrder={false}
         toastOptions={{
           style: {
-            backgroundColor: '#FF6477',
-            color: '#FFFFFF',
+            backgroundColor: "#FF6477",
+            color: "#FFFFFF",
           },
         }}
       />
-<RouterProvider router={routes} />;
-</>
-  )
+      <RouterProvider router={routes} />;
+    </>
+  );
 }
 
 export default App;

@@ -1,7 +1,16 @@
 import React from "react";
 import "./ApplicationCard.css";
+import { useNavigate } from "react-router-dom";
 
-const ApplicationCard = ({ data }) => {
+const ApplicationCard = ({ data  }) => {
+  const navigate = useNavigate();
+
+  const handleViewDetails = () => {
+    const dataString = encodeURIComponent(JSON.stringify(data));
+    navigate(`/dashboard/application/status/${dataString}`);
+  };
+  
+
   return (
     <div className="application-card">
       <div className="student-info">
@@ -24,7 +33,7 @@ const ApplicationCard = ({ data }) => {
         <p className="campus">CU: {data.courseId.uniqueCourseInfo.studyMode}</p>
       </div>
       <div className="view-details-btn-container">
-      <button className="view-details-btn ">View Details</button>
+      <button onClick={handleViewDetails} className="view-details-btn ">View Details</button>
       </div>
     </div>
   );
