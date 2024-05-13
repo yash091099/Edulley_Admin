@@ -100,6 +100,8 @@ const ApplicationStatus = () => {
               <option value="DEPOSIT_PAID">DEPOSIT_PAID</option>
               <option value="CAS_LETTER">CAS_LETTER</option>
               <option value="VISA_LETTER_ARRIVED">VISA_LETTER_ARRIVED</option>
+
+
             </select>
           </div>
           <div className="row col-md-6 formField">
