@@ -2,34 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import the fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Public+Sans:wght@400;700&display=swap');
+
 :root {
-  font-family: "PlusJakartaSans";
+  font-family: "Public Sans", "Noto Sans", sans-serif;
 }
 
-@layer base{
+@layer base {
+  /* Public Sans */
   @font-face {
-    font-family: "PlusJakartaSans";
-    src: url("/public/fonts/PlusJakartaSans-VariableFont_wght.ttf");
+    font-family: "Public Sans";
+    src: url("https://fonts.gstatic.com/s/publicsans/v10/ijwNs5js1mRZnE0paf3lV4Z0dJSj-w.ttf") format("truetype");
   }
+  /* Noto Sans */
   @font-face {
-    font-family: "PlusJakartaSans-Italic";
-    src: url("/public/fonts/PlusJakartaSans-Italic-VariableFont_wght.ttf");
+    font-family: "Noto Sans";
+    src: url("https://fonts.gstatic.com/s/notosans/v27/o-0IIpQlx3QUlC5A4PNb4j0wLge_8Y8.woff2") format("woff2");
+  }
+
+  body {
+    font-family: "Public Sans", "Noto Sans", sans-serif;
   }
 }
 
 @layer utilities {
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
-      display: none;
+    display: none;
   }
- /* Hide scrollbar for IE, Edge and Firefox */
+  /* Hide scrollbar for IE, Edge and Firefox */
   .no-scrollbar {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 }
-}
-
 
 .tr-row:hover {
-  box-shadow: 0 0 11px rgba(33,33,33,.2); 
+  box-shadow: 0 0 11px rgba(33, 33, 33, .2); 
 }

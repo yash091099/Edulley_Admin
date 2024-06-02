@@ -4,7 +4,7 @@ import PrimaryButton from "./PrimaryButton";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/images/Edulley-logo.png";
 import { loginUser } from "../context/services/login";
-import {toast} from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -35,8 +35,17 @@ export default function Login() {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleLogin();
+    }
+  };
+
   return (
-    <div className="flex flex-col gap-[2rem] max-w-[37.5625rem] w-full p-4">
+    <div
+      className="flex flex-col gap-[2rem] max-w-[37.5625rem] w-full p-4"
+      onKeyPress={handleKeyPress}
+    >
       <img className="w-[10rem] mb-[1rem] mx-auto" src={logo} alt="logo" />
       <h1 className="text-text text-[2rem] font-[600]">Login</h1>
       <div className="flex flex-col gap-[1rem]">

@@ -15,7 +15,7 @@ export default function Sidebar() {
           navigate("/dashboard");
         }}
       >
-        <img className="w-[7.0625rem]" src={logo} alt="Logo" />
+        <img className="w-[9.0625rem]" src={logo} alt="Logo" />
        
       </div>
       <div className="flex flex-col px-[0.75rem]">

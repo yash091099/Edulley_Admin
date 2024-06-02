@@ -6,6 +6,7 @@ import AddBlog from "./add-blog";
 import { getAllBlogs } from "../context/services/client";
 import { useNavigate } from "react-router-dom";
 import CustomLoader from "./loader";
+import { AddCircle } from "@material-ui/icons";
 
 export default function BlogManagement() {
   const navigate = useNavigate();
@@ -58,15 +59,15 @@ export default function BlogManagement() {
           {isAdd ? "Edit Blog" : "Blog Management"}
         </h1>
         <div className="flex justify-between gap-[0.2rem]">
-          <button className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]">
+          {/* <button className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]">
             <img src={filterIcon} alt="Filter" />
             <p className="text-text text-[0.75rem] font-[600]">Filter</p>
-          </button>
+          </button> */}
           <button
             onClick={() => (isAdd ? handleBack() : openAddForm(null))}
             className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]"
           >
-            <img src={addIcon} alt="Add" />
+            <AddCircle/>
             <p className="text-text text-[0.75rem] font-[600]">
               {isAdd ? "Back" : "Add"}
             </p>

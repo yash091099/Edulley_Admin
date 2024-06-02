@@ -3,6 +3,7 @@ import Table from "./Table";
 import filterIcon from "../assets/svg/filter-icon.svg";
 import { useNavigate } from "react-router-dom";
 import { getApplications } from "../context/services/client";
+import CustomLoader from "./loader";
 
 export default function ApplicationManagement() {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ export default function ApplicationManagement() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(false);
+
 
   // columns in table | note:- order matters
   const columns = [
@@ -62,6 +64,7 @@ export default function ApplicationManagement() {
 
   return (
     <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
+      {loading && <CustomLoader />}
       <div className="flex justify-between">
         <h1 className="text-text text-[1.5rem] font-[600]">
           Applied Student’s

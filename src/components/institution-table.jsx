@@ -82,8 +82,9 @@ function renderField(row, key, viewDetails, keyIndex , fun) {
       <div className="flex flex-wrap gap-2">
         {row["Tags"]?.map((tag, tagIndex) => (
           <span
+
             key={tagIndex}
-            className=" rounded-full px-3 py-1 text-sm font-semibold text-gray-700"
+            className=" badge rounded-full px-3 py-1 text-sm font-semibold text-gray-700"
           >
             {tag}
           </span>

@@ -109,6 +109,11 @@ export default function Table({
   );
 }
 
+const Badge = ({ text }) => (
+  <span className="badge text-[#4B465C] text-[1.125rem] font-[400] px-2 py-1 bg-gray-200 rounded">
+    {text}
+  </span>
+);
 function renderField(row, key) {
   switch (key) {
     case "Status":
@@ -142,15 +147,10 @@ function renderField(row, key) {
     case "tags":
       return (
         <div className="flex gap-2">
-          {row[key].map((tag, index) => (
-            <p
-              key={index}
-              className="text-[#4B465C] text-[1.125rem] font-[400]"
-            >
-              {index === row[key].length - 1 ? tag : `${tag}, `}
-            </p>
-          ))}
-        </div>
+        {row[key].map((tag, index) => (
+          <Badge key={index} text={tag} />
+        ))}
+      </div>
       );
     case "coursesName":
       return(
