@@ -160,7 +160,7 @@ function renderField(row, key) {
               key={index}
               className="text-[#4B465C] text-[1.125rem] font-[400]"
             >
-              {index === row[key].length - 1 ? courseName : `${courseName}, `}
+              {index === row[key].length - 1 ? (courseName||'--' ): `${courseName||'--'}, `}
             </p>
           ))}
         </div>

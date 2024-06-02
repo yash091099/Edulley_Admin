@@ -44,8 +44,8 @@ const AddCareer = ({ initialData, fetchCareers, handleBack }) => {
   };
 
   const saveData = async () => {
-    if (!data?.latestQualification || !data?.specialization || data?.coursesName.length === 0) {
-      toast.error("Please fill in all required fields.");
+    if (!data?.latestQualification || !data?.specialization || !data?.coursesName.length) {
+      toast.error("Please fill in all required fields. Enter Required to save courses.");
       return;
     }
 

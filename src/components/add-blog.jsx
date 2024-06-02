@@ -214,7 +214,7 @@ const AddBlog = ({ existingBlog, openAddForm }) => {
           formats={formats}
         />
       </div>
-      <div className="textEditor col-md-12">
+      <div className="textEditor col-md-12 mb-3">
         <label>Quote</label>
         <ReactQuill
           theme="snow"
