@@ -155,7 +155,7 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
           <div className="row">
             <div className="col-md-12 formField">
               <label>Overview</label>
-              <Field as="textarea" name="overview" className="p-2" placeholder="Add Overview"
+              <Field as="textarea" rows="5" name="overview" className="p-2" placeholder="Add Overview"
                 onChange={e => {
                   setFieldValue("overview", e.target.value);
                   onDataChange({...values, overview: e.target.value});
@@ -166,7 +166,7 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
           <div className="row">
             <div className="col-md-12 formField">
               <label>Admission Requirements</label>
-              <Field as="textarea" name="requirements" className="p-2" placeholder="Add Admission Requirements"
+              <Field as="textarea" rows="5" name="requirements" className="p-2" placeholder="Add Admission Requirements"
                 onChange={e => {
                   setFieldValue("requirements", e.target.value);
                   onDataChange({...values, requirements: e.target.value});

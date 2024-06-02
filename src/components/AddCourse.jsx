@@ -178,14 +178,24 @@ const AddCourse = ({ initialData, handleBack }) => {
             <label>
               Level<span style={{ color: "red" }}>*</span>
             </label>
-            <input
+            {/* <input
               type="text"
               className="input"
               name="level"
               placeholder="Add Level"
               value={data.level}
               onChange={handleInputChange}
-            />
+            /> */}
+            <select
+              name="level"
+              className="input"
+              value={data.level}
+              onChange={handleInputChange}
+            >
+              <option value="">Select Level</option>
+              <option value="UG">UG</option>
+              <option value="PG">PG</option>
+            </select>
           </div>
         </div>
         <div className="row">
@@ -196,6 +206,7 @@ const AddCourse = ({ initialData, handleBack }) => {
             <textarea
               name="overview"
               className="p-2"
+              rows="5"
               value={data.overview}
               placeholder="Add Overview"
               onChange={handleInputChange}
@@ -211,6 +222,7 @@ const AddCourse = ({ initialData, handleBack }) => {
             <textarea
               name="modules"
               className="p-2"
+              rows="5"
               value={data.modules}
               placeholder="Add Modules"
               onChange={handleInputChange}
@@ -225,6 +237,7 @@ const AddCourse = ({ initialData, handleBack }) => {
             <textarea
               name="requirements"
               className="p-2"
+              rows="5"
               value={data.requirements}
               placeholder="Add Requirements"
               onChange={handleInputChange}
@@ -295,27 +308,63 @@ const AddCourse = ({ initialData, handleBack }) => {
             <label>
               Upcoming Intakes<span style={{ color: "red" }}>*</span>
             </label>
-            <input
+            {/* <input
               className="input"
               type="text"
               name="upcomingIntakes"
               placeholder="Add Upcoming Intakes"
               value={data.upcomingIntakes}
               onChange={handleInputChange}
-            />
+            /> */}
+
+            <select
+              className="input"
+              name="upcomingIntakes"
+              value={data.upcomingIntakes}
+              onChange={handleInputChange}
+            >
+              <option value="">Select Intake</option>
+              <option value="January">January</option>
+              <option value="February">February</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="August">August</option>
+              <option value="September">September</option>
+              <option value="October">October</option>
+              <option value="November">November</option>
+              <option value="December">December</option>
+
+            </select>
+
           </div>
           <div className="col-md-6 formField">
             <label>
               Mode of Study<span style={{ color: "red" }}>*</span>
             </label>
-            <input
+            {/* <input
               className="input"
               type="text"
               name="modeOfStudy"
               placeholder="Add Mode of study"
               value={data.modeOfStudy}
               onChange={handleInputChange}
-            />
+            /> */}
+
+            <select
+              className="input"
+              name="modeOfStudy"
+              value={data.modeOfStudy}
+              onChange={handleInputChange}
+            >
+              <option value="">Select Mode of Study</option>
+              <option value="Online">Online</option>
+              <option value="Offline">Offline</option>
+              <option value="Full Time">Full Time</option>
+              <option value="Part Time">Part Time</option>
+            </select>
           </div>
         </div>
       </div>
