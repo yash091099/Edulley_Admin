@@ -83,7 +83,7 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
           <div className="row">
             <div className="col-md-6 formField">
               <label>University Name</label>
-              <Field className="input" type="text" name="universityName" placeholder="Add university name"
+              <Field  className="input" type="text" name="universityName" placeholder="Add university name"
                 onChange={e => {
                   setFieldValue("universityName", e.target.value);
                   onDataChange({...values, universityName: e.target.value});
@@ -94,12 +94,16 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
               <label>Logo</label>
               <input className="input" type="file" name="logo" onChange={(e) => handleFileChange(e, setFieldValue, 'logo')} style={{ display: 'none' }} id="logo-upload" />
               <label htmlFor="logo-upload" className="btn btn-secondary">Upload Logo</label>
+              <ErrorMessage name="logo" component="div" className="error" />
+            </div>
+            <div className="col-md-6"></div>
+            <div className="col-md-6 mb-3">
+
               {values.logo && (
                 <div className="preview-container">
-                  <img src={values.logo} alt="Logo Preview" className="preview-image" />
+                  <img src={values?.logo} alt="Logo Preview" className="preview-image" />
                 </div>
               )}
-              <ErrorMessage name="logo" component="div" className="error" />
             </div>
           </div>
           <div className="row">

@@ -97,7 +97,7 @@ const UniqueUniversityInfo = ({ onDataChange, initialData, resetVersion }) => {
                   <img
                     src={images[`image${index + 1}`]}
                     alt={`Image ${index + 1}`}
-                    style={{ width: "100%", marginTop: "10px" }}
+                    style={{ width: "300px",height: "200px", marginTop: "10px" }}
                   />
                 </div>
               )}

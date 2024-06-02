@@ -53,7 +53,25 @@ const Ranking = ({ onDataChange, initialData }) => {
         <Form className="overview-container">
           <h3 className="heading">Ranking</h3>
           <div className="row">
-            <div className="col-md-6 formField">
+          
+            <div className="col-md-6 ">
+              <label>Name</label>
+              <Field type="text" name="name" placeholder="Add name" className="input" onChange={(e) => {
+                handleChange(e); // This is Formik's handleChange
+                onDataChange({ ...values, name: e.target.value }); // Also update parent component's state
+              }} />
+              <ErrorMessage name="name" component="div" className="error" />
+            </div>
+          <div className="col-md-6">
+              <label>Rank</label>
+              <Field type="number" name="rank" placeholder="Add rank" className="input" onChange={(e) => {
+                handleChange(e); // This is Formik's handleChange
+                onDataChange({ ...values, rank: e.target.value }); // Also update parent component's state
+              }} />
+              <ErrorMessage name="rank" component="div" className="error" />
+          </div>
+          </div>
+          <div className="row formField">
               <label>Logo</label>
               <input
                 type="file"
@@ -65,26 +83,7 @@ const Ranking = ({ onDataChange, initialData }) => {
                 <img src={values.logo} alt="Uploaded Logo" style={{ width: '100px', height: '100px' }} />
               )}
             </div>
-            <div className="col-md-6 formField">
-              <label>Name</label>
-              <Field type="text" name="name" placeholder="Add name" className="input" onChange={(e) => {
-                handleChange(e); // This is Formik's handleChange
-                onDataChange({ ...values, name: e.target.value }); // Also update parent component's state
-              }} />
-              <ErrorMessage name="name" component="div" className="error" />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6 formField">
-              <label>Rank</label>
-              <Field type="number" name="rank" placeholder="Add rank" className="input" onChange={(e) => {
-                handleChange(e); // This is Formik's handleChange
-                onDataChange({ ...values, rank: e.target.value }); // Also update parent component's state
-              }} />
-              <ErrorMessage name="rank" component="div" className="error" />
-            </div>
-          </div>
-          <h3 className="AddMore">Add more in Ranking</h3>
+          {/* <h3 className="AddMore">Add more in Ranking</h3> */}
           {/* Removed the Save button to reflect updates via onChange */}
         </Form>
       )}
