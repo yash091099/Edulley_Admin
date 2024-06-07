@@ -71,7 +71,7 @@ export default function InstituteManagement() {
 
     <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
       <div className="flex justify-between">
-        <h1 className="text-text text-[1.5rem] font-[600]">
+        <h1 className="text-text text-[1.5rem] font-[600]" style={{fontFamily:"Gilroy-Bold"}}>
           Institute Management {isAdd ? "> Add" : ""}
         </h1>
         <div className="flex justify-between gap-[0.2rem]">
@@ -81,6 +81,7 @@ export default function InstituteManagement() {
           </button> */}
           <button
             onClick={openAddForm}
+            style={{fontFamily:"Gilroy-Bold"}}
             className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]"
           >
             <AddCircleOutline />
@@ -105,19 +106,19 @@ export default function InstituteManagement() {
           />
           {data.length > 0 ? (
             <div className="w-full flex justify-between items-center">
-              <p className="text-[#4B465C]/50 text-[1rem] font-[400] leading-[1.4675rem]">
+              <p  style={{fontFamily:"Gilroy-Medium"}} className="text-[#4B465C]/50 text-[1rem] font-[400] leading-[1.4675rem]">
                 Showing {(currentPage - 1) * pageSize + 1} to{" "}
                 {Math.min(currentPage * pageSize, totalCount)} of {totalCount}
               </p>
               <div className="flex gap-[0.31rem]">
-                <TableButton
-                  label="Previous"
+            { currentPage > 1 &&    <TableButton
+                  label="<"
                   action={() =>
                     setCurrentPage(
                       currentPage > 1 ? currentPage - 1 : currentPage
                     )
                   }
-                />
+                />}
                 {[...Array(totalPages)].map((_, index) => (
                   <TableButton
                     key={index}
@@ -127,7 +128,7 @@ export default function InstituteManagement() {
                   />
                 ))}
                 <TableButton
-                  label="Next"
+                  label=">"
                   action={() =>
                     setCurrentPage(
                       currentPage < totalPages ? currentPage + 1 : currentPage

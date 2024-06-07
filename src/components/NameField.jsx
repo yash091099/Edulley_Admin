@@ -8,8 +8,8 @@ export default function NameField(props) {
             <img src={tempImg} alt="img"/>
         </div>
         <div className='flex flex-col items-start'>
-            <p className='text-[#4B465C] text-[0.9375rem] font-[600] leading-[1.375rem]'>{props.name}</p>
-            <span className='text-[#4B465C] text-[0.8125rem] font-[400] leading-[1.25rem]'>{props.occupation}</span>
+            <p style={{fontFamily:"Gilroy-Medium"}} className='text-[#4B465C] text-[0.9375rem] font-[600] leading-[1.375rem]'>{props.name}</p>
+            <span style={{fontFamily:"Gilroy-Medium"}} className='text-[#4B465C] text-[0.8125rem] font-[400] leading-[1.25rem]'>{props.occupation}</span>
         </div>
     </div>
   )

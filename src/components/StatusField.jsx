@@ -15,7 +15,7 @@ export default function StatusField(props) {
     }
   return (
     <div
-      {...props}
+      {...props} style={{fontFamily:"Gilroy-Medium"}}
       className={`text-[0.8125rem] font-[600] leading-[0.825rem] px-[0.62rem] py-[0.31rem] rounded-[0.25rem] ${getStyle(props.label)}`}
     >
       {props.label}

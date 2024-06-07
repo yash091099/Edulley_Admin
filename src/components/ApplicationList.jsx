@@ -39,7 +39,7 @@ const ApplicationList = () => {
     <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
       {loading && <CustomLoader />}
       <div className="flex justify-between">
-        <h1 className="text-text text-[1.5rem] font-[600]">
+        <h1 style={{fontFamily:"Gilroy-Bold"}} className="text-text text-[1.5rem] font-[600]">
           Applied Student’s
         </h1>
       </div>

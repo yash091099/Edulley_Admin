@@ -16,13 +16,13 @@ export default function ListItem(props) {
       >
         <div className="flex gap-[0.5rem] items-center">
           <img src={props.image ? props.image : iconImg} alt="icon" />
-          <div className="text-[#4B465C] text-[0.9375rem] font-[400] leading-[1.375rem]">
+          <div className="text-[#4B465C] text-[1rem] font-[600] leading-[1.71875rem] " style={{ fontFamily:"Gilroy-Bold" }}>
             {props.label}
           </div>
         </div>
         <img src={RighttArrowIcon} alt="Go" />
       </div>
-      {showChild && <div className="flex flex-col pl-[2.75rem]">{props.children}</div>}
+      {showChild && <div style={{fontFamily:"Gilroy-Medium"}} className="flex flex-col pl-[2.75rem]">{props.children}</div>}
     </div>
   );
 }

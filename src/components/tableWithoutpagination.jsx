@@ -16,7 +16,7 @@ export default function TableWithoutPagination({ columns, data, mapping, fun }) 
               {columns?.map((column, index) => (
                 <th key={index}>
                   <div className="w-fit flex gap-8 items-center px-[0.7rem] py-[0.62rem]">
-                    <p className="text-[#4B465C] text-[0.71563rem] font-[600] tracking-[0.07813rem]">
+                    <p style={{fontFamily:"Gilroy-Bold"}} className="text-[#4B465C] text-[1rem] font-[600] tracking-[0.07813rem]">
                       {column?.name}
                     </p>
                     <div>
@@ -40,7 +40,7 @@ export default function TableWithoutPagination({ columns, data, mapping, fun }) 
             {selectedData?.map((row, rowIndex) => (
               <tr
                 key={rowIndex}
-                className="cursor-pointer h-[5rem] border-y border-[#DBDADE]"
+                className="cursor-pointer  border-y border-[#DBDADE]"
               >
                 {mapping?.map((key, keyIndex) => (
                   <td key={keyIndex} onClick={() => fun(row, key)}>
@@ -84,7 +84,7 @@ function renderField(row, key) {
       );
     case "createdAt":
       return (
-        <p className="text-[#4B465C] text-[1.125rem] font-[400]">
+        <p style={{fontFamily:"Gilroy-Medium"}} className="text-[#4B465C] text-[1.125rem] font-[400]">
           {new Date(row[key])?.toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
@@ -96,13 +96,13 @@ function renderField(row, key) {
       return (
         <div className="flex gap-2">
           {row[key].map((tag, index) => (
-            <p key={index} className="text-[#4B465C] text-[1.125rem] font-[400]">
+            <p style={{fontFamily:"Gilroy-Medium"}} key={index} className="text-[#4B465C] text-[1.125rem] font-[400]">
               {index === row[key].length - 1 ? tag : `${tag}, `}
             </p>
           ))}
         </div>
       );
     default:
-      return <p className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]}</p>;
+      return <p style={{fontFamily:"Gilroy-Medium"}}  className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]}</p>;
   }
 }

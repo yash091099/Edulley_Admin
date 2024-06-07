@@ -36,15 +36,15 @@ export default function Reports() {
     <div className='flex flex-col gap-[2rem] mx-[1rem]'>
       {loading && <CustomLoader />}
       <div className='bg-white rounded-[1rem] w-full'>
-        <h1 className='text-[1.5rem] font-[600] px-[2rem] pt-[2rem]'>Analytics & Reports</h1>
+        <h1 className='text-[1.5rem] font-[600] px-[2rem] pt-[2rem]' style={{fontFamily:"Gilroy-Bold"}}>Analytics & Reports</h1>
         <div className='bg-white p-[2rem] rounded-[1rem]'>
           <div className='flex justify-between items-center'>
             <div className='flex flex-col gap-[0.12rem]'>
-              <p className={`text-[1rem] font-[600]`}>All users</p>
-              <h1 className='text-primary-brand text-[2.5rem] font-[500]'>{totalUsers}</h1>
+              <p className={`text-[1rem] font-[600]`} style={{fontFamily:"Gilroy-Bold"}}>All users</p>
+              <h1 className='text-primary-brand text-[2.5rem] font-[500]' style={{fontFamily:"Gilroy-Medium"}}>{totalUsers}</h1>
             </div>
             <div className='px-[1.5rem] py-[0.5rem] bg-[#F9F9F9] rounded-md'>
-              <select className='bg-transparent' value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
+              <select style={{fontFamily:"Gilroy-Medium"}} className='bg-transparent' value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
                 {years.map(year => (
                   <option key={year} value={year}>
                     {year}

@@ -3,26 +3,33 @@
 @tailwind utilities;
 
 /* Import the fonts */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Public+Sans:wght@400;700&display=swap');
+
+/* Import Gilroy fonts (Ensure these URLs are correct for your font files) */
+@font-face {
+  font-family: "Gilroy";
+  src: url("/path/to/Gilroy-Bold.woff2") format("woff2"),
+       url("/path/to/Gilroy-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("/path/to/Gilroy-Medium.woff2") format("woff2"),
+       url("/path/to/Gilroy-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
 
 :root {
-  font-family: "Public Sans", "Noto Sans", sans-serif;
+  font-family: "Gilroy";
 }
 
 @layer base {
   /* Public Sans */
-  @font-face {
-    font-family: "Public Sans";
-    src: url("https://fonts.gstatic.com/s/publicsans/v10/ijwNs5js1mRZnE0paf3lV4Z0dJSj-w.ttf") format("truetype");
-  }
-  /* Noto Sans */
-  @font-face {
-    font-family: "Noto Sans";
-    src: url("https://fonts.gstatic.com/s/notosans/v27/o-0IIpQlx3QUlC5A4PNb4j0wLge_8Y8.woff2") format("woff2");
-  }
 
   body {
-    font-family: "Public Sans", "Noto Sans", sans-serif;
+    font-family: "Gilroy";
   }
 }
 

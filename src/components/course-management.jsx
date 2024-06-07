@@ -67,11 +67,11 @@ export default function CourseManagement() {
       {loading && <CustomLoader />}
       <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
         <div className="flex justify-between">
-          <h1 className="text-text text-[1.5rem] font-[600]">
+          <h1 style={{fontFamily:"Gilroy-Bold"}} className="text-text text-[1.5rem] font-[600]">
             Course Management
           </h1>
           <div className="flex justify-between gap-[0.2rem]">
-            <button
+            <button style={{fontFamily:"Gilroy-Bold"}}
               onClick={openAddForm}
               className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]"
             >

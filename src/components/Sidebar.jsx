@@ -20,6 +20,7 @@ export default function Sidebar() {
       </div>
       <div className="flex flex-col px-[0.75rem]">
         <ListItem
+        
           label="Dashboard"
           image={dashboardIcon}
           activeOption={selectedOption}

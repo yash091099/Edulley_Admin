@@ -15,11 +15,11 @@ export default function AccountActionsModal(props) {
       <div className="fixed top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] flex flex-col gap-[1rem] bg-white w-[18.75rem] p-[2rem] rounded-[1rem]">
             <div className="cursor-pointer flex gap-[0.5rem] items-center py-[0.56rem]" onClick={()=>{props.onClose(false); navigate('/dashboard/profile-management')}}>
                 <img src={lock} alt=""/>
-                <p className="text-[#4B465C] text-[0.9375rem] font-[400] leading-[1.375rem]">Change Password</p>
+                <p className="text-[#4B465C] text-[0.9375rem] font-[400] leading-[1.375rem]" style={{fontFamily:"Gilroy-Medium"}}>Change Password</p>
             </div>
             <div className="flex gap-[0.5rem] items-center py-[0.56rem]" onClick={()=>{props.onClose(false);props.LogoutModal(true)}}>
                 <img src={logOut} alt=""/>
-                <p className="cursor-pointer text-[#4B465C] text-[0.9375rem] font-[400] leading-[1.375rem]" onClick={()=>{props.onClose(false);props.LogoutModal(true)}}>Log out</p>
+                <p style={{fontFamily:"Gilroy-Medium"}} className="cursor-pointer text-[#4B465C] text-[0.9375rem] font-[400] leading-[1.375rem]" onClick={()=>{props.onClose(false);props.LogoutModal(true)}}>Log out</p>
             </div>
       </div>
     </div>

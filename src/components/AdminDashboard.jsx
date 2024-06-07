@@ -73,7 +73,7 @@ export default function AdminDashboard() {
       {loader && <CustomLoader />}
       <div className="flex flex-col gap-[2rem]">
         <div className="flex flex-col gap-[1.5rem] bg-white p-[2rem] rounded-[1rem]">
-          <h1 className="text-[1.5rem] font-[600]">Admin Dashboard</h1>
+          <h1 className="text-[1.5rem] font-[600]" style={{fontFamily:"Gilroy-Bold"}} >Admin Dashboard</h1>
           <div className="flex gap-[1.25rem]">
             <DashboardCard
               image={acceptedIcon}
@@ -107,7 +107,7 @@ export default function AdminDashboard() {
         />
 
         <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-md">
-          <h1 className="text-text text-[1.5rem] font-[600]">
+          <h1 className="text-text text-[1.5rem] font-[600]" style={{fontFamily:"Gilroy-Bold"}}>
             Recent Students
           </h1>
           <TableWithoutPagination
@@ -118,7 +118,7 @@ export default function AdminDashboard() {
           />
         </div>
         <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-md">
-          <h1 className="text-text text-[1.5rem] font-[600]">
+          <h1 className="text-text text-[1.5rem] font-[600]" style={{fontFamily:"Gilroy-Bold"}}>
             Recent Courses
           </h1>
           <TableWithoutPagination

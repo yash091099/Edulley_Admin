@@ -9,11 +9,11 @@ export default function ReportCard({ label, value, data,name, filterOptions, sel
     <div className='bg-white p-[2rem] rounded-[1rem]'>
       <div className='flex justify-between items-center'>
         <div className='flex flex-col gap-[0.12rem]'>
-          <p className={`text-[1rem] font-[600]`}>{label}</p>
-          <h1 className='text-primary-brand text-[2.5rem] font-[500]'>{value}</h1>
+          <p style={{fontFamily:"Gilroy-Bold"}}  className={`text-[1.5rem] font-[600]`}>{label}</p>
+          <h1 style={{fontFamily:"Gilroy-Medium"}}  className='text-primary-brand text-[2.5rem] font-[500]'>{value}</h1>
         </div>
         <div className='px-[1.5rem] py-[0.5rem] bg-[#F9F9F9] rounded-md'>
-          <select className='bg-transparent' value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
+          <select style={{fontFamily:"Gilroy-Medium"}} className='bg-transparent' value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
             {years.map(year => (
               <option key={year} value={year}>
                 {year}

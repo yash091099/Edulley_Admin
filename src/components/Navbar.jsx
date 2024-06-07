@@ -76,6 +76,7 @@ export default function Navbar(props) {
                 <img src={searchIcon} alt="search" className="w-[1.65rem]" />
                 <input
                     ref={searchInputRef}
+                    style={{fontFamily:"Gilroy-Medium"}}
                     className='outline-none w-full border-r-2 border-black'
                     type='text'
                     placeholder='Search (Ctrl+/)'
@@ -110,7 +111,7 @@ export default function Navbar(props) {
                 <div ref={notificationRef} className='absolute top-16 right-0 min-h-16 bg-white px-[1.5rem] py-[1.81rem] rounded-[8px] shadow-md'>
                     <div className='cursor-pointer flex items-center gap-[0.5rem] mb-[0.5rem]' onClick={() => setShowNotifications(false)}>
                         <img src={leftArrow} alt="back" />
-                        <p className='text-[1.25rem] font-[600]'>Notifications</p>
+                        <p className='text-[1.25rem] font-[600]' style={{fontFamily:"Gilroy-Bold"}}>Notifications</p>
                     </div>
                     <div className='flex flex-col'>
                         {notifications.map(notification => (
@@ -118,8 +119,8 @@ export default function Navbar(props) {
                                 <div className='min-w-[2.8125rem] h-[2.8125rem] rounded-[50%] bg-[#D9D9D9]'></div>
                                 <div className='w-full flex items-center justify-between'>
                                     <div className='flex flex-col'>
-                                        <h1>{notification.title}</h1>
-                                        <p>{notification.time}</p>
+                                        <h1 style={{fontFamily:"Gilroy-Medium"}}>{notification.title}</h1>
+                                        <p style={{fontFamily:"Gilroy-Medium"}}>{notification.time}</p>
                                     </div>
                                     <div className='w-2 h-2 rounded-[50%] bg-blue-500'></div>
                                 </div>

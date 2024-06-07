@@ -19,7 +19,7 @@ export default function InstitutionTable({ columns, data, mapping, fun, viewDeta
               {columns.map((column, index) => (
                 <th key={index}>
                   <div className="w-fit flex gap-8 items-center px-[0.7rem] py-[0.62rem]">
-                    <p className="text-[#4B465C] text-[0.71563rem] font-[600] tracking-[0.07813rem]">
+                    <p style={{fontFamily:"Gilroy-Bold"}} className="text-[#4B465C] text-[1rem] font-[600] tracking-[0.07813rem]">
                       {column.name}
                     </p>
                     <div>
@@ -43,7 +43,7 @@ export default function InstitutionTable({ columns, data, mapping, fun, viewDeta
             {data.map((row, rowIndex) => (
               <tr
                 key={rowIndex}
-                className="cursor-pointer h-[5rem] border-y border-[#DBDADE]"
+                className="cursor-pointer  border-y border-[#DBDADE]"
               >
                 {mapping.map((key, keyIndex) => (
                   <td
@@ -81,7 +81,7 @@ function renderField(row, key, viewDetails, keyIndex , fun) {
     return (
       <div className="flex flex-wrap gap-2">
         {row["Tags"]?.map((tag, tagIndex) => (
-          <span
+          <span style={{fontFamily:"Gilroy-Medium"}}
 
             key={tagIndex}
             className=" badge rounded-full px-3 py-1 text-sm font-semibold text-gray-700"
@@ -99,7 +99,7 @@ function renderField(row, key, viewDetails, keyIndex , fun) {
         target="_blank"
         onClick={(e) => e.stopPropagation()}
         className="text-[#4B465C] text-[1.125rem] font-[400]"
-        style={{ textDecoration: "underline"  }}
+        style={{ textDecoration: "underline" , fontFamily:"Gilroy-Medium"}}
       >
         view brochure
       </a>
@@ -107,6 +107,6 @@ function renderField(row, key, viewDetails, keyIndex , fun) {
   }
     
    else {
-    return <p className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]}</p>;
+    return <p style={{fontFamily:"Gilroy-Medium"}} className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]}</p>;
   }
 }
