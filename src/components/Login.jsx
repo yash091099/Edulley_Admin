@@ -23,7 +23,7 @@ export default function Login() {
       const { data, status } = await loginUser({ adminId, password });
       if (status === 200) {
         localStorage.setItem("userData", JSON.stringify(data.data));
-        toast.success("User logged in");
+        toast.success("Logged in successfully");
         navigate("/dashboard");
       } else {
         toast.error(data?.message || "An error occurred");
@@ -47,7 +47,7 @@ export default function Login() {
       onKeyPress={handleKeyPress}
     >
       <img className="w-[10rem] mb-[1rem] mx-auto" src={logo} alt="logo" />
-      <h1 className="text-text text-[2rem] font-[600]">Login</h1>
+      <h1 className="text-text text-[2rem] font-[600]" style={{fontFamily:"Gilroy-Bold"}}>Login</h1>
       <div className="flex flex-col gap-[1rem]">
         <UserInput
           label="Admin ID"

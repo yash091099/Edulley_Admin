@@ -93,10 +93,10 @@ const AddCareer = ({ initialData, fetchCareers, handleBack }) => {
 
   return (
     <div className="overview-container">
-      <h3 className="heading">Career Details</h3>
+      <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>Career Details</h3>
       <div className="row">
         <div className="col-md-6 formField">
-          <label>Latest Qualification *</label>
+          <label style={{fontFamily: 'Gilroy-Bold'}}>Latest Qualification *</label>
           <input
             className="input"
             type="text"
@@ -104,10 +104,11 @@ const AddCareer = ({ initialData, fetchCareers, handleBack }) => {
             placeholder="Add Qualification name"
             value={data.latestQualification}
             onChange={handleInputChange}
+            style={{fontFamily: 'Gilroy-Medium'}}
           />
         </div>
         <div className="col-md-6 formField">
-          <label>Specialization *</label>
+          <label style={{fontFamily: 'Gilroy-Bold'}}>Specialization *</label>
           <input
             className="input"
             type="text"
@@ -115,22 +116,24 @@ const AddCareer = ({ initialData, fetchCareers, handleBack }) => {
             placeholder="Add Specialization"
             value={data.specialization}
             onChange={handleInputChange}
+            style={{fontFamily: 'Gilroy-Medium'}}
           />
         </div>
       </div>
       <div className="row">
         <div className="col-md-12 formField">
-          <label>Course Names *</label>
+          <label style={{fontFamily: 'Gilroy-Bold'}}>Course Names *</label>
           <input
             className="input"
             type="text"
             placeholder="Type course name and press Enter"
             onKeyDown={handleCourseInput}
+            style={{fontFamily: 'Gilroy-Medium'}}
           />
           {data?.coursesName?.length > 0 && (
             <div className="tags-container">
               {data?.coursesName?.map((course, index) => (
-                <div key={index} className="tag">
+                <div key={index} className="tag" style={{fontFamily: 'Gilroy-Medium'}}>
                   {course}
                   <button
                     onClick={() => removeCourse(index)}
@@ -144,13 +147,14 @@ const AddCareer = ({ initialData, fetchCareers, handleBack }) => {
           )}
         </div>
       </div>
-      <div className="button-container">
+      <div className="button-container" style={{display: 'flex', justifyContent: 'flex-end'}}>
         <button
           style={{
             backgroundColor: "#FF6477",
             padding: "10px",
             borderRadius: "4px",
             color: "#fff",
+            fontFamily: "Gilroy-Bold",
             minWidth: "100px",
           }}
           onClick={saveData}

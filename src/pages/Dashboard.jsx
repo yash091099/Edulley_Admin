@@ -17,7 +17,7 @@ export default function Dashboard() {
         <div className='flex flex-col gap-[1.5rem] w-full px-[2rem] py-[1rem]'>
           <Navbar profileClick={()=>{setAccountAction(true)}} />
           <Outlet />
-          <p className='text-[#4B465C] text-[0.9375rem] font-[400] leading-[1.375rem] mx-auto mb-[1rem]'>Copyright 2023 - Company Name. All rights reserved.</p>
+          <p className='text-[#4B465C] text-[0.9375rem] font-[400] leading-[1.375rem] mx-auto mb-[1rem]'>Copyright 2024 - Edulley. All rights reserved.</p>
         </div>
         {/* <SuccessModal /> */}
         {accountAction && <AccountActionsModal onClose={setAccountAction} LogoutModal={setLogout}/>}

@@ -63,10 +63,10 @@ export default function AddScholarship({ initialData, handleBack }) {
   return (
     <>
       <div className="overview-container">
-        <h3 className="heading">Overview</h3>
+        <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>Overview</h3>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               Scholarship Name<span style={{ color: "red" }}>*</span>
             </label>
             <input
@@ -76,10 +76,11 @@ export default function AddScholarship({ initialData, handleBack }) {
               placeholder="Add Scholarship Name"
               value={data.name}
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
           </div>
           <div className="col-md-6 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               University Name<span style={{ color: "red" }}>*</span>
             </label>
             <input
@@ -89,12 +90,13 @@ export default function AddScholarship({ initialData, handleBack }) {
               placeholder="Add University Name"
               value={data.universityName}
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
           </div>
         </div>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               Course Name<span style={{ color: "red" }}>*</span>
             </label>
             <input
@@ -104,10 +106,11 @@ export default function AddScholarship({ initialData, handleBack }) {
               placeholder="Add Course Name"
               value={data.coursesName}
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
           </div>
           <div className="col-md-6 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               Deadline<span style={{ color: "red" }}>*</span>
             </label>
             <input
@@ -117,12 +120,13 @@ export default function AddScholarship({ initialData, handleBack }) {
               placeholder="Add Deadline"
               value={data.deadline}
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
           </div>
         </div>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               Level<span style={{ color: "red" }}>*</span>
             </label>
             <input
@@ -132,10 +136,11 @@ export default function AddScholarship({ initialData, handleBack }) {
               placeholder="Add Level"
               value={data.level}
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
           </div>
           <div className="col-md-6 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               Amount<span style={{ color: "red" }}>*</span>
             </label>
             <input
@@ -145,11 +150,12 @@ export default function AddScholarship({ initialData, handleBack }) {
               placeholder="Add Amount"
               value={data.amount}
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
           </div>
         </div>
       </div>
-      <div className="button-container">
+      <div className="button-container" style={{display: 'flex', justifyContent: 'flex-end'}}>
         <button
           style={{
             backgroundColor: "#FF6477",

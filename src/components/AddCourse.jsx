@@ -120,10 +120,10 @@ const AddCourse = ({ initialData, handleBack }) => {
   return (
     <>
       <div className="overview-container">
-        <h3 className="heading">Overview</h3>
+        <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>Overview</h3>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               Course Name<span style={{ color: "red" }}>*</span>
             </label>
             <input
@@ -133,10 +133,11 @@ const AddCourse = ({ initialData, handleBack }) => {
               placeholder="Add Course Name"
               value={data.courseName}
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
           </div>
           <div className="col-md-6 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               University Name<span style={{ color: "red" }}>*</span>
             </label>
             <input
@@ -146,12 +147,13 @@ const AddCourse = ({ initialData, handleBack }) => {
               placeholder="Add university name"
               value={data.universityName}
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
           </div>
         </div>
         <div className="row">
           <div className="formField col-md-6 formField">
-            <label htmlFor="bannerImage">Banner Image</label>
+            <label style={{fontFamily: 'Gilroy-Bold'}} htmlFor="bannerImage">Banner Image</label>
             <input
               type="file"
               name="bannerImage"
@@ -162,7 +164,7 @@ const AddCourse = ({ initialData, handleBack }) => {
            {data.bannerImage && <img src={data.bannerImage} style={{ width: "100px", height: "100px" }} alt="Banner Image" />}
           </div>
           <div className="formField col-md-6 formField">
-            <label htmlFor="courseLogo">Course Logo</label>
+            <label style={{fontFamily: 'Gilroy-Bold'}} htmlFor="courseLogo">Course Logo</label>
             <input
               type="file"
               name="courseLogo"
@@ -175,22 +177,15 @@ const AddCourse = ({ initialData, handleBack }) => {
         </div>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               Level<span style={{ color: "red" }}>*</span>
             </label>
-            {/* <input
-              type="text"
-              className="input"
-              name="level"
-              placeholder="Add Level"
-              value={data.level}
-              onChange={handleInputChange}
-            /> */}
             <select
               name="level"
               className="input"
               value={data.level}
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             >
               <option value="">Select Level</option>
               <option value="UG">UG</option>
@@ -200,56 +195,59 @@ const AddCourse = ({ initialData, handleBack }) => {
         </div>
         <div className="row">
           <div className="col-md-12 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               Overview<span style={{ color: "red" }}>*</span>
             </label>
             <textarea
               name="overview"
               className="p-2"
-              rows="5"
+              rows="3"
               value={data.overview}
               placeholder="Add Overview"
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
           </div>
         </div>
 
         <div className="row">
           <div className="col-md-12 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               Modules<span style={{ color: "red" }}>*</span>
             </label>
             <textarea
               name="modules"
               className="p-2"
-              rows="5"
+              rows="3"
               value={data.modules}
               placeholder="Add Modules"
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
           </div>
         </div>
         <div className="row">
           <div className="col-md-12 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               Requirements<span style={{ color: "red" }}>*</span>
             </label>
             <textarea
               name="requirements"
               className="p-2"
-              rows="5"
+              rows="3"
               value={data.requirements}
               placeholder="Add Requirements"
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
           </div>
         </div>
       </div>
       <div className="overview-container">
-        <h3 className="heading">Unique University Info</h3>
+        <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>Unique University Info</h3>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               Fee<span style={{ color: "red" }}>*</span>
             </label>
             <input
@@ -259,10 +257,11 @@ const AddCourse = ({ initialData, handleBack }) => {
               placeholder="Add Fee"
               value={data.fee}
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
           </div>
           <div className="col-md-6 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               Duration (Years)<span style={{ color: "red" }}>*</span>
             </label>
             <input
@@ -272,12 +271,13 @@ const AddCourse = ({ initialData, handleBack }) => {
               placeholder="Add Duration"
               value={data.duration}
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
           </div>
         </div>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               Application Deadline<span style={{ color: "red" }}>*</span>
             </label>
             <input
@@ -287,10 +287,11 @@ const AddCourse = ({ initialData, handleBack }) => {
               placeholder="Add Application Deadline"
               value={data.applicationDeadline}
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
           </div>
           <div className="col-md-6 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               Application Fee<span style={{ color: "red" }}>*</span>
             </label>
             <input
@@ -300,28 +301,21 @@ const AddCourse = ({ initialData, handleBack }) => {
               placeholder="Add Application Fee"
               value={data.applicationFee}
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
           </div>
         </div>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               Upcoming Intakes<span style={{ color: "red" }}>*</span>
             </label>
-            {/* <input
-              className="input"
-              type="text"
-              name="upcomingIntakes"
-              placeholder="Add Upcoming Intakes"
-              value={data.upcomingIntakes}
-              onChange={handleInputChange}
-            /> */}
-
             <select
               className="input"
               name="upcomingIntakes"
               value={data.upcomingIntakes}
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             >
               <option value="">Select Intake</option>
               <option value="January">January</option>
@@ -336,28 +330,18 @@ const AddCourse = ({ initialData, handleBack }) => {
               <option value="October">October</option>
               <option value="November">November</option>
               <option value="December">December</option>
-
             </select>
-
           </div>
           <div className="col-md-6 formField">
-            <label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
               Mode of Study<span style={{ color: "red" }}>*</span>
             </label>
-            {/* <input
-              className="input"
-              type="text"
-              name="modeOfStudy"
-              placeholder="Add Mode of study"
-              value={data.modeOfStudy}
-              onChange={handleInputChange}
-            /> */}
-
             <select
               className="input"
               name="modeOfStudy"
               value={data.modeOfStudy}
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             >
               <option value="">Select Mode of Study</option>
               <option value="Online">Online</option>
@@ -369,7 +353,7 @@ const AddCourse = ({ initialData, handleBack }) => {
         </div>
       </div>
 
-      <div className="button-container">
+      <div className="button-container" style={{display: 'flex', justifyContent: 'flex-end'}}>
         <button
           onClick={saveData}
           style={{

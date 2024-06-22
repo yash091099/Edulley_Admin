@@ -68,133 +68,133 @@ export default function AcademicProfile({ setFormData , formData , setState , st
         <Form className="main-container">
           {/* 10th Section */}
           <div className="main-container">
-            <h3 className="heading">10th</h3>
+            <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>10th</h3>
             <div className="row">
               <div className="col-md-6 formField">
-                <label>Institution Name</label>
-                <Field type="text" name="tenthInstitutionName" placeholder="Enter institution name" className="input" />
-                <ErrorMessage name="tenthInstitutionName" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Institution Name</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="tenthInstitutionName" placeholder="Enter institution name" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="tenthInstitutionName" component="div" className="error" />
               </div>
               <div className="col-md-6 formField">
-                <label>Board</label>
-                <Field type="text" name="tenthBoard" placeholder="Enter board name" className="input" />
-                <ErrorMessage name="tenthBoard" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Board</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="tenthBoard" placeholder="Enter board name" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="tenthBoard" component="div" className="error" />
               </div>
               <div className="col-md-6 formField">
-                <label>Score (%)</label>
-                <Field type="text" name="tenthScore" placeholder="Enter score" className="input" />
-                <ErrorMessage name="tenthScore" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Score (%)</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="tenthScore" placeholder="Enter score" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="tenthScore" component="div" className="error" />
               </div>
               <div className="col-md-6 formField">
-                <label>Year of Completion</label>
-                <Field type="text" name="tenthYearOfCompletion" placeholder="Enter year of completion" className="input" />
-                <ErrorMessage name="tenthYearOfCompletion" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Year of Completion</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="tenthYearOfCompletion" placeholder="Enter year of completion" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="tenthYearOfCompletion" component="div" className="error" />
               </div>
               <div className="col-md-12 formField">
-                <label>Specialization</label>
-                <Field type="text" name="tenthSpecialization" placeholder="Enter specialization" className="input" />
-                <ErrorMessage name="tenthSpecialization" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Specialization</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="tenthSpecialization" placeholder="Enter specialization" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="tenthSpecialization" component="div" className="error" />
               </div>
             </div>
           </div>
 
           {/* 12th Section */}
           <div className="main-container">
-            <h3 className="heading">Senior Secondary (11th-12th)</h3>
+            <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>Senior Secondary (11th-12th)</h3>
             <div className="row">
               <div className="col-md-6 formField">
-                <label>Institution Name</label>
-                <Field type="text" name="twelfthInstitutionName" placeholder="Enter institution name" className="input" />
-                <ErrorMessage name="twelfthInstitutionName" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Institution Name</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="twelfthInstitutionName" placeholder="Enter institution name" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="twelfthInstitutionName" component="div" className="error" />
               </div>
               <div className="col-md-6 formField">
-                <label>Board</label>
-                <Field type="text" name="twelfthBoard" placeholder="Enter board name" className="input" />
-                <ErrorMessage name="twelfthBoard" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Board</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="twelfthBoard" placeholder="Enter board name" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="twelfthBoard" component="div" className="error" />
               </div>
               <div className="col-md-6 formField">
-                <label>Score (%)</label>
-                <Field type="text" name="twelfthScore" placeholder="Enter score" className="input" />
-                <ErrorMessage name="twelfthScore" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Score (%)</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="twelfthScore" placeholder="Enter score" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="twelfthScore" component="div" className="error" />
               </div>
               <div className="col-md-6 formField">
-                <label>Year of Completion</label>
-                <Field type="text" name="twelfthYearOfCompletion" placeholder="Enter year of completion" className="input" />
-                <ErrorMessage name="twelfthYearOfCompletion" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Year of Completion</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="twelfthYearOfCompletion" placeholder="Enter year of completion" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="twelfthYearOfCompletion" component="div" className="error" />
               </div>
               <div className="col-md-12 formField">
-                <label>Specialization</label>
-                <Field type="text" name="twelfthSpecialization" placeholder="Enter specialization" className="input" />
-                <ErrorMessage name="twelfthSpecialization" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Specialization</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="twelfthSpecialization" placeholder="Enter specialization" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="twelfthSpecialization" component="div" className="error" />
               </div>
             </div>
           </div>
 
           {/* UG Section */}
           <div className="main-container">
-            <h3 className="heading">UG (Undergraduate)</h3>
+            <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>UG (Undergraduate)</h3>
             <div className="row">
               <div className="col-md-6 formField">
-                <label>Institution Name</label>
-                <Field type="text" name="ugInstitutionName" placeholder="Enter institution name" className="input" />
-                <ErrorMessage name="ugInstitutionName" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Institution Name</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="ugInstitutionName" placeholder="Enter institution name" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="ugInstitutionName" component="div" className="error" />
               </div>
               <div className="col-md-6 formField">
-                <label>Board</label>
-                <Field type="text" name="ugBoard" placeholder="Enter board name" className="input" />
-                <ErrorMessage name="ugBoard" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Board</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="ugBoard" placeholder="Enter board name" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="ugBoard" component="div" className="error" />
               </div>
               <div className="col-md-6 formField">
-                <label>Score (%)</label
-                ><Field type="text" name="ugScore" placeholder="Enter score" className="input" />
-                <ErrorMessage name="ugScore" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Score (%)</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="ugScore" placeholder="Enter score" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="ugScore" component="div" className="error" />
               </div>
               <div className="col-md-6 formField">
-                <label>Year of Completion</label>
-                <Field type="text" name="ugYearOfCompletion" placeholder="Enter year of completion" className="input" />
-                <ErrorMessage name="ugYearOfCompletion" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Year of Completion</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="ugYearOfCompletion" placeholder="Enter year of completion" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="ugYearOfCompletion" component="div" className="error" />
               </div>
               <div className="col-md-12 formField">
-                <label>Specialization</label>
-                <Field type="text" name="ugSpecialization" placeholder="Enter specialization" className="input" />
-                <ErrorMessage name="ugSpecialization" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Specialization</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="ugSpecialization" placeholder="Enter specialization" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="ugSpecialization" component="div" className="error" />
               </div>
             </div>
           </div>
 
           {/* PG Section */}
           <div className="main-container">
-            <h3 className="heading">PG (Postgraduate)</h3>
+            <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>PG (Postgraduate)</h3>
             <div className="row">
               <div className="col-md-6 formField">
-                <label>Institution Name</label>
-                <Field type="text" name="pgInstitutionName" placeholder="Enter institution name" className="input" />
-                <ErrorMessage name="pgInstitutionName" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Institution Name</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="pgInstitutionName" placeholder="Enter institution name" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="pgInstitutionName" component="div" className="error" />
               </div>
               <div className="col-md-6 formField">
-                <label>Board</label>
-                <Field type="text" name="pgBoard" placeholder="Enter board name" className="input" />
-                <ErrorMessage name="pgBoard" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Board</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="pgBoard" placeholder="Enter board name" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="pgBoard" component="div" className="error" />
               </div>
               <div className="col-md-6 formField">
-                <label>Score (%)</label>
-                <Field type="text" name="pgScore" placeholder="Enter score" className="input" />
-                <ErrorMessage name="pgScore" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Score (%)</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="pgScore" placeholder="Enter score" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="pgScore" component="div" className="error" />
               </div>
               <div className="col-md-6 formField">
-                <label>Year of Completion</label>
-                <Field type="text" name="pgYearOfCompletion" placeholder="Enter year of completion" className="input" />
-                <ErrorMessage name="pgYearOfCompletion" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Year of Completion</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="pgYearOfCompletion" placeholder="Enter year of completion" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="pgYearOfCompletion" component="div" className="error" />
               </div>
               <div className="col-md-12 formField">
-                <label>Specialization</label>
-                <Field type="text" name="pgSpecialization" placeholder="Enter specialization" className="input" />
-                <ErrorMessage name="pgSpecialization" component="div" className="error" />
+                <label style={{fontFamily: 'Gilroy-Bold'}}>Specialization</label>
+                <Field style={{fontFamily: 'Gilroy-Medium'}} type="text" name="pgSpecialization" placeholder="Enter specialization" className="input" />
+                <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="pgSpecialization" component="div" className="error" />
               </div>
             </div>
           </div>
 
-          <div className="button-container">
+          <div className="button-container" style={{display: 'flex', justifyContent: 'flex-end'}}>
             <button type="submit" style={{backgroundColor:"#FF6477", padding:"10px", borderRadius:"4px", color:"#fff", minWidth:"100px"}} className="saveButton">
               Next
             </button>

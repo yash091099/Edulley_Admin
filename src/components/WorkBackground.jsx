@@ -42,68 +42,74 @@ export default function WorkBackground({ setFormData , formData , setState , sta
     >
       {({ handleSubmit }) => (
         <Form className="main-container">
-          <h3 className="heading">Work Experience</h3>
+          <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>Work Experience</h3>
           <div className="row">
             <div className="col-md-6 formField">
-              <label>Job title</label>
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Job title</label>
               <Field
                 type="text"
                 name="jobTitle"
                 placeholder="Enter your job title"
                 className="input"
+                style={{fontFamily: 'Gilroy-Medium'}}
               />
-              <ErrorMessage name="jobTitle" component="div" className="error" />
+              <ErrorMessage name="jobTitle" component="div" className="error" style={{fontFamily: 'Gilroy-Medium'}} />
             </div>
             <div className="col-md-6 formField">
-              <label>Company Name</label>
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Company Name</label>
               <Field
                 type="text"
                 name="company"
                 placeholder="Enter company name"
                 className="input"
+                style={{fontFamily: 'Gilroy-Medium'}}
               />
-              <ErrorMessage name="company" component="div" className="error" />
+              <ErrorMessage name="company" component="div" className="error" style={{fontFamily: 'Gilroy-Medium'}} />
             </div>
             <div className="col-md-6 formField">
-              <label>Location</label>
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Location</label>
               <Field
                 type="text"
                 name="location"
                 placeholder="Enter location"
                 className="input"
+                style={{fontFamily: 'Gilroy-Medium'}}
               />
-              <ErrorMessage name="location" component="div" className="error" />
+              <ErrorMessage name="location" component="div" className="error" style={{fontFamily: 'Gilroy-Medium'}} />
             </div>
             <div className="col-md-6 formField">
-              <label>Job Summary</label>
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Job Summary</label>
               <Field
                 type="text"
                 name="jobSummary"
                 placeholder="Enter job summary"
                 className="input"
+                style={{fontFamily: 'Gilroy-Medium'}}
               />
-              <ErrorMessage name="jobSummary" component="div" className="error" />
+              <ErrorMessage name="jobSummary" component="div" className="error" style={{fontFamily: 'Gilroy-Medium'}} />
             </div>
             <div className="col-md-6 formField">
-              <label>Joining Date</label>
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Joining Date</label>
               <Field
                 type="date"
                 name="joiningDate"
                 className="input"
+                style={{fontFamily: 'Gilroy-Medium'}}
               />
-              <ErrorMessage name="joiningDate" component="div" className="error" />
+              <ErrorMessage name="joiningDate" component="div" className="error" style={{fontFamily: 'Gilroy-Medium'}} />
             </div>
             <div className="col-md-6 formField">
-              <label>Worked till</label>
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Worked till</label>
               <Field
                 type="date"
                 name="workedTill"
                 className="input"
+                style={{fontFamily: 'Gilroy-Medium'}}
               />
-              <ErrorMessage name="workedTill" component="div" className="error" />
+              <ErrorMessage name="workedTill" component="div" className="error" style={{fontFamily: 'Gilroy-Medium'}} />
             </div>
           </div>
-          <div className="button-container">
+          <div className="button-container" style={{display: 'flex', justifyContent: 'flex-end'}}>
             <button type="submit" className="saveButton" style={{backgroundColor:"#FF6477", padding:"10px", borderRadius:"4px", color:"#fff", minWidth:"100px"}}>
               Next
             </button>

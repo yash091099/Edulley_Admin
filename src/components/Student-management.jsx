@@ -90,19 +90,28 @@ export default function StudentManagement() {
       <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
         <div className="flex justify-between">
         <h1 className="text-text text-[1.5rem] font-[600]" style={{fontFamily:"Gilroy-Bold"}}>
-            Student Management {add ? "> Add" : ""}
+            Student Management {add && !existingStudent ? "> Add" : add && existingStudent ? "> Edit" : ""}
           </h1>
           <div className="flex justify-between gap-[0.2rem]">
-            <button style={{fontFamily:"Gilroy-Bold"}}
+            {/* <button style={{fontFamily:"Gilroy-Bold"}}
               className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]"
               onClick={toggleFilterModal}
             >
               <img src={filterIcon} alt="filter" />
               <p className="text-text text-[0.75rem] font-[600]">Filter</p>
-            </button>
-            <button style={{fontFamily:"Gilroy-Bold"}}
+            </button> */}
+            { !add &&  <input
+                style={{fontFamily:"Gilroy-Medium"}}
+                type="text"
+                placeholder="Search by name or email"
+                value={filter}
+                onChange={handleFilterChange}
+                className="filter-input"
+              />}
+            <button style={{fontFamily:"Gilroy-Bold",    width: '100px',height: '47px',marginLeft: '20px', marginTop: '16px'
+}}
               onClick={openAddForm}
-              className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]"
+              className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[0.5rem] py-[0.5rem] rounded-[0.5rem]"
             >
               <AddCircleOutline />
               <p className="text-text text-[0.75rem] font-[600]">

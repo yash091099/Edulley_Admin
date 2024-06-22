@@ -69,152 +69,152 @@ const PersonalDetails = ( { setFormData  , formData , setState , state}) => {
     >
       {({ handleSubmit }) => (
         <form onSubmit={handleSubmit} className="main-container">
-          <h3 className="heading">Personal Information</h3>
+          <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>Personal Information</h3>
           <div className="row">
             <div className="col-md-6 formField">
-              <label>Full Name</label>
-              <Field name="name" type="text" placeholder="Full Name" className="input" />
-              <ErrorMessage name="name" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Full Name</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}} name="name" type="text" placeholder="Full Name" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="name" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>Gender</label>
-              <Field as="select" name="gender" className="input">
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Gender</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}} as="select" name="gender" className="input">
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
               </Field>
-              <ErrorMessage name="gender" component="div" className="error" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="gender" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>Contact Number</label>
-              <Field name="contactNumber" type="text" placeholder="Contact Number" className="input" />
-              <ErrorMessage name="contactNumber" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Contact Number</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="contactNumber" type="text" placeholder="Contact Number" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="contactNumber" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>Email ID</label>
-              <Field name="emailID" type="email" placeholder="Email Address" className="input" />
-              <ErrorMessage name="emailID" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Email ID</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="emailID" type="email" placeholder="Email Address" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="emailID" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>Date of Birth</label>
-              <Field name="dob" type="date" className="input" />
-              <ErrorMessage name="dob" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Date of Birth</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="dob" type="date" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="dob" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>Marital Status</label>
-              <Field name="maritalStatus" type="text" placeholder="Marital Status" className="input" />
-              <ErrorMessage name="maritalStatus" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Marital Status</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="maritalStatus" type="text" placeholder="Marital Status" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="maritalStatus" component="div" className="error" />
             </div>
           </div>
 
-          <h3 className="heading">Mailing Address</h3>
+          <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>Mailing Address</h3>
           <div className="row">
             <div className="col-md-6 formField">
-              <label>Address Line 1</label>
-              <Field name="mailingAddressLine1" type="text" placeholder="Address Line 1" className="input" />
-              <ErrorMessage name="mailingAddressLine1" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Address Line 1</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="mailingAddressLine1" type="text" placeholder="Address Line 1" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="mailingAddressLine1" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>Address Line 2</label>
-              <Field name="mailingAddressLine2" type="text" placeholder="Address Line 2" className="input" />
-              <ErrorMessage name="mailingAddressLine2" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Address Line 2</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="mailingAddressLine2" type="text" placeholder="Address Line 2" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="mailingAddressLine2" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>Country</label>
-              <Field name="mailingCountry" type="text" placeholder="Country" className="input" />
-              <ErrorMessage name="mailingCountry" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Country</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="mailingCountry" type="text" placeholder="Country" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="mailingCountry" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>State</label>
-              <Field name="mailingState" type="text" placeholder="State" className="input" />
-              <ErrorMessage name="mailingState" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>State</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="mailingState" type="text" placeholder="State" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="mailingState" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>City</label>
-              <Field name="mailingCity" type="text" placeholder="City" className="input" />
-              <ErrorMessage name="mailingCity" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>City</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="mailingCity" type="text" placeholder="City" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="mailingCity" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>Pincode</label>
-              <Field name="mailingPincode" type="text" placeholder="Pincode" className="input" />
-              <ErrorMessage name="mailingPincode" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Pincode</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="mailingPincode" type="text" placeholder="Pincode" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="mailingPincode" component="div" className="error" />
             </div>
           </div>
 
-          <h3 className="heading">Permanent Address</h3>
+          <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>Permanent Address</h3>
           <div className="row">
             <div className="col-md-6 formField">
-              <label>Address Line 1</label>
-              <Field name="permanentAddressLine1" type="text" placeholder="Address Line 1" className="input" />
-              <ErrorMessage name="permanentAddressLine1" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Address Line 1</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="permanentAddressLine1" type="text" placeholder="Address Line 1" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="permanentAddressLine1" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>Address Line 2</label>
-              <Field name="permanentAddressLine2" type="text" placeholder="Address Line 2" className="input" />
-              <ErrorMessage name="permanentAddressLine2" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Address Line 2</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="permanentAddressLine2" type="text" placeholder="Address Line 2" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="permanentAddressLine2" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>Country</label>
-              <Field name="permanentCountry" type="text" placeholder="Country" className="input" />
-              <ErrorMessage name="permanentCountry" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Country</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="permanentCountry" type="text" placeholder="Country" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="permanentCountry" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>State</label>
-              <Field name="permanentState" type="text" placeholder="State" className="input" />
-              <ErrorMessage name="permanentState" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>State</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="permanentState" type="text" placeholder="State" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="permanentState" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>City</label>
-              <Field name="permanentCity" type="text" placeholder="City" className="input" />
-              <ErrorMessage name="permanentCity" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>City</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="permanentCity" type="text" placeholder="City" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="permanentCity" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>Pincode</label>
-              <Field name="permanentPincode" type="text" placeholder="Pincode" className="input" />
-              <ErrorMessage name="permanentPincode" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Pincode</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="permanentPincode" type="text" placeholder="Pincode" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="permanentPincode" component="div" className="error" />
             </div>
           </div>
 
-          <h3 className="heading">Passport Information</h3>
+          <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>Passport Information</h3>
           <div className="row">
             <div className="col-md-6 formField">
-              <label>Passport Number</label>
-              <Field name="passportNumber" type="text" placeholder="Passport Number" className="input" />
-              <ErrorMessage name="passportNumber" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Passport Number</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="passportNumber" type="text" placeholder="Passport Number" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="passportNumber" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>Issue Country</label>
-              <Field name="passportIssueCountry" type="text" placeholder="Issue Country" className="input" />
-              <ErrorMessage name="passportIssueCountry" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Issue Country</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="passportIssueCountry" type="text" placeholder="Issue Country" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="passportIssueCountry" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>Issue Date</label>
-              <Field name="passportIssueDate" type="date" className="input" />
-              <ErrorMessage name="passportIssueDate" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Issue Date</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="passportIssueDate" type="date" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="passportIssueDate" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>Expiry Date</label>
-              <Field name="passportExpiryDate" type="date" className="input" />
-              <ErrorMessage name="passportExpiryDate" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Expiry Date</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}  name="passportExpiryDate" type="date" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}}  name="passportExpiryDate" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>State of Birth</label>
-              <Field name="passportStateOfBirth" type="text" placeholder="State of Birth" className="input" />
-              <ErrorMessage name="passportStateOfBirth" component="div" className="error" />
+            <label style={{fontFamily: 'Gilroy-Bold'}}>State of Birth</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}}name="passportStateOfBirth" type="text" placeholder="State of Birth" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="passportStateOfBirth" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>Country of Birth</label>
-              <Field name="passportCountryOfBirth" type="text" placeholder="Country of Birth" className="input" />
-              <ErrorMessage name="passportCountryOfBirth" component="div" className="error" />
+              <label style={{fontFamily: 'Gilroy-Bold'}}>Country of Birth</label>
+              <Field style={{fontFamily: 'Gilroy-Medium'}} name="passportCountryOfBirth" type="text" placeholder="Country of Birth" className="input" />
+              <ErrorMessage style={{fontFamily: 'Gilroy-Medium'}} name="passportCountryOfBirth" component="div" className="error" />
             </div>
           </div>
 
-          <div className="button-container">
-            <button type="submit" className="saveButton" style={{ backgroundColor: "#FF6477", padding: "10px", borderRadius: "4px", color: "#fff", minWidth: "100px" }}>
-              Next
-            </button>
-          </div>
+          <div className="button-container" style={{display: 'flex', justifyContent: 'flex-end'}}>
+        <button type="submit" className="saveButton" style={{fontFamily: 'Gilroy-Bold', backgroundColor: "#FF6477", padding: "10px", borderRadius: "4px", color: "#fff", minWidth: "100px" }}>
+          Next
+        </button>
+      </div>
         </form>
       )}
     </Formik>

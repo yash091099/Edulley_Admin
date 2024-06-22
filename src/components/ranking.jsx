@@ -51,29 +51,29 @@ const Ranking = ({ onDataChange, initialData }) => {
     >
       {({ setFieldValue, values, handleChange }) => (
         <Form className="overview-container">
-          <h3 className="heading">Ranking</h3>
+          <h3 className="heading" style={{fontFamily:"Gilroy-Bold"}}>Ranking</h3>
           <div className="row">
           
             <div className="col-md-6 ">
-              <label>Name</label>
-              <Field type="text" name="name" placeholder="Add name" className="input" onChange={(e) => {
+              <label  style={{fontFamily:"Gilroy-Bold"}}>Name</label>
+              <Field style={{fontFamily:"Gilroy-Medium"}} type="text" name="name" placeholder="Add name" className="input" onChange={(e) => {
                 handleChange(e); // This is Formik's handleChange
                 onDataChange({ ...values, name: e.target.value }); // Also update parent component's state
               }} />
-              <ErrorMessage name="name" component="div" className="error" />
+              <ErrorMessage style={{fontFamily:"Gilroy-Medium"}} name="name" component="div" className="error" />
             </div>
           <div className="col-md-6">
-              <label>Rank</label>
-              <Field type="number" name="rank" placeholder="Add rank" className="input" onChange={(e) => {
+              <label style={{fontFamily:"Gilroy-Bold"}}>Rank</label>
+              <Field style={{fontFamily:"Gilroy-Medium"}} type="number" name="rank" placeholder="Add rank" className="input" onChange={(e) => {
                 handleChange(e); // This is Formik's handleChange
                 onDataChange({ ...values, rank: e.target.value }); // Also update parent component's state
               }} />
-              <ErrorMessage name="rank" component="div" className="error" />
+              <ErrorMessage style={{fontFamily:"Gilroy-Medium"}} name="rank" component="div" className="error" />
           </div>
           </div>
           <div className="row formField">
-              <label>Logo</label>
-              <input
+              <label style={{fontFamily:"Gilroy-Bold"}}>Logo</label>
+              <input style={{fontFamily:"Gilroy-Medium"}}
                 type="file"
                 accept="image/png, image/jpeg"
                 className="file-upload"

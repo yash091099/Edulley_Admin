@@ -39,7 +39,7 @@ const UniversityStats = ({ onDataChange, initialData }) => {
     >
       {formik => (
         <Form className="overview-container">
-          <h3 className="heading">University Stats</h3>
+          <h3 className="heading" style={{fontFamily:"Gilroy-Bold"}}>University Stats</h3>
           <div className="row">
             <CustomInputField label="No. of students per staff" name="studentsPerStaff" placeholder="Enter number" onDataChange={onDataChange} formik={formik} />
             <CustomInputField label="No. of full-time students" name="fulltimeStudents" placeholder="Enter number" onDataChange={onDataChange} formik={formik} />
@@ -54,8 +54,8 @@ const UniversityStats = ({ onDataChange, initialData }) => {
 
 const CustomInputField = ({ label, name, placeholder, onDataChange, formik }) => (
   <div className="col-md-6 formField">
-    <label>{label}</label>
-    <Field 
+    <label style={{fontFamily:"Gilroy-Bold"}}>{label}</label>
+    <Field  style={{fontFamily:"Gilroy-Medium"}}
       type="text" 
       name={name} 
       placeholder={placeholder} 
@@ -65,7 +65,7 @@ const CustomInputField = ({ label, name, placeholder, onDataChange, formik }) =>
         onDataChange({ ...formik.values, [name]: e.target.value }); // Also pass updated values up to parent
       }}
     />
-    <ErrorMessage name={name} component="div" className="error" />
+    <ErrorMessage style={{fontFamily:"Gilroy-Medium"}} name={name} component="div" className="error" />
   </div>
 );
 

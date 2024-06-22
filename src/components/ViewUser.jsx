@@ -324,14 +324,14 @@ export default function ViewVUser({ handleBack, initialData }) {
                 src={userIcon}
               />
               <div>
-                <h1
+                <h1 style={{fontFamily:"Gilroy-Bold"}}
                   className={`text-[0.9375rem] font-[600] leading-[1.3125rem] ${
                     state === 1 ? "text-[#4B465C]" : "text-[#4B465C]/50"
                   }`}
                 >
                   Personal Details
                 </h1>
-                <p className="text-[#4B465C]/50 text-[0.8125rem] font-[400] leading-[1.25rem]">
+                <p style={{fontFamily:"Gilroy-Bold"}} className="text-[#4B465C]/50 text-[0.8125rem] font-[400] leading-[1.25rem]">
                   Name/Email/Contact
                 </p>
               </div>
@@ -348,16 +348,16 @@ export default function ViewVUser({ handleBack, initialData }) {
                 src={documentsIcon}
               />
               <div>
-                <h1
+                <h1 style={{fontFamily:"Gilroy-Bold"}}
                   className={`text-[0.9375rem] font-[600] leading-[1.3125rem] ${
                     state === 2 ? "text-[#4B465C]" : "text-[#4B465C]/50"
                   }`}
                 >
                   Academic Profile
                 </h1>
-                <p className="text-[#4B465C]/50 text-[0.8125rem] font-[400] leading-[1.25rem]">
+                {/* <p className="text-[#4B465C]/50 text-[0.8125rem] font-[400] leading-[1.25rem]">
                   Completed
-                </p>
+                </p> */}
               </div>
             </div>
             {/* Work Background */}
@@ -372,16 +372,16 @@ export default function ViewVUser({ handleBack, initialData }) {
                 src={dollorIcon}
               />
               <div>
-                <h1
+                <h1 style={{fontFamily:"Gilroy-Bold"}}
                   className={`text-[0.9375rem] font-[600] leading-[1.3125rem] ${
                     state === 3 ? "text-[#4B465C]" : "text-[#4B465C]/50"
                   }`}
                 >
                   Work Backgrounds
                 </h1>
-                <p className="text-[#4B465C]/50 text-[0.8125rem] font-[400] leading-[1.25rem]">
+                {/* <p className="text-[#4B465C]/50 text-[0.8125rem] font-[400] leading-[1.25rem]">
                   Completed
-                </p>
+                </p> */}
               </div>
             </div>
             {/* Tests */}
@@ -396,16 +396,16 @@ export default function ViewVUser({ handleBack, initialData }) {
                 src={dollorIcon}
               />
               <div>
-                <h1
+                <h1 style={{fontFamily:"Gilroy-Bold"}}
                   className={`text-[0.9375rem] font-[600] leading-[1.3125rem] ${
                     state === 4 ? "text-[#4B465C]" : "text-[#4B465C]/50"
                   }`}
                 >
                   Tests
                 </h1>
-                <p className="text-[#4B465C]/50 text-[0.8125rem] font-[400] leading-[1.25rem]">
+                {/* <p className="text-[#4B465C]/50 text-[0.8125rem] font-[400] leading-[1.25rem]">
                   Completed
-                </p>
+                </p> */}
               </div>
             </div>
             {/* Documents */}
@@ -420,16 +420,16 @@ export default function ViewVUser({ handleBack, initialData }) {
                 src={dollorIcon}
               />
               <div>
-                <h1
+                <h1 style={{fontFamily:"Gilroy-Bold"}}
                   className={`text-[0.9375rem] font-[600] leading-[1.3125rem] ${
                     state === 5 ? "text-[#4B465C]" : "text-[#4B465C]/50"
                   }`}
                 >
                   Documents
                 </h1>
-                <p className="text-[#4B465C]/50 text-[0.8125rem] font-[400] leading-[1.25rem]">
+                {/* <p className="text-[#4B465C]/50 text-[0.8125rem] font-[400] leading-[1.25rem]">
                   Completed
-                </p>
+                </p> */}
               </div>
             </div>
           </div>

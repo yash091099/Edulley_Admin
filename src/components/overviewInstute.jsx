@@ -79,22 +79,22 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
     >
       {({ setFieldValue, values }) => (
         <Form className="overview-container">
-          <h3 className="heading">Overview</h3>
+          <h3 className="heading" style={{fontFamily:"Gilroy-Bold"}}>Overview</h3>
           <div className="row">
             <div className="col-md-6 formField">
-              <label>University Name</label>
-              <Field  className="input" type="text" name="universityName" placeholder="Add university name"
+              <label style={{fontFamily:"Gilroy-Bold"}}>University Name</label>
+              <Field style={{fontFamily:"Gilroy-Medium"}}  className="input" type="text" name="universityName" placeholder="Add university name"
                 onChange={e => {
                   setFieldValue("universityName", e.target.value);
                   onDataChange({...values, universityName: e.target.value});
                 }} />
-              <ErrorMessage name="universityName" component="div" className="error" />
+              <ErrorMessage style={{fontFamily:"Gilroy-Medium"}} name="universityName" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>Logo</label>
-              <input className="input" type="file" name="logo" onChange={(e) => handleFileChange(e, setFieldValue, 'logo')} style={{ display: 'none' }} id="logo-upload" />
-              <label htmlFor="logo-upload" className="btn btn-secondary">Upload Logo</label>
-              <ErrorMessage name="logo" component="div" className="error" />
+              <label style={{fontFamily:"Gilroy-Bold"}}>Logo</label>
+              <input style={{fontFamily:"Gilroy-Medium", display: 'none'}} className="input" type="file" name="logo" onChange={(e) => handleFileChange(e, setFieldValue, 'logo')}  id="logo-upload" />
+              <label style={{fontFamily:"Gilroy-Bold"}} htmlFor="logo-upload" className="btn btn-secondary">Upload Logo</label>
+              <ErrorMessage style={{fontFamily:"Gilroy-Medium"}} name="logo" component="div" className="error" />
             </div>
             <div className="col-md-6"></div>
             <div className="col-md-6 mb-3">
@@ -108,30 +108,30 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
           </div>
           <div className="row">
             <div className="col-md-6 formField">
-              <label>Country</label>
-              <Field className="input" type="text" name="country" placeholder="Select Country"
+              <label style={{fontFamily:"Gilroy-Bold"}}>Country</label>
+              <Field style={{fontFamily:"Gilroy-Medium"}} className="input" type="text" name="country" placeholder="Select Country"
                 onChange={e => {
                   setFieldValue("country", e.target.value);
                   onDataChange({...values, country: e.target.value});
                 }} />
-              <ErrorMessage name="country" component="div" className="error" />
+              <ErrorMessage style={{fontFamily:"Gilroy-Medium"}} name="country" component="div" className="error" />
             </div>
             <div className="col-md-6 formField">
-              <label>City</label>
-              <Field className="input" type="text" name="city" placeholder="Select City"
+              <label style={{fontFamily:"Gilroy-Bold"}}>City</label>
+              <Field style={{fontFamily:"Gilroy-Medium"}} className="input" type="text" name="city" placeholder="Select City"
                 onChange={e => {
                   setFieldValue("city", e.target.value);
                   onDataChange({...values, city: e.target.value});
                 }} />
-              <ErrorMessage name="city" component="div" className="error" />
+              <ErrorMessage style={{fontFamily:"Gilroy-Medium"}} name="city" component="div" className="error" />
             </div>
           </div>
 
           <div className='row'>
             <div className="col-md-6 formField">
-              <label>Banner</label>
-              <input className="input" type="file" accept='image/*' name="banner" onChange={(e) => handleFileChange(e, setFieldValue, 'banner')} style={{ display: 'none' }} id="banner-upload" />
-              <label htmlFor="banner-upload" className="btn btn-secondary">Upload Banner</label>
+              <label style={{fontFamily:"Gilroy-Bold"}}>Banner</label>
+              <input style={{fontFamily:"Gilroy-Medium",display: 'none'}} className="input" type="file" accept='image/*' name="banner" onChange={(e) => handleFileChange(e, setFieldValue, 'banner')} id="banner-upload" />
+              <label style={{fontFamily:"Gilroy-Bold"}} htmlFor="banner-upload" className="btn btn-secondary">Upload Banner</label>
               {values.banner && (
                 <div className="preview-container">
                   <img src={values.banner} alt="Banner Preview" className="preview-image" />
@@ -141,8 +141,8 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
             </div>
 
             <div className="col-md-6 formField">
-              <label>Brochure</label>
-              <input className="input" accept='application/pdf' type="file" name="brochure" placeholder="Add Brochure"
+              <label style={{fontFamily:"Gilroy-Bold"}}>Brochure</label>
+              <input style={{fontFamily:"Gilroy-Medium"}} className="input" accept='application/pdf' type="file" name="brochure" placeholder="Add Brochure"
                 onChange={e => {
                   handleFileChange(e, setFieldValue, 'brochure');
                 }} />
@@ -158,24 +158,24 @@ const Overview = ({ onDataChange, initialData , resetVersion }) => {
 
           <div className="row">
             <div className="col-md-12 formField">
-              <label>Overview</label>
-              <Field as="textarea" rows="5" name="overview" className="p-2" placeholder="Add Overview"
+              <label style={{fontFamily:"Gilroy-Bold"}}>Overview</label>
+              <Field style={{fontFamily:"Gilroy-Medium"}} as="textarea" rows="5" name="overview" className="p-2" placeholder="Add Overview"
                 onChange={e => {
                   setFieldValue("overview", e.target.value);
                   onDataChange({...values, overview: e.target.value});
                 }} />
-              <ErrorMessage name="overview" component="div" className="error" />
+              <ErrorMessage style={{fontFamily:"Gilroy-Medium"}} name="overview" component="div" className="error" />
             </div>
           </div>
           <div className="row">
             <div className="col-md-12 formField">
-              <label>Admission Requirements</label>
-              <Field as="textarea" rows="5" name="requirements" className="p-2" placeholder="Add Admission Requirements"
+              <label style={{fontFamily:"Gilroy-Bold"}}>Admission Requirements</label>
+              <Field style={{fontFamily:"Gilroy-Medium"}} as="textarea" rows="5" name="requirements" className="p-2" placeholder="Add Admission Requirements"
                 onChange={e => {
                   setFieldValue("requirements", e.target.value);
                   onDataChange({...values, requirements: e.target.value});
                 }} />
-              <ErrorMessage name="requirements" component="div" className="error" />
+              <ErrorMessage style={{fontFamily:"Gilroy-Medium"}} name="requirements" component="div" className="error" />
             </div>
           </div>
          

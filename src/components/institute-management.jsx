@@ -72,7 +72,7 @@ export default function InstituteManagement() {
     <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
       <div className="flex justify-between">
         <h1 className="text-text text-[1.5rem] font-[600]" style={{fontFamily:"Gilroy-Bold"}}>
-          Institute Management {isAdd ? "> Add" : ""}
+          Institute Management {isAdd && !existingInstitute ? "> Add" : isAdd && existingInstitute?"> Edit":''}
         </h1>
         <div className="flex justify-between gap-[0.2rem]">
           {/* <button className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]">
@@ -85,7 +85,7 @@ export default function InstituteManagement() {
             className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]"
           >
             <AddCircleOutline />
-            <p className="text-text text-[0.75rem] font-[600]">
+            <p className="text-text text-[0.75rem] font-[600]" style={{fontFamily:"Gilroy-Medium"}}>
               {isAdd ? "Back" : "Add"}
             </p>
           </button>

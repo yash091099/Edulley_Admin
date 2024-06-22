@@ -70,17 +70,17 @@ const UniqueUniversityInfo = ({ onDataChange, initialData, resetVersion }) => {
   return (
     <>
       <div className="overview-container">
-        <h3 className="heading">Unique University Info</h3>
+        <h3 className="heading" style={{fontFamily:"Gilroy-Bold"}}>Unique University Info</h3>
         <div className="row image-upload-container">
           {fileInputRefs.map((ref, index) => (
             <div
               key={`image${index + 1}`}
               className="col-md-6 formField image-upload-section"
             >
-              <label htmlFor={`image${index + 1}`}>{`Image ${
+              <label style={{fontFamily:"Gilroy-Bold"}} htmlFor={`image${index + 1}`}>{`Image ${
                 index + 1
               }`}</label>
-              <input
+              <input style={{fontFamily:"Gilroy-Medium"}}
                 id={`image${index + 1}`}
                 type="file"
                 ref={ref}
@@ -89,6 +89,7 @@ const UniqueUniversityInfo = ({ onDataChange, initialData, resetVersion }) => {
               />
               <input
                 type="button"
+                style={{fontFamily:"Gilroy-Medium"}}
                 value={`Upload Image ${index + 1}`}
                 onClick={() => ref.current.click()}
               />

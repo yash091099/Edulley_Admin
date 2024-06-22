@@ -15,7 +15,7 @@ export default function UserInput({ label, type, placeholder, value, onChange })
 
   return (
     <div className='flex flex-col gap-[8px] w-full'>
-      <label className='text-[1rem] font-[600] leading-[1.25rem]'>{label}</label>
+      <label className='text-[1rem] font-[600] leading-[1.25rem]' style={{fontFamily:"Gilroy-Bold"}}>{label}</label>
       <div className={`w-full flex justify-between px-[0.5rem] py-[0.625rem] rounded-md border border-[#D5D5D5]`}>
         <input style={{fontFamily:"Gilroy-Medium"}} className="w-full outline-none text-[0.75rem] text-[#656565] font-[400] leading-[1.5rem] bg-transparent" 
                type={inputType} placeholder={placeholder} value={value} onChange={e => onChange(e.target.value)} />

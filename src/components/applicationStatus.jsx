@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import FileUploadField from "./FileUploadField";
+import { toast } from "react-hot-toast";
 
 const ApplicationStatus = () => {
-    
   const { data } = useParams();
   const [applicationData, setApplicationData] = useState(null);
   const [formData, setFormData] = useState({
     status: "",
     applicationFee: "",
-    document1: "",
-    document2: "",
-    document3: "",
-    document4: "",
   });
 
   useEffect(() => {
@@ -23,10 +18,6 @@ const ApplicationStatus = () => {
       setFormData({
         status: parsedData.status,
         applicationFee: parsedData.courseId?.uniqueCourseInfo?.applicationFee,
-        document1: "",
-        document2: "",
-        document3: "",
-        document4: "",
       });
     } catch (error) {
       console.error("Error parsing application data:", error);
@@ -47,32 +38,54 @@ const ApplicationStatus = () => {
     console.log("Form submitted:", formData);
   };
 
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text).then(
+      () => {
+        toast.success("Copied to clipboard");
+      },
+      (err) => {
+        console.error("Failed to copy text: ", err);
+      }
+    );
+  };
+
   return (
     <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
       <div className="flex justify-between">
-        <h1 className="text-text text-[1.5rem] font-[600]">Applied status</h1>
+        <h1 className="text-text text-[1.5rem] font-[600]" style={{ fontFamily: "Gilroy-Bold" }}>
+          Applied status
+        </h1>
       </div>
 
       <div className="application-card">
         <div className="student-info">
-          <p className="timestamp text-[#666666]">
+          <p className="timestamp text-[#666666]" style={{ fontFamily: "Gilroy-Medium" }}>
             {new Date(applicationData?.createdAt).toLocaleString()}
           </p>
           <div className="status">
-            <p className="status-label">Status:</p>
-            <p className="status-value">{applicationData?.status}</p>
+            <p className="status-label" style={{ fontFamily: "Gilroy-Bold" }}>Status:</p>
+            <p className="status-value" style={{ fontFamily: "Gilroy-Medium" }}>{applicationData?.status}</p>
           </div>
         </div>
         <div className="application-details">
-          <p className="application-number">{applicationData?._id}</p>
-          <p className="course-info">{applicationData?.courseId.courseName}</p>
+          <p className="application-number" style={{ fontFamily: "Gilroy-Medium" }}>
+            {applicationData?._id}
+            <span
+              className="copy-icon"
+              onClick={() => copyToClipboard(applicationData?._id)}
+              style={{ cursor: "pointer", marginLeft: "5px" }}
+            >
+              📋
+            </span>
+          </p>
+          <p className="course-info" style={{ fontFamily: "Gilroy-Medium" }}>{applicationData?.courseId.courseName}</p>
           <div className="university-info">
             <span className="location-icon">📍</span>
-            <p className="university-name">
+            <p className="university-name" style={{ fontFamily: "Gilroy-Medium" }}>
               {applicationData?.courseId.universityName}
             </p>
           </div>
-          <p className="campus">
+          <p className="campus" style={{ fontFamily: "Gilroy-Medium" }}>
             CU: {applicationData?.courseId.uniqueCourseInfo.studyMode}
           </p>
         </div>
@@ -80,9 +93,9 @@ const ApplicationStatus = () => {
 
       <form onSubmit={handleSubmit}>
         <div className="overview-container">
-          <h2 className="heading">No Application Fee</h2>
+          <h2 className="heading" style={{ fontFamily: "Gilroy-Bold" }}>No Application Fee</h2>
           <div className="row col-md-6 formField">
-            <label htmlFor="status" className="form-label">
+            <label htmlFor="status" className="form-label" style={{ fontFamily: "Gilroy-Bold" }}>
               Status:
             </label>
             <select
@@ -92,6 +105,7 @@ const ApplicationStatus = () => {
               onChange={handleInputChange}
               className="input"
               required
+              style={{ fontFamily: "Gilroy-Medium" }}
             >
               <option value="">Select status</option>
               <option value="APPLIED_CONDITIONAL_OFFER">APPLIED_CONDITIONAL_OFFER</option>
@@ -100,12 +114,10 @@ const ApplicationStatus = () => {
               <option value="DEPOSIT_PAID">DEPOSIT_PAID</option>
               <option value="CAS_LETTER">CAS_LETTER</option>
               <option value="VISA_LETTER_ARRIVED">VISA_LETTER_ARRIVED</option>
-
-
             </select>
           </div>
           <div className="row col-md-6 formField">
-            <label htmlFor="applicationFee" className="form-label">
+            <label htmlFor="applicationFee" className="form-label" style={{ fontFamily: "Gilroy-Bold" }}>
               Application Fee:
             </label>
             <input
@@ -116,29 +128,11 @@ const ApplicationStatus = () => {
               onChange={handleInputChange}
               className="input"
               required
+              style={{ fontFamily: "Gilroy-Medium" }}
             />
           </div>
         </div>
 
-        <div className="main-container">
-          <h3 className="heading">upload Documents</h3>
-          <div className="row">
-            {[1, 2, 3, 4].map((index) => (
-              <FileUploadField
-                key={index}
-                name={`document${index}`}
-                label={`Document ${index}`}
-                setFieldValue={(name, value) =>
-                  setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    [name]: value,
-                  }))
-                }
-                value={formData[`document${index}`]}
-              />
-            ))}
-          </div>
-        </div>
         <div className="button-container">
           <button
             style={{
@@ -147,6 +141,7 @@ const ApplicationStatus = () => {
               borderRadius: "4px",
               color: "#fff",
               minWidth: "100px",
+              fontFamily: "Gilroy-Medium",
             }}
             type="submit"
             className="btn btn-primary"

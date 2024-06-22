@@ -128,10 +128,10 @@ const AddBlog = ({ existingBlog, openAddForm }) => {
   return (
     <>
       <div className="overview-container">
-        <h3 className="heading">Add Blog</h3>
+        <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>Add Blog</h3>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>Blog Heading*</label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>Blog Heading*</label>
             <input
               className="input"
               type="text"
@@ -139,22 +139,24 @@ const AddBlog = ({ existingBlog, openAddForm }) => {
               placeholder="Add Blog Heading"
               value={data?.blogHeading}
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
           </div>
           <div className="col-md-6 formField">
-            <label>Date*</label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>Date*</label>
             <input
               className="input"
               type="date"
               name="date"
               value={data?.date}
               onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
           </div>
         </div>
         <div className="row">
           <div className="col-md-6 formField">
-            <label>Banner Image</label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>Banner Image</label>
             <input
               className="input"
               type="file"
@@ -167,6 +169,7 @@ const AddBlog = ({ existingBlog, openAddForm }) => {
               }
               htmlFor="banner-upload"
               className="btn btn-secondary"
+              style={{fontFamily: 'Gilroy-Medium'}}
             >
               Upload Banner
             </label>
@@ -180,17 +183,18 @@ const AddBlog = ({ existingBlog, openAddForm }) => {
             )}
           </div>
           <div className="col-md-6 formField">
-            <label>Tags</label>
+            <label style={{fontFamily: 'Gilroy-Bold'}}>Tags</label>
             <input
               className="input"
               type="text"
               placeholder="Add Tags"
               onKeyPress={handleTagInput}
+              style={{fontFamily: 'Gilroy-Medium'}}
             />
             {data?.tags?.length > 0 && (
               <div className="tags-container">
                 {data?.tags?.map((tag, index) => (
-                  <div key={index} className="tag badge">
+                  <div key={index} className="tag badge" style={{fontFamily: 'Gilroy-Medium'}}>
                     {tag}
                     <button
                       className="remove-tag"
@@ -205,26 +209,26 @@ const AddBlog = ({ existingBlog, openAddForm }) => {
           </div>
         </div>
         <div className="textEditor col-md-12">
-        <label>Content*</label>
-        <ReactQuill
-          theme="snow"
-          value={data.content}
-          onChange={(content) => setData({ ...data, content })}
-          modules={modules}
-          formats={formats}
-        />
-      </div>
-      <div className="textEditor col-md-12 mb-3">
-        <label>Quote</label>
-        <ReactQuill
-          theme="snow"
-          value={data.quote}
-          onChange={(quote) => setData({ ...data, quote })}
-          modules={modules}
-          formats={formats}
-        />
-      </div>
-        <div className="button-container">
+          <label style={{fontFamily: 'Gilroy-Bold'}}>Content*</label>
+          <ReactQuill
+            theme="snow"
+            value={data.content}
+            onChange={(content) => setData({ ...data, content })}
+            modules={modules}
+            formats={formats}
+          />
+        </div>
+        <div className="textEditor col-md-12 mb-3">
+          <label style={{fontFamily: 'Gilroy-Bold'}}>Quote</label>
+          <ReactQuill
+            theme="snow"
+            value={data.quote}
+            onChange={(quote) => setData({ ...data, quote })}
+            modules={modules}
+            formats={formats}
+          />
+        </div>
+        <div className="button-container" style={{display: 'flex', justifyContent: 'flex-end'}}>
           <button
             className="saveButton"
             style={{

@@ -3,32 +3,43 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
 // Custom validation schema including the file size check
-// const validationSchema = Yup.object({
-//   document1: Yup.mixed()
-//     .required("A file is required")
-//     .test("fileSize", "File too large", value => !value || (value && value.size <= 10485760)), // 10 MB
-//   document2: Yup.mixed()
-//     .required("A file is required")
-//     .test("fileSize", "File too large", value => !value || (value && value.size <= 10485760)),
-//   document3: Yup.mixed()
-//     .required("A file is required")
-//     .test("fileSize", "File too large", value => !value || (value && value.size <= 10485760)),
-//   document4: Yup.mixed()
-//     .required("A file is required")
-//     .test("fileSize", "File too large", value => !value || (value && value.size <= 10485760)),
-// });
+const validationSchema = Yup.object({
+  tenthMarksheet: Yup.mixed().required("10th Marksheet is required"),
+  twelfthMarksheet: Yup.mixed().required("12th Marksheet is required"),
+  passport: Yup.mixed().required("Passport is required"),
+  statementOfPurpose: Yup.mixed().required("Statement of Purpose is required"),
+  lettersOfRecommendation: Yup.mixed().required("Letters of Recommendation are required"),
+  ielts: Yup.mixed().required("IELTS is required"),
+  degree: Yup.mixed().required("Degree is required"),
+  resume: Yup.mixed().required("Resume is required"),
+  additionalDocuments: Yup.mixed().required("Additional Documents are required"),
+  greGmat: Yup.mixed().required("GRE/GMAT is required"),
+});
 
 export default function ViewUserDocument({setFormData , formData , setState , state}) {
   return (
     <Formik
       initialValues={{
-        document1: formData?.userDocuments?.document1 || "",
-        document2: formData?.userDocuments?.document2 || "",
-        document3: formData?.userDocuments?.document3 || "",
-        document4: formData?.userDocuments?.document4 || "",
+        tenthMarksheet: formData?.userDocuments?.tenthMarksheet || "",
+        twelfthMarksheet: formData?.userDocuments?.twelfthMarksheet || "",
+        passport: formData?.userDocuments?.passport || "",
+        statementOfPurpose: formData?.userDocuments?.statementOfPurpose || "",
+        lettersOfRecommendation: formData?.userDocuments?.lettersOfRecommendation || "",
+        ielts: formData?.userDocuments?.ielts || "",
+        degree: formData?.userDocuments?.degree || "",
+        resume: formData?.userDocuments?.resume || "",
+        additionalDocuments: formData?.userDocuments?.additionalDocuments || "",
+        greGmat: formData?.userDocuments?.greGmat || "",
       }}
-      // validationSchema={validationSchema}
+      validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting, setFieldValue }) => {
+        const isAnyFileUploaded = Object.values(values).some((value) => value !== "");
+
+        if (!isAnyFileUploaded) {
+          setSubmitting(false);
+          return;
+        }
+
         setSubmitting(true);
 
         setFormData(prev => ({
@@ -40,20 +51,25 @@ export default function ViewUserDocument({setFormData , formData , setState , st
         }))
         setState(state + 1);
 
-        // Assuming an asynchronous function handleFileChange is defined elsewhere
         setSubmitting(false);
       }}
     >
       {({ setFieldValue, errors, touched, handleSubmit, isSubmitting, values }) => (
         <Form onSubmit={handleSubmit} className="main-container">
-          <h3 className="heading">Documents uploaded by Student</h3>
+          <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>Documents uploaded by Student</h3>
           <div className="row">
-            <FileUploadField name="document1" label="Document 1" setFieldValue={setFieldValue} error={errors.document1} touched={touched.document1} value={values.document1} />
-            <FileUploadField name="document2" label="Document 2" setFieldValue={setFieldValue} error={errors.document2} touched={touched.document2} value={values.document2} />
-            <FileUploadField name="document3" label="Document 3" setFieldValue={setFieldValue} error={errors.document3} touched={touched.document3} value={values.document3} />
-            <FileUploadField name="document4" label="Document 4" setFieldValue={setFieldValue} error={errors.document4} touched={touched.document4} value={values.document4} />
+            <FileUploadField name="tenthMarksheet" label="10th Marksheet" setFieldValue={setFieldValue} error={errors.tenthMarksheet} touched={touched.tenthMarksheet} value={values.tenthMarksheet} />
+            <FileUploadField name="twelfthMarksheet" label="12th Marksheet" setFieldValue={setFieldValue} error={errors.twelfthMarksheet} touched={touched.twelfthMarksheet} value={values.twelfthMarksheet} />
+            <FileUploadField name="passport" label="Passport" setFieldValue={setFieldValue} error={errors.passport} touched={touched.passport} value={values.passport} />
+            <FileUploadField name="statementOfPurpose" label="Statement of Purpose" setFieldValue={setFieldValue} error={errors.statementOfPurpose} touched={touched.statementOfPurpose} value={values.statementOfPurpose} />
+            <FileUploadField name="lettersOfRecommendation" label="Letters of Recommendation" setFieldValue={setFieldValue} error={errors.lettersOfRecommendation} touched={touched.lettersOfRecommendation} value={values.lettersOfRecommendation} />
+            <FileUploadField name="ielts" label="IELTS" setFieldValue={setFieldValue} error={errors.ielts} touched={touched.ielts} value={values.ielts} />
+            <FileUploadField name="degree" label="Degree" setFieldValue={setFieldValue} error={errors.degree} touched={touched.degree} value={values.degree} />
+            <FileUploadField name="resume" label="Resume" setFieldValue={setFieldValue} error={errors.resume} touched={touched.resume} value={values.resume} />
+            <FileUploadField name="additionalDocuments" label="Additional Documents" setFieldValue={setFieldValue} error={errors.additionalDocuments} touched={touched.additionalDocuments} value={values.additionalDocuments} />
+            <FileUploadField name="greGmat" label="GRE/GMAT" setFieldValue={setFieldValue} error={errors.greGmat} touched={touched.greGmat} value={values.greGmat} />
           </div>
-          <div className="button-container">
+          <div className="button-container" style={{display: 'flex', justifyContent: 'flex-end'}}>
             <button type="submit" disabled={isSubmitting} className="saveButton" style={{backgroundColor:"#FF6477", padding:"10px", borderRadius:"4px", color:"#fff", minWidth:"100px"}}>
               Save Documents
             </button>
@@ -67,16 +83,16 @@ export default function ViewUserDocument({setFormData , formData , setState , st
 function FileUploadField({ name, label, setFieldValue, error, touched, value }) {
   return (
     <div className="col-md-6 formField">
-      <label>{label}</label>
+      <label style={{fontFamily: 'Gilroy-Bold'}}>{label}</label>
       <input
         type="file"
         name={name}
         onChange={(event) => {
           handleFileChange(event.target.files[0], name, setFieldValue);
         }}
-        className="input"
+        className={`input ${touched && error ? "is-invalid" : ""}`}
       />
-      {touched && error && <div className="error">{error}</div>} 
+      {touched && error && <div className="error" style={{fontFamily: 'Gilroy-Medium'}}>{error}</div>} 
       {value && (
         <div className="preview-container">
           {name.endsWith('pdf') ? (

@@ -58,7 +58,7 @@ export default function TestScores({setFormData , formData , setState , state}) 
       {({ values, handleChange, handleBlur, handleSubmit, setFieldValue }) => (
         <Form className="test-scores-container">
           <div className="overview-container mb-4">
-            <h3>IELTS</h3>
+            <h3 style={{fontFamily: 'Gilroy-Bold'}}>IELTS</h3>
             <div className="row">
               <FieldComponent
                 name="ieltsOverall"
@@ -112,7 +112,7 @@ export default function TestScores({setFormData , formData , setState , state}) 
           </div>
 
           <div className="overview-container">
-            <h3>GRE</h3>
+            <h3 style={{fontFamily: 'Gilroy-Bold'}}>GRE</h3>
             <div className="row">
               <FieldComponent
                 name="greOverall"
@@ -165,14 +165,12 @@ export default function TestScores({setFormData , formData , setState , state}) 
             </div>
           </div>
 
-          <div className="button-container">
+          <div className="button-container" style={{display: 'flex', justifyContent: 'flex-end'}}>
             <button
               type="submit"
               style={{
                 backgroundColor: "#FF6477",
                 marginTop: "20px",
-                display: "flex",
-                justifyContent: "center",
                 padding: "10px",
                 borderRadius: "4px",
                 color: "#fff",
@@ -199,7 +197,7 @@ function FieldComponent({
 }) {
   return (
     <div className="col-md-6 formField">
-      <label>{label}</label>
+      <label style={{fontFamily: 'Gilroy-Bold'}}>{label}</label>
       <Field
         type={type}
         name={name}
@@ -208,8 +206,9 @@ function FieldComponent({
         onBlur={handleBlur}
         value={values[name]}
         className="input"
+        style={{fontFamily: 'Gilroy-Medium'}}
       />
-      <ErrorMessage name={name} component="div" className="error" />
+      <ErrorMessage name={name} component="div" className="error" style={{fontFamily: 'Gilroy-Medium'}}/>
     </div>
   );
 }
@@ -217,7 +216,7 @@ function FieldComponent({
 function CheckboxComponent({ name, label, setFieldValue, values }) {
   return (
     <div className="col-md-6 formField">
-      <label>
+      <label style={{fontFamily: 'Gilroy-Bold'}}>
         <Field
           type="checkbox"
           name={name}
