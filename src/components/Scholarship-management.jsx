@@ -6,7 +6,7 @@ import AddScholarship from "./AddScholorship";
 import CourseTable from "./CourseTable"; // Consider renaming this to ScholarshipTable for clarity
 import { getAllScholarships } from "../context/services/client";
 import CustomLoader from "./loader";
-import { AddCircleOutline } from "@material-ui/icons";
+import { AddCircle, AddCircleOutline, Backspace } from "@material-ui/icons";
 
 export default function ScholarshipManagement() {
   const navigate = useNavigate();
@@ -78,7 +78,7 @@ export default function ScholarshipManagement() {
             onClick={openAddForm}
             className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]"
           >
-            <AddCircleOutline />
+{isAdd ? <Backspace /> : <AddCircle/>}
             <p className="text-text text-[0.75rem] font-[600]">
               {isAdd ? "Back" : "Add"}
             </p>

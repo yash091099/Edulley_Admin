@@ -6,7 +6,7 @@ import AddCourse from "./AddCourse";
 import CourseTable from "./CourseTable";
 import { getCourses } from "../context/services/client";
 import CustomLoader from "./loader";
-import { AddCircleOutline } from "@material-ui/icons";
+import { AddCircle, AddCircleOutline, Backspace } from "@material-ui/icons";
 
 export default function CourseManagement() {
   const navigate = useNavigate();
@@ -75,7 +75,7 @@ export default function CourseManagement() {
               onClick={openAddForm}
               className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[1.5rem] py-[0.5rem] rounded-[0.5rem]"
             >
-              <AddCircleOutline />
+              {isAdd ? <Backspace /> : <AddCircle/>}
               <p className="text-text text-[0.75rem] font-[600]">
                 {isAdd ? "Back" : "Add"}
               </p>

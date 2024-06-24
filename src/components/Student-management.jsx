@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { getAllStudents } from "../context/services/client";
 import ViewVUser from "./ViewUser";
 import CustomLoader from "./loader";
-import { AddCircleOutline } from "@material-ui/icons";
+import { AddCircle, AddCircleOutline, Backspace } from "@material-ui/icons";
 
 export default function StudentManagement() {
   const navigate = useNavigate();
@@ -113,8 +113,7 @@ export default function StudentManagement() {
               onClick={openAddForm}
               className="flex gap-[0.25rem] items-center border border-[#89BF2C] px-[0.5rem] py-[0.5rem] rounded-[0.5rem]"
             >
-              <AddCircleOutline />
-              <p className="text-text text-[0.75rem] font-[600]">
+{add ? <Backspace /> : <AddCircle/>}              <p className="text-text text-[0.75rem] font-[600]">
                 {add ? "Back" : "Add"}
               </p>
             </button>

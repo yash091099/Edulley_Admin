@@ -3,23 +3,19 @@ import TableButton from "./TableButton";
 import StatusField from './StatusField';
 import NameFieldCourse from "./CourseNameField";
 
-export default function CourseTable({ component , columns, data, mapping, fun, viewDetails, currentPage, totalPages, setCurrentPage }) {
+export default function CourseTable({ component, columns, data, mapping, fun, viewDetails, currentPage, totalPages, setCurrentPage }) {
   return (
     <div className="flex flex-col gap-[2.5rem]">
-      <div className="flex flex-col w-full h-full border border-[#DBDADE] overflow-x-auto">
-        <table className="w-full">
+      <div className="w-full overflow-x-auto border border-[#DBDADE] rounded-lg">
+        <table className="w-full min-w-[800px]">
           <thead>
-            <tr className="border-b border-[#DBDADE]">
-              <th className="cursor-pointer pl-[1.25rem] pr-[0.62rem] py-[0.94rem]">
-                {/* <input type="checkbox" /> */}
-              </th>
+            <tr className="bg-gray-50">
+              <th className="w-12 pl-4 pr-2 py-3"></th>
               {columns.map((column, index) => (
-                <th key={index}>
-                  <div  className="w-fit flex gap-8 items-center px-[1rem] py-[0.62rem]">
-                  <p style={{fontFamily:"Gilroy-Bold"}} className="text-[#4B465C] text-[1rem] font-[600] tracking-[0.07813rem]">
-                      {column?.name}
-                    </p>
-                  </div>
+                <th key={index} className="px-4 py-3 text-left">
+                  <p style={{fontFamily:"Gilroy-Bold"}} className="text-[#4B465C] text-sm font-semibold truncate" title={column?.name}>
+                    {column?.name}
+                  </p>
                 </th>
               ))}
             </tr>
@@ -27,17 +23,17 @@ export default function CourseTable({ component , columns, data, mapping, fun, v
           <tbody>
             {data.length === 0 ? (
               <tr>
-                <td colSpan={columns.length + 1} style={{fontFamily:"Gilroy-Bold"}} className="text-center py-4 text-[#4B465C] text-[1rem] font-[400]">No {component} found</td>
+                <td colSpan={columns.length + 1} style={{fontFamily:"Gilroy-Bold"}} className="text-center py-4 text-[#4B465C] text-sm">No {component} found</td>
               </tr>
             ) : (
               data.map((row, rowIndex) => (
-                <tr  key={rowIndex} className="cursor-pointer h-[50px] border-y border-[#DBDADE]">
-                  <td className="pl-[1.25rem] pr-[0.62rem] py-[0.94rem]">
-                    {/* <input type="checkbox" /> */}
-                  </td>
+                <tr key={rowIndex} className="border-t border-[#DBDADE] hover:bg-gray-50 transition-colors">
+                  <td className="w-12 pl-4 pr-2 py-3"></td>
                   {mapping.map((key, keyIndex) => (
-                    <td key={keyIndex} onClick={() => fun(row , keyIndex)}>
-                      {renderField(row, key, keyIndex)}
+                    <td key={keyIndex} className="px-4 py-3" onClick={() => fun(row, keyIndex)}>
+                      <div className="truncate" title={getTooltipContent(row, key)}>
+                        {renderField(row, key, keyIndex)}
+                      </div>
                     </td>
                   ))}
                 </tr>
@@ -46,42 +42,44 @@ export default function CourseTable({ component , columns, data, mapping, fun, v
           </tbody>
         </table>
       </div>
-      <div className="w-full flex justify-between items-center">
-        <p style={{fontFamily:"Gilroy-Medium"}} className="text-[#4B465C]/50 text-[1rem] font-[400] leading-[1.4675rem]">
+      <div className="w-full flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p style={{fontFamily:"Gilroy-Medium"}} className="text-[#4B465C]/50 text-sm">
           {data.length > 0 ? (
             `Showing 1 to ${Math.min(data?.length, currentPage * 10)} of ${totalPages * 10}`
           ) : (
             `No data found`
           )}
         </p>
-        <div className="flex gap-[0.31rem]">
-        { currentPage > 1 &&  <TableButton label="<" action={() => setCurrentPage(currentPage - 1)} />}
+        <div className="flex flex-wrap justify-center gap-1">
+          {currentPage > 1 && <TableButton label="<" action={() => setCurrentPage(currentPage - 1)} />}
           {[...Array(totalPages)].map((_, index) => (
             <TableButton key={index} label={index + 1} activeButton={currentPage === index + 1} action={() => setCurrentPage(index + 1)} />
           ))}
-          <TableButton label=">" action={() => setCurrentPage(currentPage + 1)} />
+          {currentPage < totalPages && <TableButton label=">" action={() => setCurrentPage(currentPage + 1)} />}
         </div>
       </div>
     </div>
   );
 }
 
+function getTooltipContent(row, key) {
+  return row[key]?.toString() || '';
+}
+
 function renderField(row, key, keyIndex) {
-  // Define how each field is rendered based on the key
   switch (key) {
     case "Status":
       return <StatusField label={row[key]} />;
     case "Course Name":
-      return <NameFieldCourse name={row[key]} />;
-    case "name":
-      return <p  style={{fontFamily:"Gilroy-Medium"}}  className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]}</p>;
-    case "duration":
-      return <p  style={{fontFamily:"Gilroy-Medium"}}  className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]} years</p>;
     case "Name":
       return <NameFieldCourse name={row[key]} />;
+    case "name":
+      return <p style={{fontFamily:"Gilroy-Medium"}} className="text-[#4B465C] text-sm">{row[key]}</p>;
+    case "duration":
+      return <p style={{fontFamily:"Gilroy-Medium"}} className="text-[#4B465C] text-sm">{row[key]} years</p>;
     case "deadline":
-      return <p  style={{fontFamily:"Gilroy-Medium"}}  className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]?.split("T")[0]}</p>;
+      return <p style={{fontFamily:"Gilroy-Medium"}} className="text-[#4B465C] text-sm">{row[key]?.split("T")[0]}</p>;
     default:
-      return <p  style={{fontFamily:"Gilroy-Medium"}}  className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key]}</p>;
+      return <p style={{fontFamily:"Gilroy-Medium"}} className="text-[#4B465C] text-sm">{row[key]}</p>;
   }
 }

@@ -70,13 +70,13 @@ const ApplicationStatus = () => {
         <div className="application-details">
           <p className="application-number" style={{ fontFamily: "Gilroy-Medium" }}>
             {applicationData?._id}
-            <span
+            {/* <span
               className="copy-icon"
               onClick={() => copyToClipboard(applicationData?._id)}
               style={{ cursor: "pointer", marginLeft: "5px" }}
             >
               📋
-            </span>
+            </span> */}
           </p>
           <p className="course-info" style={{ fontFamily: "Gilroy-Medium" }}>{applicationData?.courseId.courseName}</p>
           <div className="university-info">
@@ -133,22 +133,33 @@ const ApplicationStatus = () => {
           </div>
         </div>
 
-        <div className="button-container">
+        <div className="button-container" style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          marginTop: '20px'
+        }}>
           <button
-            style={{
-              backgroundColor: "#FF6477",
-              padding: "10px",
-              borderRadius: "4px",
-              color: "#fff",
-              minWidth: "100px",
-              fontFamily: "Gilroy-Medium",
-            }}
             type="submit"
             className="btn btn-primary"
+            style={{
+              backgroundColor: "#FF6477",
+              padding: "10px 20px",
+              borderRadius: "4px",
+              color: "#fff",
+              minWidth: "120px",
+              fontFamily: "Gilroy-Medium",
+              border: "none",
+              cursor: "pointer",
+              transition: "background-color 0.3s ease",
+              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)"
+            }}
+            onMouseOver={(e) => e.target.style.backgroundColor = "#FF4757"}
+            onMouseOut={(e) => e.target.style.backgroundColor = "#FF6477"}
           >
             Submit
           </button>
         </div>
+
       </form>
     </div>
   );

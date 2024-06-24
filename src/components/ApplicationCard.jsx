@@ -39,13 +39,13 @@ const ApplicationCard = ({ data }) => {
         <div className="application-number-container">
           <p style={{ fontFamily: "Gilroy-Medium" }} className="application-number">
             Application Id: {data._id}
-            <span
+            {/* <span
               className="copy-icon"
               onClick={() => copyToClipboard(data._id)}
               style={{ cursor: "pointer", marginLeft: "5px" }}
             >
               📋
-            </span>
+            </span> */}
           </p>
         </div>
         <p style={{ fontFamily: "Gilroy-Medium" }} className="course-info">
@@ -55,31 +55,31 @@ const ApplicationCard = ({ data }) => {
           <span className="location-icon">📍</span>
           <p style={{ fontFamily: "Gilroy-Medium" }} className="university-name">
             {data.courseId.universityName}
-            <span
+            {/* <span
               className="copy-icon"
               onClick={() => copyToClipboard(data.courseId.universityName)}
               style={{ cursor: "pointer", marginLeft: "5px" }}
             >
               📋
-            </span>
+            </span> */}
           </p>
         </div>
         <div className="campus-container">
           <p style={{ fontFamily: "Gilroy-Medium" }} className="campus">
             CU: {data.courseId.uniqueCourseInfo.studyMode}
-            <span
+            {/* <span
               className="copy-icon"
               onClick={() => copyToClipboard(data.courseId.uniqueCourseInfo.studyMode)}
               style={{ cursor: "pointer", marginLeft: "5px" }}
             >
               📋
-            </span>
+            </span> */}
           </p>
         </div>
       </div>
       <div className="view-details-btn-container">
         <button
-          style={{ fontFamily: "Gilroy-Bold" }}
+          style={{ fontFamily: "Gilroy-Medium" }}
           onClick={handleViewDetails}
           className="view-details-btn"
         >

@@ -20,7 +20,7 @@ export default function TableWithoutPagination({ columns, data, mapping, fun }) 
                       {column?.name}
                     </p>
                     <div>
-                      <img
+                      {/* <img
                         className="cursor-pointer w-[1rem] h-[14px] object-cover"
                         src={upDark}
                         alt={`Sort Ascending for ${column?.name}`}
@@ -29,7 +29,7 @@ export default function TableWithoutPagination({ columns, data, mapping, fun }) 
                         className="cursor-pointer w-[1rem] h-[14px] object-cover"
                         src={downLight}
                         alt={`Sort Descending for ${column?.name}`}
-                      />
+                      /> */}
                     </div>
                   </div>
                 </th>

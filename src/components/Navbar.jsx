@@ -98,9 +98,9 @@ export default function Navbar(props) {
                 )}
             </div>
             <div className='flex items-center gap-[2rem] w-fit'>
-                <div ref={noteIcon} className='cursor-pointer relative' onClick={() => setShowNotifications(prev => !prev)}>
+                {/* <div ref={noteIcon} className='cursor-pointer relative' onClick={() => setShowNotifications(prev => !prev)}>
                     <img className="w-[1.5rem]" src={notificationIcon} alt="notifications" />
-                </div>
+                </div> */}
                 <div className='relative cursor-pointer' onClick={props.profileClick}>
                     <div className='flex justify-center items-center w-[2rem] h-[2rem] bg-[#6F6B7D] rounded-[50%] overflow-hidden'>
                         <p className='text-white text-[0.9375] font-[400] leading-[1.375rem]'>A</p>

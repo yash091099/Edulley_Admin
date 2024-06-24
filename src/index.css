@@ -57,3 +57,14 @@
   font-weight: bold;
   text-transform: uppercase;
 }
+.react-select__control {
+  height: 38px; /* Adjust this value to match your input height */
+}
+
+.input2{
+  flex: 4;
+    /* padding: 8px; */
+    /* border: 1px solid #ccc; */
+    border-radius: 4px;
+    width: 100%;
+}

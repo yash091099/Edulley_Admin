@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { addScholarship, editScholarship } from "../context/services/client";
-import {toast} from "react-hot-toast";
+import { toast } from "react-hot-toast";
+import Select from 'react-select';
+import countryList from 'react-select-country-list';
 
 export default function AddScholarship({ initialData, handleBack }) {
   const [data, setData] = useState({
@@ -10,11 +12,41 @@ export default function AddScholarship({ initialData, handleBack }) {
     deadline: initialData?.deadline?.split("T")[0] || "",
     level: initialData?.level || "",
     amount: initialData?.amount || "",
+    country: initialData?.country || "",
   });
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      borderRadius: '4px',
+      border: '1px solid #ced4da',
+      boxShadow: 'none',
+      '&:hover': {
+        border: '1px solid #ced4da',
+      }
+    }),
+    placeholder: (provided) => ({
+      ...provided,
+      color: '#6c757d',
+      fontFamily: 'Gilroy-Medium',
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      fontFamily: 'Gilroy-Medium',
+    }),
+    option: (provided) => ({
+      ...provided,
+      fontFamily: 'Gilroy-Medium',
+    }),
+  };
+  const countryOptions = countryList().getData();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleCountryChange = (selectedOption) => {
+    setData((prev) => ({ ...prev, country: selectedOption.value }));
   };
 
   const validateFields = () => {
@@ -36,16 +68,16 @@ export default function AddScholarship({ initialData, handleBack }) {
       coursesName: data?.coursesName,
       deadline: data?.deadline,
       level: data?.level,
-      amount: Number(data?.amount), // Ensure amount is a number
+      amount: Number(data?.amount),
+      country: data?.country,
     };
 
     payload.scholarshipId = initialData?._id;
 
     try {
-      // Use the correct API function for adding or editing the scholarship
       const response = initialData
         ? await editScholarship(payload)
-        : await addScholarship(payload); // Replace with actual API call for adding
+        : await addScholarship(payload);
 
       if (response.status === 200) {
         handleBack();
@@ -56,7 +88,6 @@ export default function AddScholarship({ initialData, handleBack }) {
     } catch (error) {
       toast.error(`Error saving scholarship: ${error.message}`);
       console.error(`Error saving scholarship: ${error.message}`);
-      // Handle error scenarios
     }
   };
 
@@ -152,6 +183,21 @@ export default function AddScholarship({ initialData, handleBack }) {
               onChange={handleInputChange}
               style={{fontFamily: 'Gilroy-Medium'}}
             />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-6 formField">
+            <label style={{fontFamily: 'Gilroy-Bold'}}>
+              Country<span style={{ color: "red" }}>*</span>
+            </label>
+            <Select
+  options={countryOptions}
+  value={countryOptions.find(option => option.value === data.country)}
+  onChange={handleCountryChange}
+  placeholder="Select Country"
+  className="input2"
+  styles={customStyles}
+/>
           </div>
         </div>
       </div>

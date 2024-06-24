@@ -2,7 +2,6 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
-// Custom validation schema including the file size check
 const validationSchema = Yup.object({
   tenthMarksheet: Yup.mixed().required("10th Marksheet is required"),
   twelfthMarksheet: Yup.mixed().required("12th Marksheet is required"),
@@ -32,7 +31,7 @@ export default function ViewUserDocument({setFormData , formData , setState , st
         greGmat: formData?.userDocuments?.greGmat || "",
       }}
       validationSchema={validationSchema}
-      onSubmit={(values, { setSubmitting, setFieldValue }) => {
+      onSubmit={(values, { setSubmitting }) => {
         const isAnyFileUploaded = Object.values(values).some((value) => value !== "");
 
         if (!isAnyFileUploaded) {
@@ -56,7 +55,7 @@ export default function ViewUserDocument({setFormData , formData , setState , st
     >
       {({ setFieldValue, errors, touched, handleSubmit, isSubmitting, values }) => (
         <Form onSubmit={handleSubmit} className="main-container">
-          <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>Documents uploaded by Student</h3>
+          <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>Documents upload</h3>
           <div className="row">
             <FileUploadField name="tenthMarksheet" label="10th Marksheet" setFieldValue={setFieldValue} error={errors.tenthMarksheet} touched={touched.tenthMarksheet} value={values.tenthMarksheet} />
             <FileUploadField name="twelfthMarksheet" label="12th Marksheet" setFieldValue={setFieldValue} error={errors.twelfthMarksheet} touched={touched.twelfthMarksheet} value={values.twelfthMarksheet} />
@@ -81,32 +80,51 @@ export default function ViewUserDocument({setFormData , formData , setState , st
 }
 
 function FileUploadField({ name, label, setFieldValue, error, touched, value }) {
+  const isImage = value && (value.endsWith('.jpg') || value.endsWith('.jpeg') || value.endsWith('.png') || value.endsWith('.gif'));
+
   return (
-    <div className="col-md-6 formField">
+    <div className="col-md-6 formField" style={{ minHeight: '80px', marginBottom: '20px' }}>
       <label style={{fontFamily: 'Gilroy-Bold'}}>{label}</label>
-      <input
-        type="file"
-        name={name}
-        onChange={(event) => {
-          handleFileChange(event.target.files[0], name, setFieldValue);
-        }}
-        className={`input ${touched && error ? "is-invalid" : ""}`}
-      />
-      {touched && error && <div className="error" style={{fontFamily: 'Gilroy-Medium'}}>{error}</div>} 
-      {value && (
-        <div className="preview-container">
-          {name.endsWith('pdf') ? (
-            <embed src={value} type="application/pdf" width="200" height="200" />
-          ) : (
-            <img src={value} alt={label} className="preview-image" />
-          )}
+      <div style={{ display: 'flex', alignItems: 'center', marginTop: '5px' }}>
+        <input
+          type="file"
+          name={name}
+          onChange={(event) => {
+            handleFileChange(event.target.files[0], name, setFieldValue);
+          }}
+          className={`input ${touched && error ? "is-invalid" : ""}`}
+          style={{ flex: 1 }}
+        />
+        {value && !isImage && (
+          <a 
+            href={value} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{
+              marginLeft: '10px',
+              padding: '5px 10px',
+              backgroundColor: '#f0f0f0',
+              border: '1px solid #ccc',
+              borderRadius: '4px',
+              textDecoration: 'none',
+              color: '#333',
+              fontSize: '14px'
+            }}
+          >
+            View
+          </a>
+        )}
+      </div>
+      {touched && error && <div className="error" style={{fontFamily: 'Gilroy-Medium', marginTop: '5px'}}>{error}</div>}
+      {value && isImage && (
+        <div className="preview-container" style={{ marginTop: '10px', maxHeight: '200px', overflow: 'hidden' }}>
+          <img src={value} alt={label} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
         </div>
       )}
     </div>
   );
 }
 
-// Handle file upload and set URL in formik values
 async function handleFileChange(file, fieldName, updateFieldValue) {
   try {
     const formData = new FormData();

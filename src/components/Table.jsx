@@ -1,7 +1,5 @@
 import React from "react";
 import TableButton from "./TableButton";
-import upDark from "../assets/svg/up-icon-dark.svg";
-import downLight from "../assets/svg/down-icon-light.svg";
 import StatusField from "./StatusField";
 import NameField from "./NameField";
 
@@ -21,31 +19,18 @@ export default function Table({
   const displayStart = Math.min(startIndex + 1, data?.length);
   const displayEnd = Math.min(startIndex + perPage, data?.length);
 
-
   return (
     <div className="flex flex-col gap-[2.5rem]">
-      <div className="flex flex-col w-full h-full border border-[#DBDADE] overflow-x-auto">
-        <table className="w-full">
+      <div className="flex flex-col w-full h-full border border-[#DBDADE] rounded-lg overflow-hidden">
+        <table className="w-full table-fixed">
           <thead>
-            <tr className="border-b border-[#DBDADE]">
+            <tr className="bg-gray-50">
               {columns.map((column, index) => (
-                <th key={index}>
-                  <div className="w-fit flex gap-8 items-center px-[0.7rem] py-[0.62rem]">
-                  <p  style={{fontFamily:"Gilroy-Bold"}} className="text-[#4B465C] text-[1rem] font-[600] tracking-[0.07813rem]">
+                <th key={index} className="px-4 py-3 text-left">
+                  <div className="flex items-center gap-2">
+                    <p style={{fontFamily:"Gilroy-Bold"}} className="text-[#4B465C] text-sm font-semibold truncate" title={column?.name}>
                       {column?.name}
                     </p>
-                    <div>
-                      <img
-                        className="cursor-pointer w-[1rem] h-[14px] object-cover"
-                        src={upDark}
-                        alt={`Sort Ascending for ${column?.name}`}
-                      />
-                      <img
-                        className="cursor-pointer w-[1rem] h-[14px] object-cover"
-                        src={downLight}
-                        alt={`Sort Descending for ${column?.name}`}
-                      />
-                    </div>
                   </div>
                 </th>
               ))}
@@ -55,11 +40,11 @@ export default function Table({
             {selectedData?.map((row, rowIndex) => (
               <tr
                 key={rowIndex}
-                className={`cursor-pointer border-y border-[#DBDADE]`}
+                className="border-t border-[#DBDADE] hover:bg-gray-50 transition-colors"
               >
                 {mapping.map((key, keyIndex) => (
-                  <td key={keyIndex} onClick={() => fun(row, key)}>
-                    <div className="w-fit flex gap-8 items-center px-[0.7rem] py-[0.62rem]">
+                  <td key={keyIndex} className="px-4 py-3" onClick={() => fun(row, key)}>
+                    <div className="truncate" title={getTooltipContent(row, key)}>
                       {renderField(row, key)}
                     </div>
                   </td>
@@ -68,8 +53,8 @@ export default function Table({
             ))}
             {!selectedData?.length && (
               <tr>
-                <td colSpan={mapping.length}>
-                  <p style={{fontFamily:"Gilroy-Medium"}} className="text-[#4B465C]/50 text-[1rem] font-[400] text-center p-3 leading-[1.4675rem]">
+                <td colSpan={mapping.length} className="px-4 py-3 text-center">
+                  <p style={{fontFamily:"Gilroy-Medium"}} className="text-[#4B465C]/50 text-sm">
                     No data found
                   </p>
                 </td>
@@ -79,15 +64,17 @@ export default function Table({
         </table>
       </div>
       {data.length > 0 && (
-        <div className="w-full flex justify-between items-center">
-          <p  style={{fontFamily:"Gilroy-Medium"}} className="text-[#4B465C]/50 text-[1rem] font-[400] leading-[1.4675rem]">
+        <div className="flex justify-between items-center">
+          <p style={{fontFamily:"Gilroy-Medium"}} className="text-[#4B465C]/50 text-sm">
             Showing {displayStart} to {displayEnd} of {data.length}
           </p>
-          <div className="flex gap-[0.31rem]">
-          { currentPage > 1 &&  <TableButton
-              label="<"
-              action={() => setCurrentPage(Math.max(1, currentPage - 1))}
-            />}
+          <div className="flex gap-1">
+            {currentPage > 1 && (
+              <TableButton
+                label="<"
+                action={() => setCurrentPage(Math.max(1, currentPage - 1))}
+              />
+            )}
             {[...Array(totalPages)].map((_, index) => (
               <TableButton
                 key={index}
@@ -96,12 +83,12 @@ export default function Table({
                 action={() => setCurrentPage(index + 1)}
               />
             ))}
-            <TableButton
-              label=">"
-              action={() =>
-                setCurrentPage(Math.min(totalPages, currentPage + 1))
-              }
-            />
+            {currentPage < totalPages && (
+              <TableButton
+                label=">"
+                action={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+              />
+            )}
           </div>
         </div>
       )}
@@ -110,31 +97,40 @@ export default function Table({
 }
 
 const Badge = ({ text }) => (
-  <span style={{fontFamily:"Gilroy-Medium"}} className="badge text-[#4B465C] text-[1.125rem] font-[400] px-2 py-1 bg-gray-200 rounded">
+  <span style={{fontFamily:"Gilroy-Medium"}} className="inline-block px-2 py-1 text-xs font-medium bg-gray-200 text-[#4B465C] rounded-full truncate max-w-[150px]" title={text}>
     {text}
   </span>
 );
+
+function getTooltipContent(row, key) {
+  switch (key) {
+    case "tags":
+      return row[key].join(", ");
+    case "coursesName":
+      return row[key].join(", ");
+    default:
+      return row[key] || "--";
+  }
+}
+
 function renderField(row, key) {
   switch (key) {
     case "Status":
-      return <StatusField label={row[key]||'--'} />;
+      return <StatusField label={row[key] || '--'} />;
     case "Name":
-      return <NameField name={row[key]||'--'} />;
     case "fullName":
-      return <NameField name={row[key]||'--'} />;
+      return <NameField name={row[key] || '--'} />;
     case "date":
       const date = new Date(row[key]);
-      const formattedDate = `${
-        date.getMonth() + 1
-      }/${date.getDate()}/${date.getFullYear()}`;
+      const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
       return (
-        <p style={{fontFamily:"Gilroy-Medium"}} className="text-[#4B465C] text-[1.125rem] font-[400]">
+        <p style={{fontFamily:"Gilroy-Medium"}} className="text-sm text-[#4B465C]">
           {formattedDate || "--"}
         </p>
       );
     case "createdAt":
       return (
-        <p style={{fontFamily:"Gilroy-Medium"}} className="text-[#4B465C] text-[1.125rem] font-[400]">
+        <p style={{fontFamily:"Gilroy-Medium"}} className="text-sm text-[#4B465C]">
           {new Date(row[key]).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
@@ -146,29 +142,29 @@ function renderField(row, key) {
       return <NameField name={row[key] || "--"} />;
     case "tags":
       return (
-        <div className="flex gap-2">
-        {row[key].map((tag, index) => (
-          <Badge key={index} text={tag || "--"} />
-        ))}
-      </div>
+        <div className="flex flex-wrap gap-1 max-w-full">
+          {row[key].map((tag, index) => (
+            <Badge key={index} text={tag || "--"} />
+          ))}
+        </div>
       );
     case "coursesName":
-      return(
-        <div className="flex gap-2">
+      return (
+        <div className="flex flex-wrap gap-1 max-w-full">
           {row[key].map((courseName, index) => (
             <p style={{fontFamily:"Gilroy-Medium"}}
               key={index}
-              className="text-[#4B465C] text-[1.125rem] font-[400]"
+              className="text-sm text-[#4B465C] truncate"
             >
-              {index === row[key].length - 1 ? (courseName||'--' ): `${courseName||'--'}, `}
+              {index === row[key].length - 1 ? (courseName || '--') : `${courseName || '--'},`}
             </p>
           ))}
-          {!row[key].length && <p style={{fontFamily:"Gilroy-Medium"}} className="text-[#4B465C] text-[1.125rem] font-[400]">--</p>}
+          {!row[key].length && <p style={{fontFamily:"Gilroy-Medium"}} className="text-sm text-[#4B465C]">--</p>}
         </div>
-      )
+      );
     default:
       return (
-        <p style={{fontFamily:"Gilroy-Medium"}} className="text-[#4B465C] text-[1.125rem] font-[400]">{row[key] || "--"}</p>
+        <p style={{fontFamily:"Gilroy-Medium"}} className="text-sm text-[#4B465C]">{row[key] || "--"}</p>
       );
   }
 }
