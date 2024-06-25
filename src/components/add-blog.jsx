@@ -194,7 +194,7 @@ const AddBlog = ({ existingBlog, openAddForm }) => {
             {data?.tags?.length > 0 && (
               <div className="tags-container">
                 {data?.tags?.map((tag, index) => (
-                  <div key={index} className="tag badge" style={{fontFamily: 'Gilroy-Medium'}}>
+                  <div key={index} className="tag badge" style={{fontFamily: 'Gilroy-Medium',color: '#4B465C'}}>
                     {tag}
                     <button
                       className="remove-tag"

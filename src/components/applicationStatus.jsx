@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { updateApplicationStatus } from "../context/services/client";
+import CustomLoader from "./loader";
 
 const ApplicationStatus = () => {
+  const navigate=useNavigate();
   const { data } = useParams();
   const [applicationData, setApplicationData] = useState(null);
   const [formData, setFormData] = useState({
     status: "",
     applicationFee: "",
   });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     try {
@@ -32,10 +36,24 @@ const ApplicationStatus = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission (e.g., send data to server)
-    console.log("Form submitted:", formData);
+    setLoading(true);
+    try {
+      const payload = {
+        status: formData.status,
+        applicationId: applicationData._id,
+      };
+      await updateApplicationStatus(payload);
+
+      toast.success("Application status updated successfully");
+      navigate("/dashboard/Applications-management");
+    } catch (error) {
+      console.error("Error updating application status:", error);
+      toast.error("Failed to update application status");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const copyToClipboard = (text) => {
@@ -51,6 +69,7 @@ const ApplicationStatus = () => {
 
   return (
     <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
+      {loading && <CustomLoader />}
       <div className="flex justify-between">
         <h1 className="text-text text-[1.5rem] font-[600]" style={{ fontFamily: "Gilroy-Bold" }}>
           Applied status
@@ -70,13 +89,6 @@ const ApplicationStatus = () => {
         <div className="application-details">
           <p className="application-number" style={{ fontFamily: "Gilroy-Medium" }}>
             {applicationData?._id}
-            {/* <span
-              className="copy-icon"
-              onClick={() => copyToClipboard(applicationData?._id)}
-              style={{ cursor: "pointer", marginLeft: "5px" }}
-            >
-              📋
-            </span> */}
           </p>
           <p className="course-info" style={{ fontFamily: "Gilroy-Medium" }}>{applicationData?.courseId.courseName}</p>
           <div className="university-info">
@@ -93,7 +105,7 @@ const ApplicationStatus = () => {
 
       <form onSubmit={handleSubmit}>
         <div className="overview-container">
-          <h2 className="heading" style={{ fontFamily: "Gilroy-Bold" }}>No Application Fee</h2>
+          <h2 className="heading" style={{ fontFamily: "Gilroy-Bold" }}>Update Application Status</h2>
           <div className="row col-md-6 formField">
             <label htmlFor="status" className="form-label" style={{ fontFamily: "Gilroy-Bold" }}>
               Status:
@@ -105,7 +117,7 @@ const ApplicationStatus = () => {
               onChange={handleInputChange}
               className="input"
               required
-              style={{ fontFamily: "Gilroy-Medium" }}
+              style={{ fontFamily: "Gilroy-Medium", cursor: "pointer" }}
             >
               <option value="">Select status</option>
               <option value="APPLIED_CONDITIONAL_OFFER">APPLIED_CONDITIONAL_OFFER</option>
@@ -122,13 +134,14 @@ const ApplicationStatus = () => {
             </label>
             <input
               type="text"
+              disabled
               id="applicationFee"
               name="applicationFee"
               value={formData.applicationFee}
               onChange={handleInputChange}
               className="input"
               required
-              style={{ fontFamily: "Gilroy-Medium" }}
+              style={{ fontFamily: "Gilroy-Medium", cursor: "not-allowed" }}
             />
           </div>
         </div>
@@ -149,17 +162,18 @@ const ApplicationStatus = () => {
               minWidth: "120px",
               fontFamily: "Gilroy-Medium",
               border: "none",
-              cursor: "pointer",
+              cursor: loading ? "not-allowed" : "pointer",
               transition: "background-color 0.3s ease",
-              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)"
+              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+              opacity: loading ? 0.7 : 1,
             }}
             onMouseOver={(e) => e.target.style.backgroundColor = "#FF4757"}
             onMouseOut={(e) => e.target.style.backgroundColor = "#FF6477"}
+            disabled={loading}
           >
-            Submit
+            {loading ? "Updating..." : "Submit"}
           </button>
         </div>
-
       </form>
     </div>
   );

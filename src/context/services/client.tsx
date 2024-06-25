@@ -152,4 +152,8 @@ export const getApplicationsById = (id) => {
   const url = `${baseUrl}/v1/application/user/applied/?userId=${id}`;
   return instance.get(url);
 }
+export const updateApplicationStatus = (payload) => {
+  const url = `${baseUrl}/v1/application/update/status`;
+  return instance.post(url,payload);
+}
 
