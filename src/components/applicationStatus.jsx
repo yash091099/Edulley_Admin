@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { updateApplicationStatus } from "../context/services/client";
+import { updateApplicationStatus, getApplicationChat, createApplicationChat } from "../context/services/client";
 import CustomLoader from "./loader";
 
 const ApplicationStatus = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const { data } = useParams();
   const [applicationData, setApplicationData] = useState(null);
   const [formData, setFormData] = useState({
@@ -13,6 +13,9 @@ const ApplicationStatus = () => {
     applicationFee: "",
   });
   const [loading, setLoading] = useState(false);
+  const [chatMessages, setChatMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     try {
@@ -25,8 +28,37 @@ const ApplicationStatus = () => {
       });
     } catch (error) {
       console.error("Error parsing application data:", error);
+      setError("Error loading application data");
     }
   }, [data]);
+
+  useEffect(() => {
+    const fetchChatMessages = async () => {
+      if (applicationData?._id) {
+        try {
+          const response = await getApplicationChat({ applicationId: applicationData._id });
+          console.log("Chat messages response:", response);
+          if (response?.data?.data && Array.isArray(response.data?.data)) {
+            setChatMessages(response?.data?.data||[]);
+          } else {
+            console.error("Unexpected chat messages format:", response?.data);
+            setError("Error loading chat messages");
+          }
+        } catch (error) {
+          console.error("Error fetching chat messages:", error);
+          setError("Error loading chat messages");
+        }
+      }
+    };
+
+    const intervalId = setInterval(fetchChatMessages, 5000);
+
+    // Initial fetch
+    fetchChatMessages();
+
+    // Cleanup function
+    return () => clearInterval(intervalId);
+  }, [applicationData]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -56,6 +88,28 @@ const ApplicationStatus = () => {
     }
   };
 
+  const handleSendMessage = async () => {
+    if (newMessage.trim() === "") return;
+
+    try {
+      const payload = {
+        applicationId: applicationData._id,
+        message: newMessage,
+        senderRole:"ADMIN"
+      };
+      const response = await createApplicationChat(payload);
+      console.log("Send message response:", response);
+
+      if (response?.data) {
+        setChatMessages(prevMessages => [...prevMessages, response.data]);
+      }
+      setNewMessage("");
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast.error("Failed to send message");
+    }
+  };
+
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text).then(
       () => {
@@ -66,6 +120,10 @@ const ApplicationStatus = () => {
       }
     );
   };
+
+  if (error) {
+    return <div className="error-message">{error}</div>;
+  }
 
   return (
     <div className="flex flex-col gap-[2.5rem] bg-white p-[2rem] rounded-[1rem]">
@@ -100,6 +158,51 @@ const ApplicationStatus = () => {
           <p className="campus" style={{ fontFamily: "Gilroy-Medium" }}>
             CU: {applicationData?.courseId.uniqueCourseInfo.studyMode}
           </p>
+        </div>
+      </div>
+
+      {/* Chat Section */}
+      <div className="chat-section mt-8">
+        <h2 className="text-[1.25rem] font-[600] mb-4" style={{ fontFamily: "Gilroy-Bold" }}>
+          Chat with Student
+        </h2>
+        <div className="chat-messages bg-gray-100 p-4 h-[300px] overflow-y-auto rounded-md">
+          {Array.isArray(chatMessages) && chatMessages.length > 0 ? (
+            chatMessages.map((msg, index) => (
+              <div
+                key={index}
+                className={`mb-2 ${msg.senderRole === "ADMIN" ? "text-right" : "text-left"}`}
+              >
+                <span
+                  className={`inline-block p-2 rounded-md ${
+                    msg.senderRole === "ADMIN" ? "bg-[#FF6477] text-white" : "bg-gray-300"
+                  }`}
+                >
+                  {msg.message}
+                </span>
+                <p className="text-xs text-gray-500 mt-1">
+                  {new Date(msg.createdAt).toLocaleString()}
+                </p>
+              </div>
+            ))
+          ) : (
+            <p>No messages yet.</p>
+          )}
+        </div>
+        <div className="message-input mt-4 flex">
+          <input
+            type="text"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            className="flex-grow border rounded-l-md p-2"
+            placeholder="Type your message..."
+          />
+          <button
+            onClick={handleSendMessage}
+            className="bg-[#FF6477] text-white px-4 py-2 rounded-r-md hover:bg-[#FF4757] transition-colors duration-300"
+          >
+            Send
+          </button>
         </div>
       </div>
 

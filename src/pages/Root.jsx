@@ -1,6 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import mainImage from '../assets/images/rectangle.png'
+import mainImage from '../assets/images/home_image.png'
+// import mainImage from '../assets/images/rectangle.png'
 export default function Root() {
   return (
     <div className='flex min-h-screen'>

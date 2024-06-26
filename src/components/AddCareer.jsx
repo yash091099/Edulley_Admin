@@ -3,9 +3,10 @@ import "./overviewInstute.css";
 import {
   addCareerDetails,
   editCareerDetails,
+  getCoursesWithoutPagination
 } from "../context/services/client";
 import "./addCareer.css";
-import {toast} from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 const AddCareer = ({ initialData, fetchCareers, handleBack }) => {
   const [data, setData] = useState({
@@ -13,6 +14,18 @@ const AddCareer = ({ initialData, fetchCareers, handleBack }) => {
     specialization: "",
     coursesName: [],
   });
+  const [courses, setCourses] = useState([]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    getCoursesWithoutPagination().then((res) => {
+      setCourses(res.data?.data || []);
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log(courses, "courses");
+  }, [courses]);
 
   useEffect(() => {
     if (initialData) {
@@ -29,23 +42,18 @@ const AddCareer = ({ initialData, fetchCareers, handleBack }) => {
     setData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleCourseInput = (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault(); // Prevent form submission on Enter key
-      const newCourse = event.target.value.trim();
-      if (newCourse) {
-        setData((prev) => ({
-          ...prev,
-          coursesName: [...prev.coursesName, newCourse],
-        }));
-        event.target.value = ""; // Clear the input after adding to the list
-      }
-    }
+  const handleCourseChange = (courseName) => {
+    setData((prev) => {
+      const updatedCoursesName = prev.coursesName.includes(courseName)
+        ? prev.coursesName.filter((course) => course !== courseName)
+        : [...prev.coursesName, courseName];
+      return { ...prev, coursesName: updatedCoursesName };
+    });
   };
 
   const saveData = async () => {
     if (!data?.latestQualification || !data?.specialization || !data?.coursesName.length) {
-      toast.error("Please fill in all required fields. Enter Required to save courses.");
+      toast.error("Please fill in all required fields.");
       return;
     }
 
@@ -54,7 +62,6 @@ const AddCareer = ({ initialData, fetchCareers, handleBack }) => {
       specialization: data.specialization,
       coursesName: data.coursesName,
     };
-
 
     if (initialData) {
       payload.careerPathId = initialData?._id;
@@ -84,70 +91,93 @@ const AddCareer = ({ initialData, fetchCareers, handleBack }) => {
     }
   };
 
-  const removeCourse = (index) => {
-    setData((prev) => ({
-      ...prev,
-      coursesName: prev.coursesName.filter((_, i) => i !== index),
-    }));
-  };
-
   return (
     <div className="overview-container">
-      <h3 className="heading" style={{fontFamily: 'Gilroy-Bold'}}>Career Details</h3>
+      <h3 className="heading" style={{ fontFamily: 'Gilroy-Bold' }}>Career Details</h3>
       <div className="row">
         <div className="col-md-6 formField">
-          <label style={{fontFamily: 'Gilroy-Bold'}}>Latest Qualification *</label>
-          <input
+          <label style={{ fontFamily: 'Gilroy-Bold' }}>Latest Qualification *</label>
+          <select
             className="input"
-            type="text"
             name="latestQualification"
-            placeholder="Add Qualification name"
             value={data.latestQualification}
             onChange={handleInputChange}
-            style={{fontFamily: 'Gilroy-Medium'}}
-          />
+            style={{ fontFamily: 'Gilroy-Medium' }}
+          >
+            <option value="">Select Qualification</option>
+            <option value="12th (High School Completed)">12th (High School Completed)</option>
+            <option value="Bachelors of Technology">Bachelors of Technology</option>
+            <option value="Bachelors of Arts">Bachelors of Arts</option>
+            <option value="Bachelors of Business Administration">Bachelors of Business Administration</option>
+            <option value="Bachelors of Architecture">Bachelors of Architecture</option>
+            <option value="Bachelors of Science">Bachelors of Science</option>
+            <option value="Bachelors of Commerce">Bachelors of Commerce</option>
+            <option value="Bachelors of Law">Bachelors of Law</option>
+            <option value="MBBS">MBBS</option>
+            <option value="Bachelors of Engineering">Bachelors of Engineering</option>
+            <option value="Bachelor of Pharmacy (B.Pharm.)">Bachelor of Pharmacy (B.Pharm.)</option>
+          </select>
         </div>
         <div className="col-md-6 formField">
-          <label style={{fontFamily: 'Gilroy-Bold'}}>Specialization *</label>
-          <input
+          <label style={{ fontFamily: 'Gilroy-Bold' }}>Specialization *</label>
+          <select
             className="input"
-            type="text"
             name="specialization"
-            placeholder="Add Specialization"
             value={data.specialization}
             onChange={handleInputChange}
-            style={{fontFamily: 'Gilroy-Medium'}}
-          />
+            style={{ fontFamily: 'Gilroy-Medium' }}
+          >
+            <option value="">Select Specialization</option>
+            <option value="Business and Management">Business and Management</option>
+            <option value="Computer Science and IT">Computer Science and IT</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Social Science">Social Science</option>
+            <option value="Architecture">Architecture</option>
+            <option value="Professional Studies">Professional Studies</option>
+            <option value="Hospitality and Tourism">Hospitality and Tourism</option>
+            <option value="Science">Science</option>
+            <option value="Sports Studies">Sports Studies</option>
+            <option value="Fine Arts">Fine Arts</option>
+            <option value="Law">Law</option>
+            <option value="Education">Education</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Medicine">Medicine</option>
+            <option value="Journalism and Media">Journalism and Media</option>
+            <option value="Agriculture">Agriculture</option>
+            <option value="Arts">Arts</option>
+            <option value="Commerce">Commerce</option>
+          </select>
         </div>
       </div>
       <div className="row">
         <div className="col-md-12 formField">
-          <label style={{fontFamily: 'Gilroy-Bold'}}>Course Names *</label>
-          <input
-            className="input"
-            type="text"
-            placeholder="Type course name and press Enter"
-            onKeyDown={handleCourseInput}
-            style={{fontFamily: 'Gilroy-Medium'}}
-          />
-          {data?.coursesName?.length > 0 && (
-            <div className="tags-container">
-              {data?.coursesName?.map((course, index) => (
-                <div key={index} className="tag" style={{fontFamily: 'Gilroy-Medium'}}>
-                  {course}
-                  <button
-                    onClick={() => removeCourse(index)}
-                    className="remove-tag-btn"
-                  >
-                    &times;
-                  </button>
-                </div>
-              ))}
+          <label style={{ fontFamily: 'Gilroy-Bold' }}>Course Names *</label>
+          <div className="custom-dropdown">
+            <div 
+              className="dropdown-header" 
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              style={{ fontFamily: 'Gilroy-Medium', cursor: 'pointer', border: '1px solid #ccc', padding: '8px', borderRadius: '4px' }}
+            >
+              {data.coursesName.length > 0 ? `${data.coursesName.length} course(s) selected` : 'Select Courses'}
             </div>
-          )}
+            {dropdownOpen && (
+              <div className="dropdown-list" style={{ maxHeight: '200px', overflowY: 'auto', border: '1px solid #ccc', borderTop: 'none', borderRadius: '0 0 4px 4px' }}>
+                {courses.map((course) => (
+                  <label key={course._id} style={{ display: 'block', padding: '8px', cursor: 'pointer' }}>
+                    <input
+                      type="checkbox"
+                      checked={data.coursesName.includes(course.courseName)}
+                      onChange={() => handleCourseChange(course.courseName)}
+                    />
+                    <span style={{ marginLeft: '8px' }}>{course.courseName}</span>
+                  </label>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
-      <div className="button-container" style={{display: 'flex', justifyContent: 'flex-end'}}>
+      <div className="button-container" style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <button
           style={{
             backgroundColor: "#FF6477",

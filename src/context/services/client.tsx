@@ -105,6 +105,10 @@ export const getCourses = (queryParams) => {
   const url = `${baseUrl}/v1/course/list/pagination?${queryString}`;
   return instance.get(url);
 }
+export const getCoursesWithoutPagination = (queryParams) => {
+  const url = `${baseUrl}/v1/course/list`;
+  return instance.get(url);
+}
 
 export const addScholarship = (payload) => {
   const url = `${baseUrl}/v1/scholarship/add/new`;
@@ -154,6 +158,15 @@ export const getApplicationsById = (id) => {
 }
 export const updateApplicationStatus = (payload) => {
   const url = `${baseUrl}/v1/application/update/status`;
+  return instance.post(url,payload);
+}
+export const getApplicationChat = (queryParams) => {
+  const queryString = new URLSearchParams(queryParams).toString();
+  const url = `${baseUrl}/v1/chat/application/list?${queryString}`;
+  return instance.get(url);
+}
+export const createApplicationChat = (payload) => {
+  const url = `${baseUrl}/v1/chat/admin/application`;
   return instance.post(url,payload);
 }
 
