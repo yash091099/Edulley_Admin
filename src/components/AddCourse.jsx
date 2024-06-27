@@ -264,7 +264,7 @@ const AddCourse = ({ initialData, handleBack }) => {
             <label style={{fontFamily: 'Gilroy-Bold'}}>
               Duration (Years)<span style={{ color: "red" }}>*</span>
             </label>
-            <input
+            {/* <input
               type="number"
               className="input"
               name="duration"
@@ -272,7 +272,21 @@ const AddCourse = ({ initialData, handleBack }) => {
               value={data.duration}
               onChange={handleInputChange}
               style={{fontFamily: 'Gilroy-Medium'}}
-            />
+            /> */}
+            <select
+              className="input"
+              name="duration"
+              value={data.duration}
+              onChange={handleInputChange}
+              style={{fontFamily: 'Gilroy-Medium'}}
+            >
+              <option value="">Select Duration (Year)</option>
+              <option value="2024">2024</option>
+              <option value="2025">2025</option>
+              <option value="2026">2026</option>
+              <option value="2027">2027</option>
+              <option value="2028">2028</option>
+            </select>
           </div>
         </div>
         <div className="row">
